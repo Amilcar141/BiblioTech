@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
-            this.grpMenu = new System.Windows.Forms.GroupBox();
-            this.grpMenu2 = new System.Windows.Forms.GroupBox();
+            this.pnlMenu = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.mnuMenu = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoPréstamoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.devolverLibroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,7 +50,7 @@
             this.buscarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.préstamosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.registrarPréstamoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiRegistrarPrestamo = new System.Windows.Forms.ToolStripMenuItem();
             this.registrarDevoluciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renovarPréstamoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.préstamosVencidosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,35 +66,70 @@
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.soporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnStripMenu = new System.Windows.Forms.MenuStrip();
-            this.label1 = new System.Windows.Forms.Label();
-            this.grpMenu.SuspendLayout();
-            this.grpMenu2.SuspendLayout();
-            this.mnStripMenu.SuspendLayout();
+            this.pnlMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.mnuMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // grpMenu
+            // pnlMenu
             // 
-            this.grpMenu.BackColor = System.Drawing.Color.Tan;
-            this.grpMenu.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("grpMenu.BackgroundImage")));
-            this.grpMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.grpMenu.Controls.Add(this.grpMenu2);
-            this.grpMenu.Location = new System.Drawing.Point(-5, -2);
-            this.grpMenu.Name = "grpMenu";
-            this.grpMenu.Size = new System.Drawing.Size(667, 471);
-            this.grpMenu.TabIndex = 0;
-            this.grpMenu.TabStop = false;
-            this.grpMenu.Text = "Menu";
+            this.pnlMenu.BackColor = System.Drawing.Color.Tan;
+            this.pnlMenu.Controls.Add(this.label1);
+            this.pnlMenu.Controls.Add(this.pictureBox1);
+            this.pnlMenu.Location = new System.Drawing.Point(0, 25);
+            this.pnlMenu.Name = "pnlMenu";
+            this.pnlMenu.Size = new System.Drawing.Size(664, 440);
+            this.pnlMenu.TabIndex = 0;
             // 
-            // grpMenu2
+            // label1
             // 
-            this.grpMenu2.Controls.Add(this.label1);
-            this.grpMenu2.Controls.Add(this.mnStripMenu);
-            this.grpMenu2.Location = new System.Drawing.Point(5, 0);
-            this.grpMenu2.Name = "grpMenu2";
-            this.grpMenu2.Size = new System.Drawing.Size(661, 127);
-            this.grpMenu2.TabIndex = 0;
-            this.grpMenu2.TabStop = false;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("MingLiU_MSCS-ExtB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.SaddleBrown;
+            this.label1.Location = new System.Drawing.Point(198, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(284, 19);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "¡BIENVENIDO A BIBLIOTECH!";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::BiblioTech.Properties.Resources.Biblioteca;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 56);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(658, 381);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel2.Controls.Add(this.mnuMenu);
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(663, 27);
+            this.panel2.TabIndex = 1;
+            // 
+            // mnuMenu
+            // 
+            this.mnuMenu.BackColor = System.Drawing.Color.Peru;
+            this.mnuMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.archivoToolStripMenuItem,
+            this.catálogoToolStripMenuItem,
+            this.usuariosToolStripMenuItem,
+            this.préstamosToolStripMenuItem,
+            this.reportesToolStripMenuItem,
+            this.configuraciónToolStripMenuItem,
+            this.ayudaToolStripMenuItem,
+            this.cerrarSesiónToolStripMenuItem});
+            this.mnuMenu.Location = new System.Drawing.Point(0, 0);
+            this.mnuMenu.Name = "mnuMenu";
+            this.mnuMenu.Padding = new System.Windows.Forms.Padding(35, 2, 0, 5);
+            this.mnuMenu.Size = new System.Drawing.Size(663, 26);
+            this.mnuMenu.TabIndex = 3;
             // 
             // archivoToolStripMenuItem
             // 
@@ -209,7 +246,7 @@
             // préstamosToolStripMenuItem
             // 
             this.préstamosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.registrarPréstamoToolStripMenuItem,
+            this.tsmiRegistrarPrestamo,
             this.registrarDevoluciónToolStripMenuItem,
             this.renovarPréstamoToolStripMenuItem1,
             this.préstamosVencidosToolStripMenuItem});
@@ -217,11 +254,12 @@
             this.préstamosToolStripMenuItem.Size = new System.Drawing.Size(74, 19);
             this.préstamosToolStripMenuItem.Text = "Préstamos";
             // 
-            // registrarPréstamoToolStripMenuItem
+            // tsmiRegistrarPrestamo
             // 
-            this.registrarPréstamoToolStripMenuItem.Name = "registrarPréstamoToolStripMenuItem";
-            this.registrarPréstamoToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.registrarPréstamoToolStripMenuItem.Text = "Registrar Préstamo";
+            this.tsmiRegistrarPrestamo.Name = "tsmiRegistrarPrestamo";
+            this.tsmiRegistrarPrestamo.Size = new System.Drawing.Size(183, 22);
+            this.tsmiRegistrarPrestamo.Text = "Registrar Préstamo";
+            this.tsmiRegistrarPrestamo.Click += new System.EventHandler(this.tsmiRegistrarPrestamo_Click);
             // 
             // registrarDevoluciónToolStripMenuItem
             // 
@@ -324,60 +362,34 @@
             this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(88, 19);
             this.cerrarSesiónToolStripMenuItem.Text = "Cerrar Sesión";
             // 
-            // mnStripMenu
-            // 
-            this.mnStripMenu.BackColor = System.Drawing.Color.Peru;
-            this.mnStripMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.archivoToolStripMenuItem,
-            this.catálogoToolStripMenuItem,
-            this.usuariosToolStripMenuItem,
-            this.préstamosToolStripMenuItem,
-            this.reportesToolStripMenuItem,
-            this.configuraciónToolStripMenuItem,
-            this.ayudaToolStripMenuItem,
-            this.cerrarSesiónToolStripMenuItem});
-            this.mnStripMenu.Location = new System.Drawing.Point(3, 16);
-            this.mnStripMenu.Name = "mnStripMenu";
-            this.mnStripMenu.Padding = new System.Windows.Forms.Padding(35, 2, 0, 5);
-            this.mnStripMenu.Size = new System.Drawing.Size(655, 26);
-            this.mnStripMenu.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("MingLiU_MSCS-ExtB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.label1.Location = new System.Drawing.Point(185, 58);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(284, 19);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "¡BIENVENIDO A BIBLIOTECH!";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(665, 464);
-            this.Controls.Add(this.grpMenu);
-            this.MainMenuStrip = this.mnStripMenu;
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.pnlMenu);
             this.Name = "frmMenu";
             this.Text = "Menu";
             this.Load += new System.EventHandler(this.frmMenu_Load);
-            this.grpMenu.ResumeLayout(false);
-            this.grpMenu2.ResumeLayout(false);
-            this.grpMenu2.PerformLayout();
-            this.mnStripMenu.ResumeLayout(false);
-            this.mnStripMenu.PerformLayout();
+            this.pnlMenu.ResumeLayout(false);
+            this.pnlMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.mnuMenu.ResumeLayout(false);
+            this.mnuMenu.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox grpMenu;
-        private System.Windows.Forms.GroupBox grpMenu2;
-        private System.Windows.Forms.MenuStrip mnStripMenu;
+        private System.Windows.Forms.Panel pnlMenu;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.MenuStrip mnuMenu;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nuevoPréstamoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem devolverLibroToolStripMenuItem;
@@ -395,7 +407,7 @@
         private System.Windows.Forms.ToolStripMenuItem buscarUsuarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editarDatosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem préstamosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem registrarPréstamoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiRegistrarPrestamo;
         private System.Windows.Forms.ToolStripMenuItem registrarDevoluciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem renovarPréstamoToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem préstamosVencidosToolStripMenuItem;
@@ -411,6 +423,5 @@
         private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem soporteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cerrarSesiónToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
     }
 }
