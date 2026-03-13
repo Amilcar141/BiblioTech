@@ -47,5 +47,12 @@ namespace BiblioTech.Views
 
             AbrirFormulario(prestamo);
         }
+
+        private void favoritosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmFavoritos favoritos = new frmFavoritos();
+
+            AbrirFormulario(favoritos);
+        }
     }
 }

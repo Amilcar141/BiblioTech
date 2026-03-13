@@ -52,6 +52,10 @@ namespace BiblioTech.Views
             txtIdLibro.Focus();
         }
 
+        private void frmPrestamo_Load(object sender, EventArgs e)
+        {
+
+        }
     }
     }
 

@@ -120,6 +120,9 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Img\Biblioteca.jpg" />
+    <None Include="Img\updates_16.png" />
+    <None Include="Img\borrar.png" />
+    <None Include="Img\salvar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

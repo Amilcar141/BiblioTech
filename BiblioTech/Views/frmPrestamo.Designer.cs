@@ -29,33 +29,33 @@
         private void InitializeComponent()
         {
             this.grpPrestamo = new System.Windows.Forms.GroupBox();
-            this.lblSeleccionLibro = new System.Windows.Forms.Label();
-            this.txtIdLibro = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblTitulo = new System.Windows.Forms.Label();
-            this.lblAutor = new System.Windows.Forms.Label();
-            this.txtTitulo = new System.Windows.Forms.TextBox();
-            this.txtAutor = new System.Windows.Forms.TextBox();
-            this.grpUsuario = new System.Windows.Forms.GroupBox();
-            this.lblSeleccionUsuario = new System.Windows.Forms.Label();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.lblNombre = new System.Windows.Forms.Label();
-            this.txtIdUsuario = new System.Windows.Forms.TextBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.lblApellido = new System.Windows.Forms.Label();
+            this.txtIdUsuario = new System.Windows.Forms.TextBox();
+            this.lblSeleccionUsuario = new System.Windows.Forms.Label();
+            this.grpUsuario = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lblApellido = new System.Windows.Forms.Label();
+            this.lblNombre = new System.Windows.Forms.Label();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtAutor = new System.Windows.Forms.TextBox();
+            this.txtTitulo = new System.Windows.Forms.TextBox();
+            this.lblAutor = new System.Windows.Forms.Label();
+            this.lblTitulo = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.txtIdLibro = new System.Windows.Forms.TextBox();
+            this.lblSeleccionLibro = new System.Windows.Forms.Label();
             this.grpDetallesPrestamo = new System.Windows.Forms.GroupBox();
-            this.lblFechaEntrega = new System.Windows.Forms.Label();
-            this.dtFechaLimite = new System.Windows.Forms.DateTimePicker();
-            this.rchComentarios = new System.Windows.Forms.RichTextBox();
             this.lblObservaciones = new System.Windows.Forms.Label();
+            this.rchComentarios = new System.Windows.Forms.RichTextBox();
+            this.dtFechaLimite = new System.Windows.Forms.DateTimePicker();
+            this.lblFechaEntrega = new System.Windows.Forms.Label();
             this.grpAcciones = new System.Windows.Forms.GroupBox();
-            this.btnGuardarPrestamo = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnGuardarPrestamo = new System.Windows.Forms.Button();
             this.grpPrestamo.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.grpUsuario.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.grpDetallesPrestamo.SuspendLayout();
             this.grpAcciones.SuspendLayout();
             this.SuspendLayout();
@@ -71,82 +71,41 @@
             this.grpPrestamo.Controls.Add(this.comboBox1);
             this.grpPrestamo.Controls.Add(this.txtIdLibro);
             this.grpPrestamo.Controls.Add(this.lblSeleccionLibro);
-            this.grpPrestamo.Location = new System.Drawing.Point(7, 6);
+            this.grpPrestamo.Location = new System.Drawing.Point(10, 9);
+            this.grpPrestamo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grpPrestamo.Name = "grpPrestamo";
-            this.grpPrestamo.Size = new System.Drawing.Size(314, 438);
+            this.grpPrestamo.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grpPrestamo.Size = new System.Drawing.Size(471, 674);
             this.grpPrestamo.TabIndex = 0;
             this.grpPrestamo.TabStop = false;
             this.grpPrestamo.Text = "Datos de Identificación";
             // 
-            // lblSeleccionLibro
+            // comboBox2
             // 
-            this.lblSeleccionLibro.AutoSize = true;
-            this.lblSeleccionLibro.Location = new System.Drawing.Point(16, 30);
-            this.lblSeleccionLibro.Name = "lblSeleccionLibro";
-            this.lblSeleccionLibro.Size = new System.Drawing.Size(109, 13);
-            this.lblSeleccionLibro.TabIndex = 0;
-            this.lblSeleccionLibro.Text = "Seleccionar Libro (ID)";
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(152, 408);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(294, 28);
+            this.comboBox2.TabIndex = 7;
             // 
-            // txtIdLibro
+            // txtIdUsuario
             // 
-            this.txtIdLibro.Location = new System.Drawing.Point(21, 56);
-            this.txtIdLibro.Name = "txtIdLibro";
-            this.txtIdLibro.Size = new System.Drawing.Size(60, 20);
-            this.txtIdLibro.TabIndex = 1;
-            this.txtIdLibro.Leave += new System.EventHandler(this.txtIdLibro_Leave);
+            this.txtIdUsuario.Location = new System.Drawing.Point(28, 408);
+            this.txtIdUsuario.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtIdUsuario.Name = "txtIdUsuario";
+            this.txtIdUsuario.Size = new System.Drawing.Size(91, 26);
+            this.txtIdUsuario.TabIndex = 6;
             // 
-            // comboBox1
+            // lblSeleccionUsuario
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(101, 55);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(197, 21);
-            this.comboBox1.TabIndex = 2;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtAutor);
-            this.groupBox1.Controls.Add(this.txtTitulo);
-            this.groupBox1.Controls.Add(this.lblAutor);
-            this.groupBox1.Controls.Add(this.lblTitulo);
-            this.groupBox1.Location = new System.Drawing.Point(15, 93);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(272, 107);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Datos del Libro";
-            // 
-            // lblTitulo
-            // 
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(16, 34);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(41, 13);
-            this.lblTitulo.TabIndex = 0;
-            this.lblTitulo.Text = "Título: ";
-            // 
-            // lblAutor
-            // 
-            this.lblAutor.AutoSize = true;
-            this.lblAutor.Location = new System.Drawing.Point(19, 71);
-            this.lblAutor.Name = "lblAutor";
-            this.lblAutor.Size = new System.Drawing.Size(35, 13);
-            this.lblAutor.TabIndex = 1;
-            this.lblAutor.Text = "Autor:";
-            // 
-            // txtTitulo
-            // 
-            this.txtTitulo.Location = new System.Drawing.Point(76, 36);
-            this.txtTitulo.Name = "txtTitulo";
-            this.txtTitulo.Size = new System.Drawing.Size(184, 20);
-            this.txtTitulo.TabIndex = 2;
-            // 
-            // txtAutor
-            // 
-            this.txtAutor.Location = new System.Drawing.Point(76, 71);
-            this.txtAutor.Name = "txtAutor";
-            this.txtAutor.Size = new System.Drawing.Size(184, 20);
-            this.txtAutor.TabIndex = 3;
+            this.lblSeleccionUsuario.AutoSize = true;
+            this.lblSeleccionUsuario.Location = new System.Drawing.Point(24, 360);
+            this.lblSeleccionUsuario.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSeleccionUsuario.Name = "lblSeleccionUsuario";
+            this.lblSeleccionUsuario.Size = new System.Drawing.Size(217, 20);
+            this.lblSeleccionUsuario.TabIndex = 5;
+            this.lblSeleccionUsuario.Text = "Seleccionar Usuario (Cuenta)";
             // 
             // grpUsuario
             // 
@@ -154,68 +113,129 @@
             this.grpUsuario.Controls.Add(this.lblApellido);
             this.grpUsuario.Controls.Add(this.lblNombre);
             this.grpUsuario.Controls.Add(this.txtNombre);
-            this.grpUsuario.Location = new System.Drawing.Point(15, 291);
+            this.grpUsuario.Location = new System.Drawing.Point(22, 448);
+            this.grpUsuario.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grpUsuario.Name = "grpUsuario";
-            this.grpUsuario.Size = new System.Drawing.Size(272, 141);
+            this.grpUsuario.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grpUsuario.Size = new System.Drawing.Size(408, 217);
             this.grpUsuario.TabIndex = 4;
             this.grpUsuario.TabStop = false;
             this.grpUsuario.Text = "Datos del Usuario";
             // 
-            // lblSeleccionUsuario
+            // textBox1
             // 
-            this.lblSeleccionUsuario.AutoSize = true;
-            this.lblSeleccionUsuario.Location = new System.Drawing.Point(16, 234);
-            this.lblSeleccionUsuario.Name = "lblSeleccionUsuario";
-            this.lblSeleccionUsuario.Size = new System.Drawing.Size(145, 13);
-            this.lblSeleccionUsuario.TabIndex = 5;
-            this.lblSeleccionUsuario.Text = "Seleccionar Usuario (Cuenta)";
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(86, 31);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(174, 20);
-            this.txtNombre.TabIndex = 0;
-            // 
-            // lblNombre
-            // 
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(19, 31);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(47, 13);
-            this.lblNombre.TabIndex = 1;
-            this.lblNombre.Text = "Nombre:";
-            // 
-            // txtIdUsuario
-            // 
-            this.txtIdUsuario.Location = new System.Drawing.Point(19, 265);
-            this.txtIdUsuario.Name = "txtIdUsuario";
-            this.txtIdUsuario.Size = new System.Drawing.Size(62, 20);
-            this.txtIdUsuario.TabIndex = 6;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(101, 265);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(197, 21);
-            this.comboBox2.TabIndex = 7;
+            this.textBox1.Location = new System.Drawing.Point(129, 109);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(259, 26);
+            this.textBox1.TabIndex = 3;
             // 
             // lblApellido
             // 
             this.lblApellido.AutoSize = true;
-            this.lblApellido.Location = new System.Drawing.Point(22, 71);
+            this.lblApellido.Location = new System.Drawing.Point(33, 109);
+            this.lblApellido.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblApellido.Name = "lblApellido";
-            this.lblApellido.Size = new System.Drawing.Size(47, 13);
+            this.lblApellido.Size = new System.Drawing.Size(69, 20);
             this.lblApellido.TabIndex = 2;
             this.lblApellido.Text = "Apellido:";
             // 
-            // textBox1
+            // lblNombre
             // 
-            this.textBox1.Location = new System.Drawing.Point(86, 71);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(174, 20);
-            this.textBox1.TabIndex = 3;
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Location = new System.Drawing.Point(28, 48);
+            this.lblNombre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(69, 20);
+            this.lblNombre.TabIndex = 1;
+            this.lblNombre.Text = "Nombre:";
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Location = new System.Drawing.Point(129, 48);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(259, 26);
+            this.txtNombre.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtAutor);
+            this.groupBox1.Controls.Add(this.txtTitulo);
+            this.groupBox1.Controls.Add(this.lblAutor);
+            this.groupBox1.Controls.Add(this.lblTitulo);
+            this.groupBox1.Location = new System.Drawing.Point(22, 143);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Size = new System.Drawing.Size(408, 165);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Datos del Libro";
+            // 
+            // txtAutor
+            // 
+            this.txtAutor.Location = new System.Drawing.Point(114, 109);
+            this.txtAutor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtAutor.Name = "txtAutor";
+            this.txtAutor.Size = new System.Drawing.Size(274, 26);
+            this.txtAutor.TabIndex = 3;
+            // 
+            // txtTitulo
+            // 
+            this.txtTitulo.Location = new System.Drawing.Point(114, 55);
+            this.txtTitulo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtTitulo.Name = "txtTitulo";
+            this.txtTitulo.Size = new System.Drawing.Size(274, 26);
+            this.txtTitulo.TabIndex = 2;
+            // 
+            // lblAutor
+            // 
+            this.lblAutor.AutoSize = true;
+            this.lblAutor.Location = new System.Drawing.Point(28, 109);
+            this.lblAutor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAutor.Name = "lblAutor";
+            this.lblAutor.Size = new System.Drawing.Size(52, 20);
+            this.lblAutor.TabIndex = 1;
+            this.lblAutor.Text = "Autor:";
+            // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Location = new System.Drawing.Point(24, 52);
+            this.lblTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(55, 20);
+            this.lblTitulo.TabIndex = 0;
+            this.lblTitulo.Text = "Título: ";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(152, 85);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(294, 28);
+            this.comboBox1.TabIndex = 2;
+            // 
+            // txtIdLibro
+            // 
+            this.txtIdLibro.Location = new System.Drawing.Point(32, 86);
+            this.txtIdLibro.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtIdLibro.Name = "txtIdLibro";
+            this.txtIdLibro.Size = new System.Drawing.Size(88, 26);
+            this.txtIdLibro.TabIndex = 1;
+            this.txtIdLibro.Leave += new System.EventHandler(this.txtIdLibro_Leave);
+            // 
+            // lblSeleccionLibro
+            // 
+            this.lblSeleccionLibro.AutoSize = true;
+            this.lblSeleccionLibro.Location = new System.Drawing.Point(24, 46);
+            this.lblSeleccionLibro.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSeleccionLibro.Name = "lblSeleccionLibro";
+            this.lblSeleccionLibro.Size = new System.Drawing.Size(162, 20);
+            this.lblSeleccionLibro.TabIndex = 0;
+            this.lblSeleccionLibro.Text = "Seleccionar Libro (ID)";
             // 
             // grpDetallesPrestamo
             // 
@@ -223,91 +243,103 @@
             this.grpDetallesPrestamo.Controls.Add(this.rchComentarios);
             this.grpDetallesPrestamo.Controls.Add(this.dtFechaLimite);
             this.grpDetallesPrestamo.Controls.Add(this.lblFechaEntrega);
-            this.grpDetallesPrestamo.Location = new System.Drawing.Point(338, 13);
+            this.grpDetallesPrestamo.Location = new System.Drawing.Point(507, 20);
+            this.grpDetallesPrestamo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grpDetallesPrestamo.Name = "grpDetallesPrestamo";
-            this.grpDetallesPrestamo.Size = new System.Drawing.Size(244, 240);
+            this.grpDetallesPrestamo.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grpDetallesPrestamo.Size = new System.Drawing.Size(366, 369);
             this.grpDetallesPrestamo.TabIndex = 1;
             this.grpDetallesPrestamo.TabStop = false;
             this.grpDetallesPrestamo.Text = "Detalles del Préstamo";
             // 
-            // lblFechaEntrega
-            // 
-            this.lblFechaEntrega.AutoSize = true;
-            this.lblFechaEntrega.Location = new System.Drawing.Point(7, 22);
-            this.lblFechaEntrega.Name = "lblFechaEntrega";
-            this.lblFechaEntrega.Size = new System.Drawing.Size(127, 13);
-            this.lblFechaEntrega.TabIndex = 0;
-            this.lblFechaEntrega.Text = "Fecha de Entrega Límite:";
-            // 
-            // dtFechaLimite
-            // 
-            this.dtFechaLimite.Location = new System.Drawing.Point(14, 48);
-            this.dtFechaLimite.Name = "dtFechaLimite";
-            this.dtFechaLimite.Size = new System.Drawing.Size(220, 20);
-            this.dtFechaLimite.TabIndex = 0;
-            // 
-            // rchComentarios
-            // 
-            this.rchComentarios.Location = new System.Drawing.Point(14, 120);
-            this.rchComentarios.Name = "rchComentarios";
-            this.rchComentarios.Size = new System.Drawing.Size(214, 100);
-            this.rchComentarios.TabIndex = 1;
-            this.rchComentarios.Text = "";
-            // 
             // lblObservaciones
             // 
             this.lblObservaciones.AutoSize = true;
-            this.lblObservaciones.Location = new System.Drawing.Point(14, 101);
+            this.lblObservaciones.Location = new System.Drawing.Point(21, 155);
+            this.lblObservaciones.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblObservaciones.Name = "lblObservaciones";
-            this.lblObservaciones.Size = new System.Drawing.Size(127, 13);
+            this.lblObservaciones.Size = new System.Drawing.Size(187, 20);
             this.lblObservaciones.TabIndex = 2;
             this.lblObservaciones.Text = "Observaciones (opcional)";
+            // 
+            // rchComentarios
+            // 
+            this.rchComentarios.Location = new System.Drawing.Point(21, 185);
+            this.rchComentarios.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.rchComentarios.Name = "rchComentarios";
+            this.rchComentarios.Size = new System.Drawing.Size(319, 152);
+            this.rchComentarios.TabIndex = 1;
+            this.rchComentarios.Text = "";
+            // 
+            // dtFechaLimite
+            // 
+            this.dtFechaLimite.Location = new System.Drawing.Point(21, 74);
+            this.dtFechaLimite.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtFechaLimite.Name = "dtFechaLimite";
+            this.dtFechaLimite.Size = new System.Drawing.Size(328, 26);
+            this.dtFechaLimite.TabIndex = 0;
+            // 
+            // lblFechaEntrega
+            // 
+            this.lblFechaEntrega.AutoSize = true;
+            this.lblFechaEntrega.Location = new System.Drawing.Point(10, 34);
+            this.lblFechaEntrega.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFechaEntrega.Name = "lblFechaEntrega";
+            this.lblFechaEntrega.Size = new System.Drawing.Size(187, 20);
+            this.lblFechaEntrega.TabIndex = 0;
+            this.lblFechaEntrega.Text = "Fecha de Entrega Límite:";
             // 
             // grpAcciones
             // 
             this.grpAcciones.Controls.Add(this.btnCancelar);
             this.grpAcciones.Controls.Add(this.btnGuardarPrestamo);
-            this.grpAcciones.Location = new System.Drawing.Point(338, 349);
+            this.grpAcciones.Location = new System.Drawing.Point(507, 537);
+            this.grpAcciones.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grpAcciones.Name = "grpAcciones";
-            this.grpAcciones.Size = new System.Drawing.Size(244, 89);
+            this.grpAcciones.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grpAcciones.Size = new System.Drawing.Size(366, 137);
             this.grpAcciones.TabIndex = 2;
             this.grpAcciones.TabStop = false;
             // 
-            // btnGuardarPrestamo
-            // 
-            this.btnGuardarPrestamo.Location = new System.Drawing.Point(6, 25);
-            this.btnGuardarPrestamo.Name = "btnGuardarPrestamo";
-            this.btnGuardarPrestamo.Size = new System.Drawing.Size(107, 30);
-            this.btnGuardarPrestamo.TabIndex = 0;
-            this.btnGuardarPrestamo.Text = "Guardar Préstamo";
-            this.btnGuardarPrestamo.UseVisualStyleBackColor = true;
-            // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(127, 25);
+            this.btnCancelar.Location = new System.Drawing.Point(190, 38);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(101, 30);
+            this.btnCancelar.Size = new System.Drawing.Size(152, 46);
             this.btnCancelar.TabIndex = 1;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
+            // btnGuardarPrestamo
+            // 
+            this.btnGuardarPrestamo.Location = new System.Drawing.Point(9, 38);
+            this.btnGuardarPrestamo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnGuardarPrestamo.Name = "btnGuardarPrestamo";
+            this.btnGuardarPrestamo.Size = new System.Drawing.Size(160, 46);
+            this.btnGuardarPrestamo.TabIndex = 0;
+            this.btnGuardarPrestamo.Text = "Guardar Préstamo";
+            this.btnGuardarPrestamo.UseVisualStyleBackColor = true;
+            // 
             // frmPrestamo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(594, 456);
+            this.ClientSize = new System.Drawing.Size(891, 702);
             this.Controls.Add(this.grpAcciones);
             this.Controls.Add(this.grpDetallesPrestamo);
             this.Controls.Add(this.grpPrestamo);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmPrestamo";
             this.Text = "Prestamo";
             this.TransparencyKey = System.Drawing.Color.Silver;
+            this.Load += new System.EventHandler(this.frmPrestamo_Load);
             this.grpPrestamo.ResumeLayout(false);
             this.grpPrestamo.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.grpUsuario.ResumeLayout(false);
             this.grpUsuario.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.grpDetallesPrestamo.ResumeLayout(false);
             this.grpDetallesPrestamo.PerformLayout();
             this.grpAcciones.ResumeLayout(false);
