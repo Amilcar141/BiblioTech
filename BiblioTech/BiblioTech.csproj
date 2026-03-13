@@ -49,8 +49,16 @@
     <Compile Include="Controllers\FavoritoController.cs" />
     <Compile Include="Controllers\GeneroController.cs" />
     <Compile Include="Controllers\LibroController.cs" />
+    <Compile Include="Controllers\MultaContoller.cs" />
     <Compile Include="Controllers\PrestamoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Models\Administrador.cs" />
+    <Compile Include="Models\Enums\EstadoMulta.cs" />
+    <Compile Include="Models\Enums\EstadoPrestamo.cs" />
+    <Compile Include="Models\Enums\EstadoPublicacion.cs" />
+    <Compile Include="Models\Enums\Rol.cs" />
+    <Compile Include="Models\Lector.cs" />
+    <Compile Include="Models\Multa.cs" />
     <Compile Include="Views\frmFavoritos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,6 +90,24 @@
     <Compile Include="Views\frmPrestamo.Designer.cs">
       <DependentUpon>frmPrestamo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Multas\FrmMultasPagadas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Multas\FrmMultasPagadas.Designer.cs">
+      <DependentUpon>FrmMultasPagadas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Multas\frmMultasPendientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Multas\frmMultasPendientes.Designer.cs">
+      <DependentUpon>frmMultasPendientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Usuarios\frmRegistrarUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Usuarios\frmRegistrarUsuario.Designer.cs">
+      <DependentUpon>frmRegistrarUsuario.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Views\frmFavoritos.resx">
       <DependentUpon>frmFavoritos.cs</DependentUpon>
     </EmbeddedResource>
@@ -103,6 +129,15 @@
     </Compile>
     <EmbeddedResource Include="Views\frmPrestamo.resx">
       <DependentUpon>frmPrestamo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Multas\FrmMultasPagadas.resx">
+      <DependentUpon>FrmMultasPagadas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Multas\frmMultasPendientes.resx">
+      <DependentUpon>frmMultasPendientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Usuarios\frmRegistrarUsuario.resx">
+      <DependentUpon>frmRegistrarUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

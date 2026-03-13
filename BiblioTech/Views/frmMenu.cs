@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BiblioTech.Views.Usuarios;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -53,6 +54,12 @@ namespace BiblioTech.Views
             frmFavoritos favoritos = new frmFavoritos();
 
             AbrirFormulario(favoritos);
+        }
+
+        private void tsmiRegistrarUsuario_Click(object sender, EventArgs e)
+        {
+            frmRegistrarUsuario registrarUsuario = new frmRegistrarUsuario();
+            AbrirFormulario(registrarUsuario);
         }
     }
 }
