@@ -11,6 +11,7 @@ namespace BiblioTech.Models
     {
         // Atributos privados
         private int _id;
+        private string _codigoMulta;
         private double _monto;
         private EstadoMulta _estado;
         private DateTime _fechaGeneracion;

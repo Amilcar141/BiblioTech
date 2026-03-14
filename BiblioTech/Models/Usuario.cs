@@ -11,6 +11,7 @@ namespace BiblioTech.Models
     {
         // Atributos de la clase
         private int _id;
+        private string _cuenta;
         private string _nombre;
         private string _correo;
         private string _password;
@@ -18,14 +19,18 @@ namespace BiblioTech.Models
         private bool _activo;
         private List<Prestamo> _historialPrestamos;
 
+        // Contador para el manejo de los IDs
+        private static int _contadorIds = 1;
+
         // Constructores
         public Usuario()
         {
         }
 
-        public Usuario(int id, string nombre, string correo, string password, Rol rol, bool activo)
+        public Usuario(string nombre, string correo, string password, Rol rol, bool activo)
         {
-            _id = id;
+            _id = _contadorIds++;
+            _cuenta = AsignarCuenta();
             _nombre = nombre;
             _correo = correo;
             _password = password;
@@ -78,17 +83,30 @@ namespace BiblioTech.Models
         }
 
         // Otros metodos adicionales
+
+        // Crear el codigo de la cuenta del usuario
+        private string AsignarCuenta()
+        {
+            string numeroCuenta;
+
+            if (_rol == Rol.Administrador)
+            {
+                numeroCuenta = "ADM" + "-" + DateTime.Now.ToString("yy") 
+                    + "-" +_id.ToString("D4");
+            }
+            else
+                numeroCuenta = "LEC" + "-" + DateTime.Now.ToString("yy")
+                    + "-" + _id.ToString("D4");
+
+            return numeroCuenta;
+        }
+
         public bool Autenticar(string correo, string password)
         {
             if (_correo == correo && _password == password)
                 return true;
             else
                 return false;
-        }
-
-        public List<Prestamo> GetPrestamosActivos()
-        {
-            return _historialPrestamos;
         }
 
         public bool TienePrestamosActivos()
@@ -99,24 +117,6 @@ namespace BiblioTech.Models
                     return true;
             }
 
-            return false;
-        }
-
-        public bool TienePrestamoPendiente()
-        {
-            foreach (Prestamo p in _historialPrestamos)
-            {
-                if (p.Multa.Estado == EstadoMulta.Pendiente)
-                    return true;
-            }
-
-            return false;
-        }
-
-        public bool PuedeRealizarPrestamo()
-        {
-            if (_activo && !TienePrestamoPendiente())
-                return true;
             return false;
         }
     }

@@ -1,4 +1,6 @@
-﻿using BiblioTech.Views.Usuarios;
+﻿using BiblioTech.Controllers;
+using BiblioTech.Views.Multas;
+using BiblioTech.Views.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +15,8 @@ namespace BiblioTech.Views
 {
     public partial class frmMenu : Form
     {
+        MultaController multaController;
+
         public frmMenu()
         {
             InitializeComponent();
@@ -60,6 +64,18 @@ namespace BiblioTech.Views
         {
             frmRegistrarUsuario registrarUsuario = new frmRegistrarUsuario();
             AbrirFormulario(registrarUsuario);
+        }
+
+        private void tsmiMultasPendientes_Click(object sender, EventArgs e)
+        {
+            frmMultasPendientes multasPendientes = new frmMultasPendientes(multaController);
+            AbrirFormulario(multasPendientes);
+        }
+
+        private void multasPagadasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmMultasPagadas multasPagadas = new FrmMultasPagadas(multaController);
+            AbrirFormulario(multasPagadas);
         }
     }
 }
