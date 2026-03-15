@@ -40,10 +40,10 @@ namespace BiblioTech.Models
         }
 
         // Metodos get y set
-        public int Id
+        public string NumeroCuenta
         {
-            get { return _id; }
-            set { _id = value; }
+            get { return _cuenta; }
+            private set { _cuenta = value; }
         }
 
         public string Nombre
@@ -79,7 +79,10 @@ namespace BiblioTech.Models
         public List<Prestamo> HistorialPrestamos
         {
             get { return _historialPrestamos; }
-            set { _historialPrestamos = value; }
+            set { 
+                if (value != null)
+                    _historialPrestamos = value; 
+            }
         }
 
         // Otros metodos adicionales

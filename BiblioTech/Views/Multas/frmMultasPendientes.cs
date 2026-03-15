@@ -30,7 +30,7 @@ namespace BiblioTech.Views.Multas
             foreach (Multa m in multaController.ObtenerMultasPendientes())
             {
                 dgvMultasPendientes.Rows.Add(
-                    m.Id,
+                    m.CodigoMulta,
                     "", // Usuario
                     m.FechaPago.ToString(),
                     multaController.CalcularDiasMora(m.FechaGeneracion),
@@ -40,9 +40,9 @@ namespace BiblioTech.Views.Multas
         }
 
         // Obtener el total a cobrar
-        private double TotalCobrar()
+        private decimal TotalCobrar()
         {
-            double total = multaController.ObtenerTotalMultasPendientes();
+            decimal total = multaController.ObtenerTotalMultasPendientes();
             txtTotal.Text = total.ToString();
             return total;
         }

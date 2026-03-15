@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,22 +12,40 @@ namespace BiblioTech.Models
     {
         // Atributos privados
         private int _idPrestamo;
+        private string _codigoPrestamo;
         private DateTime _fechaInicio;
         private DateTime _fechaLimite;
         private DateTime _fechaDevolucion;
         private EstadoPrestamo _estado;
-        private Multa _multa;
-        private Lector _lector;
-        private Libro _libro;
+        private List<Libro> _libros;
         private List<Multa> _multas;
+        private Lector _lector;
         private Administrador _gestionadoPor;
-        private decimal _tarifaDiaria = 5.00m; // Extra: tarifa diaria por retraso
+
+        // Asignar un id unico al préstamo
+        private static int _contadorIds = 1;
+
+        // Constructores
+        public Prestamo() { }
+
+        public Prestamo(Lector lector, DateTime fechaInicio, DateTime fechaLimite, Administrador gestionadoPor)
+        {
+            _idPrestamo = _contadorIds++;
+            _codigoPrestamo = AsignarCodigo();
+            _lector = lector;
+            _fechaInicio = fechaInicio;
+            _fechaLimite = fechaLimite;
+            _gestionadoPor = gestionadoPor;
+            _libros = new List<Libro>(3);
+            _multas = new List<Multa>();
+            _estado = EstadoPrestamo.Activo;
+        }
 
         // Propiedades
-        public int IdPrestamo
+        public string CodigoPrestamo
         {
-            get { return _idPrestamo; }
-            set { _idPrestamo = value; }
+            get { return _codigoPrestamo; }
+            private set { _codigoPrestamo = value; }
         }
 
         public DateTime FechaInicio
@@ -53,22 +72,10 @@ namespace BiblioTech.Models
             set { _estado = value; }
         }
 
-        public Multa Multa
+        public List<Libro> Libros
         {
-            get { return _multa; }
-            set { _multa = value; }
-        }
-
-        public Lector Lector
-        {
-            get { return _lector; }
-            set { _lector = value; }
-        }
-
-        public Libro Libro
-        {
-            get { return _libro; }
-            set { _libro = value; }
+            get { return _libros; }
+            set { _libros = value; }
         }
 
         public List<Multa> Multas
@@ -77,38 +84,28 @@ namespace BiblioTech.Models
             set { _multas = value; }
         }
 
+        public Lector Lector
+        {
+            get { return _lector; }
+            set { _lector = value; }
+        }
+
         public Administrador GestionadoPor
         {
             get { return _gestionadoPor; }
             set { _gestionadoPor = value; }
         }
 
-        public decimal TarifaDiaria
-        {
-            get { return _tarifaDiaria; }
-            set { _tarifaDiaria = value; }
-        }
-
-        // Constructores
-        public Prestamo()
-        {
-            _multas = new List<Multa>();
-            _estado = EstadoPrestamo.Activo;
-        }
-
-        public Prestamo(int idPrestamo, Lector lector, Libro libro, DateTime fechaInicio, DateTime fechaLimite, Administrador gestionadoPor)
-        {
-            _idPrestamo = idPrestamo;
-            _lector = lector;
-            _libro = libro;
-            _fechaInicio = fechaInicio;
-            _fechaLimite = fechaLimite;
-            _gestionadoPor = gestionadoPor;
-            _multas = new List<Multa>();
-            _estado = EstadoPrestamo.Activo;
-        }
 
         // Métodos
+
+        // Metodo para asignar un codigo unico a cada multa
+        private string AsignarCodigo()
+        {
+            return "PRST-" + _idPrestamo.ToString("D4");
+        }
+
+        // Valida si el préstamo está vencido comparando la fecha actual con la fecha límite
         public bool EstaVencido()
         {
             if (DateTime.Now > _fechaLimite)
@@ -134,34 +131,58 @@ namespace BiblioTech.Models
             return (int)Math.Max(0, diferencia.TotalDays);
         }
 
-        // Calcula la multa por retraso en la devolución
-        public decimal CalcularMulta()
+        // Calcula la multa según el tipo y los libros involucrados
+        public decimal CalcularMontoMulta(TipoMulta tipo)
         {
             int diasRetraso = ObtenerDiasDeRetraso();
+            decimal precioTotalLibros = 0;
 
-            decimal multa = diasRetraso * _tarifaDiaria;
+            foreach (Libro l in _libros)
+            {
+                // Usamos tu lógica de páginas * 2 si no hay precio real
+                precioTotalLibros += l.Precio;
+            }
 
-            return multa;
+            // Determina el tipo de multa a aplicar
+            switch (tipo)
+            {
+                case TipoMulta.Retraso:
+                    // Multa de 1% por cada dia de retraso 
+                    if (diasRetraso > 0)
+                        return diasRetraso * 0.01m * precioTotalLibros;
+                    return 0;
+
+                case TipoMulta.Deterioro:
+                    // Si se daño cobra un 25%
+                    return precioTotalLibros * 0.25m;
+
+                case TipoMulta.Perdida:
+                    // Si se perdio o extravio se cobra el libro + 20%
+                    return precioTotalLibros * 1.20m;
+
+                default:
+                    return 0;
+            }
+        }
+
+        // Agrega un libro al préstamo
+        public void AgregarLibro(Libro libro)
+        {
+            if (libro == null)
+                return;
+
+            if (_libros.Count >= 3)
+                return;
+
+            _libros.Add(libro);
         }
 
         // Registra la devolución del préstamo y el administrador que registro el libro
-        public void RegistrarDevolucion(DateTime fechaDevolucion, Administrador administrador)
+        public void FinalizarPrestamo(Administrador administrador)
         {
-            _fechaDevolucion = fechaDevolucion;
+            _fechaDevolucion = DateTime.Now;
             _estado = EstadoPrestamo.Devuelto;
             _gestionadoPor = administrador;
-
-            // Si hay retraso creaa una multa
-            int diasRetraso = ObtenerDiasDeRetraso();
-
-            if (diasRetraso > 0)
-            {
-                decimal montoMulta = CalcularMulta();
-                Multa multa = new Multa();
-
-                _multas.Add(multa);
-                _multa = multa; // Asignar la multa más reciente
-            }
         }
     }
 }

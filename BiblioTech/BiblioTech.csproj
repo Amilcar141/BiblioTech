@@ -46,8 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\FavoritoController.cs" />
     <Compile Include="Controllers\GeneroController.cs" />
+    <Compile Include="Controllers\LectorController.cs" />
     <Compile Include="Controllers\LibroController.cs" />
     <Compile Include="Controllers\MultaContoller.cs" />
     <Compile Include="Controllers\PrestamoController.cs" />
@@ -57,6 +59,7 @@
     <Compile Include="Models\Enums\EstadoPrestamo.cs" />
     <Compile Include="Models\Enums\EstadoPublicacion.cs" />
     <Compile Include="Models\Enums\Rol.cs" />
+    <Compile Include="Models\Enums\TipoMulta.cs" />
     <Compile Include="Models\Lector.cs" />
     <Compile Include="Models\Multa.cs" />
     <Compile Include="Views\frmFavoritos.cs">
