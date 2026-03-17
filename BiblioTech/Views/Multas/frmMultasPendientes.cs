@@ -29,10 +29,13 @@ namespace BiblioTech.Views.Multas
 
             foreach (Multa m in multaController.ObtenerMultasPendientes())
             {
+                string nombreLector = "";
+                if (m.Lector != null)
+                    nombreLector = m.Lector.Nombre;
+
                 dgvMultasPendientes.Rows.Add(
-                    m.Id,
-                    "", // Usuario
-                    m.FechaPago.ToString(),
+                    m.CodigoMulta,
+                    nombreLector,
                     multaController.CalcularDiasMora(m.FechaGeneracion),
                     m.Monto.ToString()
                 );
@@ -40,9 +43,9 @@ namespace BiblioTech.Views.Multas
         }
 
         // Obtener el total a cobrar
-        private double TotalCobrar()
+        private decimal TotalCobrar()
         {
-            double total = multaController.ObtenerTotalMultasPendientes();
+            decimal total = multaController.ObtenerTotalMultasPendientes();
             txtTotal.Text = total.ToString();
             return total;
         }
@@ -52,6 +55,28 @@ namespace BiblioTech.Views.Multas
             CargarMultasPendientes();
             TotalCobrar();
         }
+
+        private void dgvMultasPendientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Verifica que el clic no sea en el encabezado
+            if (e.RowIndex < 0) return;
+
+            // Verifica si se hizo clic en el botón "Ver"
+            if (dgvMultasPendientes.Columns[e.ColumnIndex].Name == "Ver Detalles")
+            {
+                string codigoMulta = dgvMultasPendientes.Rows[e.RowIndex].Cells["Codigo"].Value.ToString();
+                Multa multaSeleccionada = multaController.BuscarMulta(codigoMulta);
+
+                if (multaSeleccionada != null)
+                {
+                    frmDetalleMulta detalle = new frmPagarMulta(multaController, multaSeleccionada);
+                    frmPagar.ShowDialog();
+                    // Recargar la tabla y el total después de pagar
+                    CargarMultasPendientes();
+                    TotalCobrar();
+                }
+            }
+    }
 
         /*private void btnBuscar_Click(object sender, EventArgs e)
         {

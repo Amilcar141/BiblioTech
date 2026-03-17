@@ -29,16 +29,17 @@
         private void InitializeComponent()
         {
             this.dgvMultasPendientes = new System.Windows.Forms.DataGridView();
-            this.colLector = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFechaLimite = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDiasMora = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotalMulta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.txtBusqueda = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.Button();
+            this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLector = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDiasMora = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotalMulta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnDetalles = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMultasPendientes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,38 +48,16 @@
             this.dgvMultasPendientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvMultasPendientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMultasPendientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colCodigo,
             this.colLector,
-            this.colFechaLimite,
             this.colDiasMora,
-            this.colTotalMulta});
+            this.colTotalMulta,
+            this.btnDetalles});
             this.dgvMultasPendientes.Location = new System.Drawing.Point(24, 103);
             this.dgvMultasPendientes.Name = "dgvMultasPendientes";
             this.dgvMultasPendientes.Size = new System.Drawing.Size(607, 255);
             this.dgvMultasPendientes.TabIndex = 0;
-            // 
-            // colLector
-            // 
-            this.colLector.HeaderText = "Usuario";
-            this.colLector.Name = "colLector";
-            this.colLector.ReadOnly = true;
-            // 
-            // colFechaLimite
-            // 
-            this.colFechaLimite.HeaderText = "Fecha Limite";
-            this.colFechaLimite.Name = "colFechaLimite";
-            this.colFechaLimite.ReadOnly = true;
-            // 
-            // colDiasMora
-            // 
-            this.colDiasMora.HeaderText = "Dias Mora";
-            this.colDiasMora.Name = "colDiasMora";
-            this.colDiasMora.ReadOnly = true;
-            // 
-            // colTotalMulta
-            // 
-            this.colTotalMulta.HeaderText = "Total Multa";
-            this.colTotalMulta.Name = "colTotalMulta";
-            this.colTotalMulta.ReadOnly = true;
+            this.dgvMultasPendientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMultasPendientes_CellContentClick);
             // 
             // label1
             // 
@@ -140,6 +119,35 @@
             this.btnBuscar.TabIndex = 9;
             this.btnBuscar.UseVisualStyleBackColor = false;
             // 
+            // colCodigo
+            // 
+            this.colCodigo.HeaderText = "Codigo";
+            this.colCodigo.Name = "colCodigo";
+            this.colCodigo.ReadOnly = true;
+            // 
+            // colLector
+            // 
+            this.colLector.HeaderText = "Usuario";
+            this.colLector.Name = "colLector";
+            this.colLector.ReadOnly = true;
+            // 
+            // colDiasMora
+            // 
+            this.colDiasMora.HeaderText = "Dias Mora";
+            this.colDiasMora.Name = "colDiasMora";
+            this.colDiasMora.ReadOnly = true;
+            // 
+            // colTotalMulta
+            // 
+            this.colTotalMulta.HeaderText = "Total Multa";
+            this.colTotalMulta.Name = "colTotalMulta";
+            this.colTotalMulta.ReadOnly = true;
+            // 
+            // btnDetalles
+            // 
+            this.btnDetalles.HeaderText = "Ver Detalles";
+            this.btnDetalles.Name = "btnDetalles";
+            // 
             // frmMultasPendientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -165,15 +173,16 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvMultasPendientes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLector;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFechaLimite;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDiasMora;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalMulta;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtBusqueda;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCodigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLector;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDiasMora;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalMulta;
+        private System.Windows.Forms.DataGridViewButtonColumn btnDetalles;
     }
 }

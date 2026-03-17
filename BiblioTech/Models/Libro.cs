@@ -9,6 +9,7 @@ namespace BiblioTech.Models
     public class Libro
     {
         public int idLibro { get; set; }
+        public decimal Precio { get; set; }
         public string Titulo { get; set; }
         public string Autor { get; set; }        
         public string idCategoria { get; set; }

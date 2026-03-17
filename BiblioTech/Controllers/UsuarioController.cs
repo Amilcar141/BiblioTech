@@ -18,19 +18,10 @@ namespace BiblioTech.Controllers
         }
 
         // Registra un nuevo usuario
-        public bool RegistrarUsuario(int id, string nombre, string correo, string password, Rol rol)
+        public bool RegistrarUsuario(string nombre, string correo, string password, Rol rol)
         {
             Usuario usuario = new Usuario();
 
-            foreach (Usuario u in _usuarios)
-            {
-                if (u.Id == id || u.Correo == correo)
-                {
-                    return false;
-                }
-            }
-
-            usuario.Id = id;
             usuario.Nombre = nombre;
             usuario.Correo = correo;
             usuario.Password = password;
@@ -59,11 +50,11 @@ namespace BiblioTech.Controllers
         }
 
         // Obtiene un usuario por ID
-        public Usuario ObtenerUsuario(int id)
+        public Usuario ObtenerUsuario(string cuenta)
         {
             foreach (Usuario u in _usuarios)
             {
-                if (u.Id == id)
+                if (u.NumeroCuenta == cuenta)
                 {
                     return u;
                 }
@@ -109,10 +100,10 @@ namespace BiblioTech.Controllers
         }
 
         // Actualiza los datos de un usuario
-        public bool ActualizarUsuario(int id, string nombre, 
+        public bool ActualizarUsuario(string cuenta, string nombre, 
             string correo, string password)
         {
-            Usuario usuario = ObtenerUsuario(id);
+            Usuario usuario = ObtenerUsuario(cuenta);
 
             if (usuario == null)
                 return false;
@@ -132,9 +123,9 @@ namespace BiblioTech.Controllers
         }
 
         // Desactiva un usuario
-        public bool DesactivarUsuario(int id)
+        public bool DesactivarUsuario(string cuenta)
         {
-            Usuario usuario = ObtenerUsuario(id);
+            Usuario usuario = ObtenerUsuario(cuenta);
 
             if (usuario == null)
                 return false;
@@ -144,9 +135,9 @@ namespace BiblioTech.Controllers
         }
 
         // Activa un usuario
-        public bool ActivarUsuario(int id)
+        public bool ActivarUsuario(string cuenta)
         {
-            Usuario usuario = ObtenerUsuario(id);
+            Usuario usuario = ObtenerUsuario(cuenta);
 
             if (usuario == null)
                 return false;
@@ -156,9 +147,9 @@ namespace BiblioTech.Controllers
         }
 
         // Elimina un usuario
-        public bool EliminarUsuario(int id)
+        public bool EliminarUsuario(string cuenta)
         {
-            Usuario usuario = ObtenerUsuario(id);
+            Usuario usuario = ObtenerUsuario(cuenta);
 
             if (usuario == null)
                 return false;

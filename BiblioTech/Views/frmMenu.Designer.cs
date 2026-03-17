@@ -189,43 +189,43 @@
             // buscarLibroToolStripMenuItem
             // 
             this.buscarLibroToolStripMenuItem.Name = "buscarLibroToolStripMenuItem";
-            this.buscarLibroToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.buscarLibroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.buscarLibroToolStripMenuItem.Text = "Buscar Libro";
             // 
             // agregarLibroToolStripMenuItem
             // 
             this.agregarLibroToolStripMenuItem.Name = "agregarLibroToolStripMenuItem";
-            this.agregarLibroToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.agregarLibroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.agregarLibroToolStripMenuItem.Text = "Agregar Libro";
             // 
             // editarLibroToolStripMenuItem
             // 
             this.editarLibroToolStripMenuItem.Name = "editarLibroToolStripMenuItem";
-            this.editarLibroToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.editarLibroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editarLibroToolStripMenuItem.Text = "Editar Libro";
             // 
             // eliminarLibroToolStripMenuItem
             // 
             this.eliminarLibroToolStripMenuItem.Name = "eliminarLibroToolStripMenuItem";
-            this.eliminarLibroToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.eliminarLibroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.eliminarLibroToolStripMenuItem.Text = "Eliminar Libro";
             // 
             // verDisponibilidadToolStripMenuItem
             // 
             this.verDisponibilidadToolStripMenuItem.Name = "verDisponibilidadToolStripMenuItem";
-            this.verDisponibilidadToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.verDisponibilidadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.verDisponibilidadToolStripMenuItem.Text = "Ver Disponibilidad";
             // 
             // gestiónCategoríaToolStripMenuItem
             // 
             this.gestiónCategoríaToolStripMenuItem.Name = "gestiónCategoríaToolStripMenuItem";
-            this.gestiónCategoríaToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.gestiónCategoríaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gestiónCategoríaToolStripMenuItem.Text = "Gestión Categoría";
             // 
             // tsmiFavoritos
             // 
             this.tsmiFavoritos.Name = "tsmiFavoritos";
-            this.tsmiFavoritos.Size = new System.Drawing.Size(169, 22);
+            this.tsmiFavoritos.Size = new System.Drawing.Size(180, 22);
             this.tsmiFavoritos.Text = "Favoritos";
             // 
             // usuariosToolStripMenuItem
@@ -306,19 +306,21 @@
             // tsmiMultasPendientes
             // 
             this.tsmiMultasPendientes.Name = "tsmiMultasPendientes";
-            this.tsmiMultasPendientes.Size = new System.Drawing.Size(171, 22);
+            this.tsmiMultasPendientes.Size = new System.Drawing.Size(180, 22);
             this.tsmiMultasPendientes.Text = "Multas Pendientes";
+            this.tsmiMultasPendientes.Click += new System.EventHandler(this.tsmiMultasPendientes_Click);
             // 
             // multasPagadasToolStripMenuItem
             // 
             this.multasPagadasToolStripMenuItem.Name = "multasPagadasToolStripMenuItem";
-            this.multasPagadasToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.multasPagadasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.multasPagadasToolStripMenuItem.Text = "Multas Pagadas";
+            this.multasPagadasToolStripMenuItem.Click += new System.EventHandler(this.multasPagadasToolStripMenuItem_Click);
             // 
             // registrarPagoToolStripMenuItem
             // 
             this.registrarPagoToolStripMenuItem.Name = "registrarPagoToolStripMenuItem";
-            this.registrarPagoToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.registrarPagoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.registrarPagoToolStripMenuItem.Text = "Registrar Pago";
             // 
             // reportesToolStripMenuItem

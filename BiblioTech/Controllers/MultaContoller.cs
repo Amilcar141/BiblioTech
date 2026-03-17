@@ -1,9 +1,11 @@
 ﻿using BiblioTech.Models;
+using BiblioTech.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BiblioTech.Controllers
 {
@@ -56,12 +58,44 @@ namespace BiblioTech.Controllers
             return multasPagadas;
         }
 
-        // Busca una multa por su ID
-        public Multa ObtenerMultaPorId(int idMulta)
+        // Obtiene todas las multas de un lector específico
+        public List<Multa> ObtenerMultasPorLector(string idLector)
+        {
+            List<Multa> multasLector = new List<Multa>();
+
+            foreach (Multa m in _multas)
+            {
+                if (m.Lector != null && m.Lector.NumeroCuenta == idLector)
+                {
+                    multasLector.Add(m);
+                }
+            }
+
+            return multasLector;
+        }
+
+        // Obtiene todas las multas de un préstamo específico
+        public List<Multa> ObtenerMultasPorPrestamo(string codigoPrestamo)
+        {
+            List<Multa> multasPrestamo = new List<Multa>();
+
+            foreach (Multa m in _multas)
+            {
+                if (m.Prestamo != null && m.Prestamo.CodigoPrestamo == codigoPrestamo)
+                {
+                    multasPrestamo.Add(m);
+                }
+            }
+
+            return multasPrestamo;
+        }
+
+        // Busca una multa por su codigo
+        public Multa BuscarMulta(string codigo)
         {
             foreach (Multa m in _multas)
             {
-                if (m.Id == idMulta)
+                if (m.CodigoMulta == codigo)
                 {
                     return m;
                 }
@@ -78,9 +112,9 @@ namespace BiblioTech.Controllers
         }
 
         // Obtner total a cobrar de multas pendientes
-        public double ObtenerTotalMultasPendientes()
+        public decimal ObtenerTotalMultasPendientes()
         {
-            double total = 0;
+            decimal total = 0;
 
             foreach (Multa m in _multas)
             {
@@ -92,25 +126,65 @@ namespace BiblioTech.Controllers
         }
 
 
-        // Registra una nueva multa
-        public bool RegistrarMulta(int idMulta, double monto)
+        // Registra una nueva multa sin préstamo asociado
+        public bool RegistrarMulta(TipoMulta tipo, decimal monto, string descripcion)
         {
-            if (idMulta <= 0 || monto <= 0)
+            if (monto <= 0)
                 return false;
 
-            // Verificar que no exista una multa con el mismo ID
-            if (ObtenerMultaPorId(idMulta) != null)
-                return false;
-
-            Multa nuevaMulta = new Multa(idMulta, monto);
+            Multa nuevaMulta = new Multa(tipo, monto, descripcion);
             _multas.Add(nuevaMulta);
             return true;
         }
 
-        // Procesa el pago de una multa
-        public bool PagarMulta(int idMulta)
+        // Registra una nueva multa con lector asociado
+        public bool RegistrarMulta(TipoMulta tipo, decimal monto, string descripcion, Lector lector)
         {
-            Multa multa = ObtenerMultaPorId(idMulta);
+            if (monto <= 0)
+                return false;
+
+            Multa nuevaMulta = new Multa(tipo, monto, descripcion);
+            nuevaMulta.Lector = lector;
+            _multas.Add(nuevaMulta);
+            return true;
+        }
+
+        // Registra una nueva multa con prestamo y lector asociados
+        public bool RegistrarMulta(TipoMulta tipo, decimal monto, string descripcion, Lector lector, Prestamo prestamo)
+        {
+            if (monto <= 0)
+                return false;
+
+            Multa nuevaMulta = new Multa(tipo, monto, descripcion);
+            nuevaMulta.Lector = lector;
+            nuevaMulta.Prestamo = prestamo;
+            _multas.Add(nuevaMulta);
+            return true;
+        }
+
+        // Edita una multa
+        public bool EditarMulta(string codigo, TipoMulta tipo, decimal monto, string descripcion)
+        {
+            foreach (Multa m in _multas)
+            {
+                if (m.CodigoMulta == codigo)
+                {
+                    m.CodigoMulta = codigo;
+                    m.TipoMulta = tipo;
+                    m.Monto = monto;
+                    m.Descripcion = descripcion;
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        // Procesa el pago de una multa
+        public bool PagarMulta(string codigo)
+        {
+            Multa multa = BuscarMulta(codigo);
 
             if (multa == null)
                 return false;
@@ -120,9 +194,10 @@ namespace BiblioTech.Controllers
         }
 
         // Elimina una multa del sistema
-        public bool EliminarMulta(int idMulta)
+        public bool EliminarMulta(string codigo)
         {
-            Multa multa = ObtenerMultaPorId(idMulta);
+            Multa multa = BuscarMulta(codigo);
+
             if (multa == null)
                 return false;
 
