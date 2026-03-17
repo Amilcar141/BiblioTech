@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BiblioTech.Models
 {
-    internal class Favorito
+    internal class Favorito 
     {
          
         public int idFavorito { get; set; }

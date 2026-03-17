@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using BiblioTech.Controllers;
 
 
-namespace BiblioTech.Views
+namespace BiblioTech.Views 
 {
     public partial class frmFavoritos : Form
     {
@@ -122,4 +122,4 @@ namespace BiblioTech.Views
             LimpiarCampos();
         }
     }
-}
+} 

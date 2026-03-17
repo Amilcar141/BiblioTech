@@ -24,7 +24,7 @@ namespace BiblioTech.Controllers
         {
             mensaje = "";
 
-            // Validar ISBN 
+            // Validar ISBN  
             if (f.ISBN <= 0)
             {
                 mensaje = "Debe ingresar un ISBN válido (número mayor que cero).";

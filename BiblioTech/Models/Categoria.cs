@@ -10,7 +10,7 @@ namespace BiblioTech.Models
 
         // Constructor 
         public Categoria()
-        { _nombreCategoria = ""; }
+        { _nombreCategoria = ""; } 
 
         
         public int  GetIdCategoria()             

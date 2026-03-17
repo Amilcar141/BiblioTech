@@ -6,7 +6,7 @@ namespace BiblioTech.Models
 { 
     public class Libro
 {
-    // Atributos privados
+    // Atributos privados  
     private int _idLibro; 
     private string _isbn;
     private string _nombreLibro;
