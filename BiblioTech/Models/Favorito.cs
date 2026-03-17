@@ -8,7 +8,7 @@ namespace BiblioTech.Models
 {
     internal class Favorito
     {
-        
+         
         public int idFavorito { get; set; }
         public int ISBN { get; set; }
         public string AliasUsuario { get; set; }

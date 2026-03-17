@@ -341,7 +341,6 @@ namespace BiblioTech.Views
             // btnGuardarCambios
             // 
             this.btnGuardarCambios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(76)))));
-            this.btnGuardarCambios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardarCambios.ForeColor = System.Drawing.Color.White;
             this.btnGuardarCambios.Location = new System.Drawing.Point(13, 236);
             this.btnGuardarCambios.Margin = new System.Windows.Forms.Padding(4);
@@ -355,7 +354,6 @@ namespace BiblioTech.Views
             // btnCancelar
             // 
             this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(165)))), ((int)(((byte)(0)))));
-            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.ForeColor = System.Drawing.Color.White;
             this.btnCancelar.Location = new System.Drawing.Point(129, 236);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
@@ -369,7 +367,6 @@ namespace BiblioTech.Views
             // btnCerrar
             // 
             this.btnCerrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrar.ForeColor = System.Drawing.Color.White;
             this.btnCerrar.Location = new System.Drawing.Point(274, 236);
             this.btnCerrar.Margin = new System.Windows.Forms.Padding(4);

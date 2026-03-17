@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BiblioTech.Controllers
 {
-    internal class GeneroController
+    internal class GeneroController 
     {
     }
 }

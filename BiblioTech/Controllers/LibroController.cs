@@ -5,7 +5,7 @@ using BiblioTech.Models;
 namespace BiblioTech.Controllers
 {
     public class LibroController
-    {
+    { 
         
         private static List<Libro> _libros = new List<Libro>();
         private static int _nextId = 1;

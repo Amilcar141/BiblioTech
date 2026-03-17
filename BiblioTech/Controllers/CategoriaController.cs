@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using BiblioTech.Models;
 
 namespace BiblioTech.Controllers
-{
+{ 
     public class CategoriaController
     {
         // Estructura de datos privada para Categorias

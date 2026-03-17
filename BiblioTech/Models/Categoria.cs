@@ -8,7 +8,7 @@ namespace BiblioTech.Models
         private int    _idCategoria;
         private string _nombreCategoria;
 
-        // Constructor
+        // Constructor 
         public Categoria()
         { _nombreCategoria = ""; }
 

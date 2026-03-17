@@ -101,7 +101,7 @@ namespace BiblioTech.Views
             "Todos",
             "Disponibles",
             "Prestados"});
-            this.cmbFiltro.Location = new System.Drawing.Point(585, 20);
+            this.cmbFiltro.Location = new System.Drawing.Point(595, 20);
             this.cmbFiltro.Margin = new System.Windows.Forms.Padding(4);
             this.cmbFiltro.Name = "cmbFiltro";
             this.cmbFiltro.Size = new System.Drawing.Size(205, 28);

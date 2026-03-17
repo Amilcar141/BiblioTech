@@ -49,8 +49,6 @@
             this.txtTitulo = new System.Windows.Forms.TextBox();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.dgvFavoritos = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lblFavoritos = new System.Windows.Forms.Label();
             this.IdFavorito = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIdLibro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIdUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,6 +56,8 @@
             this.colAutor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAnio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGenero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblFavoritos = new System.Windows.Forms.Label();
             this.grpFavoritos.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFavoritos)).BeginInit();
@@ -141,7 +141,7 @@
             // 
             // txtISBN
             // 
-            this.txtISBN.Location = new System.Drawing.Point(454, 290);
+            this.txtISBN.Location = new System.Drawing.Point(454, 293);
             this.txtISBN.Name = "txtISBN";
             this.txtISBN.Size = new System.Drawing.Size(100, 26);
             this.txtISBN.TabIndex = 16;
@@ -272,29 +272,6 @@
             this.dgvFavoritos.Size = new System.Drawing.Size(894, 147);
             this.dgvFavoritos.TabIndex = 2;
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Peru;
-            this.panel1.Controls.Add(this.lblFavoritos);
-            this.panel1.Location = new System.Drawing.Point(39, 25);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(951, 55);
-            this.panel1.TabIndex = 0;
-            // 
-            // lblFavoritos
-            // 
-            this.lblFavoritos.AutoSize = true;
-            this.lblFavoritos.Font = new System.Drawing.Font("MS Reference Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFavoritos.ForeColor = System.Drawing.Color.Black;
-            this.lblFavoritos.Location = new System.Drawing.Point(237, 18);
-            this.lblFavoritos.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblFavoritos.Name = "lblFavoritos";
-            this.lblFavoritos.Size = new System.Drawing.Size(455, 35);
-            this.lblFavoritos.TabIndex = 0;
-            this.lblFavoritos.Text = "FAVORITOS DE BIBLIOTECH";
-            this.lblFavoritos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // IdFavorito
             // 
             this.IdFavorito.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -351,6 +328,29 @@
             this.colGenero.Name = "colGenero";
             this.colGenero.ReadOnly = true;
             this.colGenero.Width = 114;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Peru;
+            this.panel1.Controls.Add(this.lblFavoritos);
+            this.panel1.Location = new System.Drawing.Point(39, 25);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(951, 55);
+            this.panel1.TabIndex = 0;
+            // 
+            // lblFavoritos
+            // 
+            this.lblFavoritos.AutoSize = true;
+            this.lblFavoritos.Font = new System.Drawing.Font("MS Reference Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFavoritos.ForeColor = System.Drawing.Color.Black;
+            this.lblFavoritos.Location = new System.Drawing.Point(237, 18);
+            this.lblFavoritos.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFavoritos.Name = "lblFavoritos";
+            this.lblFavoritos.Size = new System.Drawing.Size(455, 35);
+            this.lblFavoritos.TabIndex = 0;
+            this.lblFavoritos.Text = "FAVORITOS DE BIBLIOTECH";
+            this.lblFavoritos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmFavoritos
             // 

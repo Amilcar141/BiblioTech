@@ -100,7 +100,7 @@ namespace BiblioTech.Views
             // 
             // txtNombreCategoria
             // 
-            this.txtNombreCategoria.Location = new System.Drawing.Point(203, 102);
+            this.txtNombreCategoria.Location = new System.Drawing.Point(203, 106);
             this.txtNombreCategoria.Margin = new System.Windows.Forms.Padding(4);
             this.txtNombreCategoria.Name = "txtNombreCategoria";
             this.txtNombreCategoria.Size = new System.Drawing.Size(275, 26);

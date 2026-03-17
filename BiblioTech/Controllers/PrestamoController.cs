@@ -7,7 +7,7 @@ using BiblioTech.Models;
 
 namespace BiblioTech.Controllers
 {
-    public class PrestamoController
+    public class PrestamoController 
     {
         public List<Prestamo> Historial;
 
