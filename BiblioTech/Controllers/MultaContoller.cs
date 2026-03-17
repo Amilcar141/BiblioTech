@@ -58,6 +58,38 @@ namespace BiblioTech.Controllers
             return multasPagadas;
         }
 
+        // Obtiene todas las multas de un lector específico
+        public List<Multa> ObtenerMultasPorLector(string idLector)
+        {
+            List<Multa> multasLector = new List<Multa>();
+
+            foreach (Multa m in _multas)
+            {
+                if (m.Lector != null && m.Lector.NumeroCuenta == idLector)
+                {
+                    multasLector.Add(m);
+                }
+            }
+
+            return multasLector;
+        }
+
+        // Obtiene todas las multas de un préstamo específico
+        public List<Multa> ObtenerMultasPorPrestamo(string codigoPrestamo)
+        {
+            List<Multa> multasPrestamo = new List<Multa>();
+
+            foreach (Multa m in _multas)
+            {
+                if (m.Prestamo != null && m.Prestamo.CodigoPrestamo == codigoPrestamo)
+                {
+                    multasPrestamo.Add(m);
+                }
+            }
+
+            return multasPrestamo;
+        }
+
         // Busca una multa por su codigo
         public Multa BuscarMulta(string codigo)
         {
@@ -94,13 +126,38 @@ namespace BiblioTech.Controllers
         }
 
 
-        // Registra una nueva multa
-        public bool RegistrarMulta(TipoMulta tipo, decimal monto,  string descripcion)
+        // Registra una nueva multa sin préstamo asociado
+        public bool RegistrarMulta(TipoMulta tipo, decimal monto, string descripcion)
         {
             if (monto <= 0)
                 return false;
 
             Multa nuevaMulta = new Multa(tipo, monto, descripcion);
+            _multas.Add(nuevaMulta);
+            return true;
+        }
+
+        // Registra una nueva multa con lector asociado
+        public bool RegistrarMulta(TipoMulta tipo, decimal monto, string descripcion, Lector lector)
+        {
+            if (monto <= 0)
+                return false;
+
+            Multa nuevaMulta = new Multa(tipo, monto, descripcion);
+            nuevaMulta.Lector = lector;
+            _multas.Add(nuevaMulta);
+            return true;
+        }
+
+        // Registra una nueva multa con prestamo y lector asociados
+        public bool RegistrarMulta(TipoMulta tipo, decimal monto, string descripcion, Lector lector, Prestamo prestamo)
+        {
+            if (monto <= 0)
+                return false;
+
+            Multa nuevaMulta = new Multa(tipo, monto, descripcion);
+            nuevaMulta.Lector = lector;
+            nuevaMulta.Prestamo = prestamo;
             _multas.Add(nuevaMulta);
             return true;
         }

@@ -18,6 +18,8 @@ namespace BiblioTech.Models
         private TipoMulta _tipoMulta;
         private DateTime _fechaGeneracion;
         private DateTime _fechaPago;
+        private Lector _lector;
+        private Prestamo _prestamo;
 
         // Contador para el manejo de los IDs
         private static int _contadorIds = 1;
@@ -85,6 +87,18 @@ namespace BiblioTech.Models
             private set { _fechaPago = value; }
         }
 
+        public Lector Lector
+        {
+            get { return _lector; }
+            set { _lector = value; }
+        }
+
+        public Prestamo Prestamo
+        {
+            get { return _prestamo; }
+            set { _prestamo = value; }
+        }
+
         // Metodos de la multa
 
         // Metodo para asignar un codigo unico a cada multa
@@ -93,7 +107,7 @@ namespace BiblioTech.Models
             // Obtinene la inicial identificadora del tipo de multa
             char tipoMulta = _tipoMulta.ToString()[0];
 
-            return "MLT-" + tipoMulta +"-" + _id.ToString("D4");
+            return "MLT-" + tipoMulta + "-" + _id.ToString("D4");
         }
 
         public void Pagar()

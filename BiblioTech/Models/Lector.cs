@@ -19,16 +19,13 @@ namespace BiblioTech.Models
         // Constructores
         public Lector() : base()
         {
-            _maxPrestamosSimultaneos = 3;
-            _diasPrestamo = 14; // Maximo de 14 días para el préstamo
-            _restriccionActiva = false;
         }
 
         public Lector(string nombre, string correo, string password, bool activo)
             : base(nombre, correo, password, Rol.Lector, activo)
         {
             _maxPrestamosSimultaneos = 3;
-            _diasPrestamo = 14;
+            _diasPrestamo = 14; // Maximo de 14 días para el préstamo
             _restriccionActiva = false;
         }
 

@@ -29,10 +29,13 @@ namespace BiblioTech.Views.Multas
 
             foreach (Multa m in multaController.ObtenerMultasPendientes())
             {
+                string nombreLector = "";
+                if (m.Lector != null)
+                    nombreLector = m.Lector.Nombre;
+
                 dgvMultasPendientes.Rows.Add(
                     m.CodigoMulta,
-                    "", // Usuario
-                    m.FechaPago.ToString(),
+                    nombreLector,
                     multaController.CalcularDiasMora(m.FechaGeneracion),
                     m.Monto.ToString()
                 );
@@ -52,6 +55,28 @@ namespace BiblioTech.Views.Multas
             CargarMultasPendientes();
             TotalCobrar();
         }
+
+        private void dgvMultasPendientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Verifica que el clic no sea en el encabezado
+            if (e.RowIndex < 0) return;
+
+            // Verifica si se hizo clic en el botón "Ver"
+            if (dgvMultasPendientes.Columns[e.ColumnIndex].Name == "Ver Detalles")
+            {
+                string codigoMulta = dgvMultasPendientes.Rows[e.RowIndex].Cells["Codigo"].Value.ToString();
+                Multa multaSeleccionada = multaController.BuscarMulta(codigoMulta);
+
+                if (multaSeleccionada != null)
+                {
+                    frmDetalleMulta detalle = new frmPagarMulta(multaController, multaSeleccionada);
+                    frmPagar.ShowDialog();
+                    // Recargar la tabla y el total después de pagar
+                    CargarMultasPendientes();
+                    TotalCobrar();
+                }
+            }
+    }
 
         /*private void btnBuscar_Click(object sender, EventArgs e)
         {
