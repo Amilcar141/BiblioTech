@@ -24,7 +24,7 @@ namespace BiblioTech.Views
 
         private void frmFavoritos_Load(object sender, EventArgs e)
         {
-
+            // Comentario
         }
 
         private void LimpiarCampos()
