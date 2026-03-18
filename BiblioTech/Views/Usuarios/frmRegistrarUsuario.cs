@@ -187,15 +187,12 @@ namespace BiblioTech.Views.Usuarios
         {
             try
             {
-                // Generar ID único (número)
-                int id = GenerarIdUsuario();
 
                 // Obtener el rol seleccionado
                 Rol rolSeleccionado = rbtnLector.Checked ? Rol.Lector : Rol.Administrador;
 
                 // Llamar al controlador para registrar el usuario
                 bool resultado = usuarioController.RegistrarUsuario(
-                    id,
                     txtNombre.Text.Trim() + " " + txtApellidos.Text.Trim(),
                     txtCorreo.Text.Trim(),
                     txtPassword.Text,

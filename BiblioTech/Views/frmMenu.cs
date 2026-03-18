@@ -1,9 +1,7 @@
-﻿using BiblioTech.Controllers;
-using BiblioTech.Views.Multas;
-using BiblioTech.Views.Usuarios;
+﻿using BiblioTech.Views.Usuarios;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.ComponentModel ;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -11,12 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BiblioTech.Views
+namespace BiblioTech.Views 
 {
     public partial class frmMenu : Form
     {
-        MultaController multaController;
-
         public frmMenu()
         {
             InitializeComponent();
@@ -66,16 +62,46 @@ namespace BiblioTech.Views
             AbrirFormulario(registrarUsuario);
         }
 
-        private void tsmiMultasPendientes_Click(object sender, EventArgs e)
+        private void agregarLibroToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmMultasPendientes multasPendientes = new frmMultasPendientes(multaController);
-            AbrirFormulario(multasPendientes);
+            FrmAgregarLibro libro = new FrmAgregarLibro();
+            AbrirFormulario(libro);
         }
 
-        private void multasPagadasToolStripMenuItem_Click(object sender, EventArgs e)
+        private void buscarLibroToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmMultasPagadas multasPagadas = new FrmMultasPagadas(multaController);
-            AbrirFormulario(multasPagadas);
+            FrmBuscarLibro buscarLibro = new FrmBuscarLibro();
+            AbrirFormulario(buscarLibro);
+        }
+
+        private void editarLibroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmEditarLibro editarLibro = new FrmEditarLibro();
+            AbrirFormulario(editarLibro);
+        }
+
+        private void eliminarLibroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmEliminarLibro EliminarLibro = new FrmEliminarLibro();
+            AbrirFormulario(EliminarLibro);
+        }
+
+        private void verDisponibilidadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmVerDisponibilidad disponibilidad = new FrmVerDisponibilidad();
+            AbrirFormulario(disponibilidad);
+        }
+
+        private void gestiónCategoríaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmGestionarCategorias gestionCategoria = new FrmGestionarCategorias();
+            AbrirFormulario(gestionCategoria);
+        }
+
+        private void tsmiFavoritos_Click(object sender, EventArgs e)
+        {
+            frmFavoritos favoritos = new frmFavoritos();
+            AbrirFormulario(favoritos);
         }
     }
 }

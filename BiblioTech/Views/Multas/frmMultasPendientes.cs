@@ -55,10 +55,10 @@ namespace BiblioTech.Views.Multas
             CargarMultasPendientes();
             TotalCobrar();
         }
-
+        
         private void dgvMultasPendientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Verifica que el clic no sea en el encabezado
+            /* Verifica que el clic no sea en el encabezado
             if (e.RowIndex < 0) return;
 
             // Verifica si se hizo clic en el botón "Ver"
@@ -71,15 +71,18 @@ namespace BiblioTech.Views.Multas
                 {
                     frmDetalleMulta detalle = new frmPagarMulta(multaController, multaSeleccionada);
                     frmPagar.ShowDialog();
+
                     // Recargar la tabla y el total después de pagar
                     CargarMultasPendientes();
                     TotalCobrar();
                 }
             }
-    }
+            */
+        }
 
-        /*private void btnBuscar_Click(object sender, EventArgs e)
+        private void btnBuscar_Click(object sender, EventArgs e)
         {
+            /*
             string criterio = txtBusqueda.Text.Trim();
             dgvMultasPendientes.Rows.Clear();
 
@@ -96,7 +99,7 @@ namespace BiblioTech.Views.Multas
                     );
                 }
             }
+            */
         }
-        */
     }
 }

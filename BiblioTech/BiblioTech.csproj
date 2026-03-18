@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AdministradorController.cs" />
+    <Compile Include="Controllers\CategoriaController.cs" />
+    <Compile Include="Controllers\EjemplarController.cs" />
     <Compile Include="Controllers\FavoritoController.cs" />
     <Compile Include="Controllers\GeneroController.cs" />
     <Compile Include="Controllers\LectorController.cs" />
@@ -55,6 +57,8 @@
     <Compile Include="Controllers\PrestamoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Models\Administrador.cs" />
+    <Compile Include="Models\Categoria.cs" />
+    <Compile Include="Models\Ejemplar.cs" />
     <Compile Include="Models\Enums\EstadoMulta.cs" />
     <Compile Include="Models\Enums\EstadoPrestamo.cs" />
     <Compile Include="Models\Enums\EstadoPublicacion.cs" />
@@ -92,6 +96,42 @@
     </Compile>
     <Compile Include="Views\frmPrestamo.Designer.cs">
       <DependentUpon>frmPrestamo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Libros\FrmAgregarLibro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Libros\FrmAgregarLibro.Designer.cs">
+      <DependentUpon>FrmAgregarLibro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Libros\FrmBuscarLibro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Libros\FrmBuscarLibro.Designer.cs">
+      <DependentUpon>FrmBuscarLibro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Libros\FrmEditarLibro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Libros\FrmEditarLibro.Designer.cs">
+      <DependentUpon>FrmEditarLibro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Libros\FrmEliminarLibro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Libros\FrmEliminarLibro.Designer.cs">
+      <DependentUpon>FrmEliminarLibro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Libros\FrmGestionarCategorias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Libros\FrmGestionarCategorias.Designer.cs">
+      <DependentUpon>FrmGestionarCategorias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Libros\FrmVerDisponibilidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Libros\FrmVerDisponibilidad.Designer.cs">
+      <DependentUpon>FrmVerDisponibilidad.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Multas\frmDetalleMulta.cs">
       <SubType>Form</SubType>
@@ -138,6 +178,24 @@
     </Compile>
     <EmbeddedResource Include="Views\frmPrestamo.resx">
       <DependentUpon>frmPrestamo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Libros\FrmAgregarLibro.resx">
+      <DependentUpon>FrmAgregarLibro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Libros\FrmBuscarLibro.resx">
+      <DependentUpon>FrmBuscarLibro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Libros\FrmEditarLibro.resx">
+      <DependentUpon>FrmEditarLibro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Libros\FrmEliminarLibro.resx">
+      <DependentUpon>FrmEliminarLibro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Libros\FrmGestionarCategorias.resx">
+      <DependentUpon>FrmGestionarCategorias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Libros\FrmVerDisponibilidad.resx">
+      <DependentUpon>FrmVerDisponibilidad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Multas\FrmMultasPagadas.resx">
       <DependentUpon>FrmMultasPagadas.cs</DependentUpon>

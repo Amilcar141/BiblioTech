@@ -1,23 +1,98 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BiblioTech.Models;
 
 namespace BiblioTech.Controllers
 {
-  public class LibroController
+    public class LibroController
     {
-        public static List<Libro> Inventario = new List<Libro>();
 
-        public void AgregarLibro(Libro nuevo) { Inventario.Add(nuevo); }
+        private static List<Libro> _libros;
 
-        public List<Libro> BuscarLibro(string texto)
+        // Constructor
+        public LibroController()
         {
-            return Inventario.Where(l => l.Titulo.Contains(texto) || l.Autor.Contains(texto)).ToList();
+            _libros = new List<Libro>();
         }
 
-        public void EliminarLibro(int id) { Inventario.RemoveAll(l => l.idLibro == id); }
+        // Metodos
+
+        // Obtiene todos los libros
+        public List<Libro> ObtenerTodos()
+        {
+            return _libros;
+        }
+
+        // Obtiene libros por autor
+        public List<Libro> ObtenerPorAutor(string autor)
+        {
+            List<Libro> resultado = new List<Libro>();
+
+            foreach (Libro lib in _libros)
+            {
+                if (lib.Autor.ToLower == autor.ToLower)
+                    resultado.Add(lib);
+            }
+
+            return resultado;
+        }
+
+        // Obtiene libros por categoria
+        public List<Libro> ObtenerPorCategoria(string categoria)
+        {
+            List<Libro> resultado = new List<Libro>();
+            foreach (Libro lib in _libros)
+            {
+                if (lib.Categoria.Nombre.ToLower == categoria.ToLower)
+                    resultado.Add(lib);
+            }
+            return resultado;
+        }
+
+        // Obtiene un libro por su isbn
+        public Libro ObtenerPorId(string isbn)
+        {
+            foreach (Libro lib in _libros)
+            {
+                if (lib.ISBN == isbn)
+                    return lib;
+            }
+            return null;
+        }
+
+        public bool AgregarLibro(Libro libro)
+        {
+            if (ObtenerPorId(libro.ISBN) != null)
+                return false; // No se puede agregar un libro con un ISBN duplicado
+
+            _libros.Add(libro);
+            return true;
+        }
+
+        public bool ActualizarLibro(string isbn, Libro libroActualizado)
+        {
+            foreach (Libro lib in _libros)
+            {
+                if (lib.ISBN == isbn)
+                {
+                    lib = libroActualizado;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool EliminarLibro(string isbn)
+        {
+            foreach (Libro lib in _libros)
+            {
+                if (lib.ISBN == isbn)
+                {
+                    _libros.Remove(lib);
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
