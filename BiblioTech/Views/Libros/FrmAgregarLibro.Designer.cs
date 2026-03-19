@@ -20,14 +20,19 @@ namespace BiblioTech.Views
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAgregarLibro));
             this.lblTitulo = new System.Windows.Forms.Label();
             this.grpDatos = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtPrecio = new System.Windows.Forms.TextBox();
             this.lblISBN = new System.Windows.Forms.Label();
             this.txtISBN = new System.Windows.Forms.TextBox();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.lblNombreLibro = new System.Windows.Forms.Label();
+            this.btnNuevo = new System.Windows.Forms.Button();
             this.txtNombreLibro = new System.Windows.Forms.TextBox();
             this.lblAutor = new System.Windows.Forms.Label();
             this.txtAutor = new System.Windows.Forms.TextBox();
             this.lblCategoria = new System.Windows.Forms.Label();
-            this.txtCategoria = new System.Windows.Forms.TextBox();
             this.lblFechaPublicacion = new System.Windows.Forms.Label();
             this.dtpFechaPublicacion = new System.Windows.Forms.DateTimePicker();
             this.lblNumeroPaginas = new System.Windows.Forms.Label();
@@ -46,13 +51,8 @@ namespace BiblioTech.Views
             this.Paginas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Editorial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Alias = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnNuevo = new System.Windows.Forms.Button();
-            this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtPrecio = new System.Windows.Forms.TextBox();
+            this.cbxCategoria = new System.Windows.Forms.ComboBox();
             this.grpDatos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLibros)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -72,6 +72,7 @@ namespace BiblioTech.Views
             // grpDatos
             // 
             this.grpDatos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(133)))), ((int)(((byte)(82)))));
+            this.grpDatos.Controls.Add(this.cbxCategoria);
             this.grpDatos.Controls.Add(this.label1);
             this.grpDatos.Controls.Add(this.txtPrecio);
             this.grpDatos.Controls.Add(this.lblISBN);
@@ -85,7 +86,6 @@ namespace BiblioTech.Views
             this.grpDatos.Controls.Add(this.lblAutor);
             this.grpDatos.Controls.Add(this.txtAutor);
             this.grpDatos.Controls.Add(this.lblCategoria);
-            this.grpDatos.Controls.Add(this.txtCategoria);
             this.grpDatos.Controls.Add(this.lblFechaPublicacion);
             this.grpDatos.Controls.Add(this.dtpFechaPublicacion);
             this.grpDatos.Controls.Add(this.lblNumeroPaginas);
@@ -100,6 +100,22 @@ namespace BiblioTech.Views
             this.grpDatos.TabIndex = 1;
             this.grpDatos.TabStop = false;
             this.grpDatos.Text = "Datos del Libro";
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(352, 82);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 20);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Precio:";
+            // 
+            // txtPrecio
+            // 
+            this.txtPrecio.Location = new System.Drawing.Point(411, 82);
+            this.txtPrecio.Name = "txtPrecio";
+            this.txtPrecio.Size = new System.Drawing.Size(139, 20);
+            this.txtPrecio.TabIndex = 19;
             // 
             // lblISBN
             // 
@@ -117,6 +133,43 @@ namespace BiblioTech.Views
             this.txtISBN.Size = new System.Drawing.Size(174, 20);
             this.txtISBN.TabIndex = 1;
             // 
+            // btnCancelar
+            // 
+            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnCancelar.ForeColor = System.Drawing.Color.White;
+            this.btnCancelar.Location = new System.Drawing.Point(616, 143);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(77, 27);
+            this.btnCancelar.TabIndex = 6;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(165)))), ((int)(((byte)(0)))));
+            this.btnLimpiar.ForeColor = System.Drawing.Color.White;
+            this.btnLimpiar.Location = new System.Drawing.Point(616, 103);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(77, 25);
+            this.btnLimpiar.TabIndex = 5;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(76)))));
+            this.btnGuardar.ForeColor = System.Drawing.Color.White;
+            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGuardar.Location = new System.Drawing.Point(616, 62);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(77, 27);
+            this.btnGuardar.TabIndex = 3;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
             // lblNombreLibro
             // 
             this.lblNombreLibro.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
@@ -125,6 +178,18 @@ namespace BiblioTech.Views
             this.lblNombreLibro.Size = new System.Drawing.Size(93, 20);
             this.lblNombreLibro.TabIndex = 2;
             this.lblNombreLibro.Text = "Titulo del Libro:";
+            // 
+            // btnNuevo
+            // 
+            this.btnNuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
+            this.btnNuevo.ForeColor = System.Drawing.Color.White;
+            this.btnNuevo.Location = new System.Drawing.Point(616, 22);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(77, 25);
+            this.btnNuevo.TabIndex = 4;
+            this.btnNuevo.Text = "Nuevo";
+            this.btnNuevo.UseVisualStyleBackColor = false;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // txtNombreLibro
             // 
@@ -157,13 +222,6 @@ namespace BiblioTech.Views
             this.lblCategoria.Size = new System.Drawing.Size(70, 20);
             this.lblCategoria.TabIndex = 6;
             this.lblCategoria.Text = "Categoría:";
-            // 
-            // txtCategoria
-            // 
-            this.txtCategoria.Location = new System.Drawing.Point(101, 110);
-            this.txtCategoria.Name = "txtCategoria";
-            this.txtCategoria.Size = new System.Drawing.Size(174, 20);
-            this.txtCategoria.TabIndex = 7;
             // 
             // lblFechaPublicacion
             // 
@@ -332,55 +390,6 @@ namespace BiblioTech.Views
             this.Alias.Name = "Alias";
             this.Alias.ReadOnly = true;
             // 
-            // btnGuardar
-            // 
-            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(76)))));
-            this.btnGuardar.ForeColor = System.Drawing.Color.White;
-            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(616, 62);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(77, 27);
-            this.btnGuardar.TabIndex = 3;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = false;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // btnNuevo
-            // 
-            this.btnNuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
-            this.btnNuevo.ForeColor = System.Drawing.Color.White;
-            this.btnNuevo.Location = new System.Drawing.Point(616, 22);
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(77, 25);
-            this.btnNuevo.TabIndex = 4;
-            this.btnNuevo.Text = "Nuevo";
-            this.btnNuevo.UseVisualStyleBackColor = false;
-            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(165)))), ((int)(((byte)(0)))));
-            this.btnLimpiar.ForeColor = System.Drawing.Color.White;
-            this.btnLimpiar.Location = new System.Drawing.Point(616, 103);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(77, 25);
-            this.btnLimpiar.TabIndex = 5;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.UseVisualStyleBackColor = false;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnCancelar.ForeColor = System.Drawing.Color.White;
-            this.btnCancelar.Location = new System.Drawing.Point(616, 143);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(77, 27);
-            this.btnCancelar.TabIndex = 6;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
@@ -391,21 +400,13 @@ namespace BiblioTech.Views
             this.pictureBox1.TabIndex = 286;
             this.pictureBox1.TabStop = false;
             // 
-            // label1
+            // cbxCategoria
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(352, 82);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 20);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Precio:";
-            // 
-            // txtPrecio
-            // 
-            this.txtPrecio.Location = new System.Drawing.Point(411, 82);
-            this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.Size = new System.Drawing.Size(139, 20);
-            this.txtPrecio.TabIndex = 19;
+            this.cbxCategoria.FormattingEnabled = true;
+            this.cbxCategoria.Location = new System.Drawing.Point(101, 111);
+            this.cbxCategoria.Name = "cbxCategoria";
+            this.cbxCategoria.Size = new System.Drawing.Size(173, 21);
+            this.cbxCategoria.TabIndex = 20;
             // 
             // FrmAgregarLibro
             // 
@@ -441,7 +442,6 @@ namespace BiblioTech.Views
         private System.Windows.Forms.Label lblAutor;
         private System.Windows.Forms.TextBox txtAutor;
         private System.Windows.Forms.Label lblCategoria;
-        private System.Windows.Forms.TextBox txtCategoria;
         private System.Windows.Forms.Label lblFechaPublicacion;
         private System.Windows.Forms.DateTimePicker dtpFechaPublicacion;
         private System.Windows.Forms.Label lblNumeroPaginas;
@@ -476,5 +476,6 @@ namespace BiblioTech.Views
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtPrecio;
+        private System.Windows.Forms.ComboBox cbxCategoria;
     }
 }

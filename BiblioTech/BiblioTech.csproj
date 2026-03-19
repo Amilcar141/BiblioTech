@@ -66,6 +66,8 @@
     <Compile Include="Models\Enums\TipoMulta.cs" />
     <Compile Include="Models\Lector.cs" />
     <Compile Include="Models\Multa.cs" />
+    <Compile Include="Models\Publicacion.cs" />
+    <Compile Include="Models\Reserva.cs" />
     <Compile Include="Views\frmFavoritos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,7 +87,6 @@
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Favorito.cs" />
-    <Compile Include="Models\Genero.cs" />
     <Compile Include="Models\Libro.cs" />
     <Compile Include="Models\Prestamo.cs" />
     <Compile Include="Models\Usuario.cs" />

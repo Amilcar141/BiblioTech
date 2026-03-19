@@ -37,8 +37,8 @@ namespace BiblioTech.Models
 
         public EstadoPublicacion Estado
         {
-            get { return estado; }
-            set { estado = value; }
+            get { return _estado; }
+            set { _estado = value; }
         }
 
         // Asignar un código único a cada ejemplar

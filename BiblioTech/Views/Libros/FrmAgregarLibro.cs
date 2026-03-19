@@ -22,6 +22,7 @@ namespace BiblioTech.Views
             
             lblFechaRegistroValor.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
             CargarTabla();
+            CargarCategorias();
         }
 
         
@@ -35,10 +36,10 @@ namespace BiblioTech.Views
                     lib.ISBN,
                     lib.Titulo,
                     lib.Autor,
-                    lib.Categoria != null ? lib.Categoria.NombreCategoria : "Sin categoría",
+                    lib.Categoria.NombreCategoria,
                     lib.FechaPublicacion.ToString("dd/MM/yyyy"),
                     lib.NumeroPaginas,
-                    lib.Editorial,
+                    lib.Editorial
                     // Posibles columnas para la dgv
                     //lib.ObtenerEjemplaresDisponibles(),
                     //lib.Precio.ToString("C")
@@ -46,25 +47,19 @@ namespace BiblioTech.Views
             }
         }
 
-        // busca existente, si no la crea
-        private Categoria ResolverCategoria(string nombreCat)
+        // Cargar COmboBox de Categorias
+        private void CargarCategorias()
         {
-            Categoria existente = _catCtrl.ObtenerPorNombre(nombreCat);
+            cbxCategoria.Items.Clear();
 
-            if (existente != null)
-                return existente;
+            cbxCategoria.Items.Add("Seleccione una categoría");
 
-            Categoria nuevaCategoria = new Categoria(nombreCat, "");
-            bool creada = _catCtrl.Guardar(nuevaCategoria);
+            List<Categoria> categorias = _catCtrl.ObtenerTodas();
 
-            if (!creada)
-            {
-                MessageBox.Show("No se pudo crear la categoría", "Error en categoría",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
-            }
-
-            return _catCtrl.ObtenerPorNombre(nombreCat);
+            // Muestra solo el nombre pero obtiene el codigo
+            cbxCategoria.DataSource = categorias;
+            cbxCategoria.DisplayMember = "NombreCategoria";
+            cbxCategoria.ValueMember = "CodigoCategoria";
         }
 
         // Valida los campos del formulario
@@ -94,11 +89,11 @@ namespace BiblioTech.Views
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(txtCategoria.Text))
+            if (cbxCategoria.SelectedIndex == -1)
             {
                 MessageBox.Show("La categoría no puede estar vacía.", "Validación",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCategoria.Focus();
+                cbxCategoria.Focus();
                 return false;
             }
 
@@ -127,7 +122,7 @@ namespace BiblioTech.Views
             txtISBN.Clear();
             txtNombreLibro.Clear();
             txtAutor.Clear();
-            txtCategoria.Clear();
+            cbxCategoria.SelectedIndex = 0;
             txtNumeroPaginas.Clear();
             txtEditorial.Clear();
             dtpFechaPublicacion.Value  = DateTime.Today;
@@ -140,22 +135,27 @@ namespace BiblioTech.Views
             if (!ValidarCampos())
                 return;
 
-            string nombreCat = txtCategoria.Text.Trim();
-            Categoria categoria = ResolverCategoria(nombreCat);
-            
-            if (categoria == null)
-                return;
+            string isbn = txtISBN.Text.Trim();
+            string titulo = txtNombreLibro.Text.Trim();
+            string autor = txtAutor.Text.Trim();
+            string editorial = txtEditorial.Text.Trim();
+            decimal precio = Decimal.Parse(txtPrecio.Text.Trim());
+            int numeroPaginas = int.Parse(txtNumeroPaginas.Text);
+            DateTime fechaPublicacion = dtpFechaPublicacion.Value;
+
+            // Manejp de la categoria seleccionada
+            Categoria categoria = cbxCategoria.SelectedItem as Categoria;
 
             try
             {
                 Libro nuevoLibro = new Libro(
-                    txtISBN.Text.Trim(),
-                    txtNombreLibro.Text.Trim(),
-                    txtAutor.Text.Trim(),
-                    txtEditorial.Text.Trim(),
-                    0,
-                    int.Parse(txtNumeroPaginas.Text),
-                    dtpFechaPublicacion.Value,
+                    isbn,
+                    titulo,
+                    autor,
+                    editorial,
+                    precio,
+                    numeroPaginas,
+                    fechaPublicacion,
                     categoria
                 );
 
