@@ -1,55 +1,66 @@
-﻿using BiblioTech.Controllers;
-using BiblioTech.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using BiblioTech.Controllers;
+using BiblioTech.Models;
 
 namespace BiblioTech.Views.Multas
 {
     public partial class FrmMultasPagadas : Form
     {
-        MultaController multaController;
+        private MultaController _multaCtrl;
 
-        public FrmMultasPagadas(MultaController multa)
+        public FrmMultasPagadas()
         {
             InitializeComponent();
-            multaController = multa;
+            _multaCtrl = new MultaController();
+            ConfigurarTabla();
+            lblFechaRegistroValor.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+            CargarTabla();
         }
 
-        // Cargar tabla
-        private void CargarMultasPagadas()
+        private void ConfigurarTabla()
+        {
+            dgvMultasPagadas.Columns.Clear();
+
+            DataGridViewTextBoxColumn colId = new DataGridViewTextBoxColumn();
+            colId.Name = "ID"; colId.Visible = false;
+
+            DataGridViewTextBoxColumn colMonto = new DataGridViewTextBoxColumn();
+            colMonto.Name = "Monto"; colMonto.HeaderText = "Monto ($)"; colMonto.Width = 130;
+
+            DataGridViewTextBoxColumn colEstado = new DataGridViewTextBoxColumn();
+            colEstado.Name = "Estado"; colEstado.HeaderText = "Estado"; colEstado.Width = 110;
+
+            DataGridViewTextBoxColumn colFechaGen = new DataGridViewTextBoxColumn();
+            colFechaGen.Name = "FechaGen"; colFechaGen.HeaderText = "Fecha Generacion"; colFechaGen.Width = 150;
+
+            DataGridViewTextBoxColumn colFechaPago = new DataGridViewTextBoxColumn();
+            colFechaPago.Name = "FechaPago"; colFechaPago.HeaderText = "Fecha Pago"; colFechaPago.Width = 130;
+
+            dgvMultasPagadas.Columns.Add(colId);
+            dgvMultasPagadas.Columns.Add(colMonto);
+            dgvMultasPagadas.Columns.Add(colEstado);
+            dgvMultasPagadas.Columns.Add(colFechaGen);
+            dgvMultasPagadas.Columns.Add(colFechaPago);
+        }
+
+        private void CargarTabla()
         {
             dgvMultasPagadas.Rows.Clear();
 
-            foreach (Multa m in multaController.ObtenerMultasPendientes())
+            foreach (Multa m in _multaCtrl.ObtenerMultasPagadas())
             {
                 dgvMultasPagadas.Rows.Add(
-                    m.CodigoMulta,
-                    "", // Usuario
-                    "",
-                    multaController.CalcularDiasMora(m.FechaGeneracion),
-                    m.Monto.ToString()
+                    m.Id,
+                    m.Monto.ToString("F2"),
+                    m.Estado.ToString(),
+                    m.FechaGeneracion.ToString("dd/MM/yyyy"),
+                    m.FechaPago.ToString("dd/MM/yyyy")
                 );
             }
         }
 
-        // Obtener el total a cobrar
-        private decimal TotalCobrar()
-        {
-            decimal total = multaController.ObtenerTotalMultasPendientes();
-            txtTotalMultas.Text = total.ToString();
-            return total;
-        }
-
-        private void FrmMultasPagadas_Load(object sender, EventArgs e)
-        {
-
-        }
+        private void btnCancelar_Click(object sender, EventArgs e) { this.Close(); }
     }
 }

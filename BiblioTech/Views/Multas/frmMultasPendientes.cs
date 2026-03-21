@@ -1,105 +1,134 @@
-﻿using BiblioTech.Controllers;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using BiblioTech.Controllers;
 using BiblioTech.Models;
 
 namespace BiblioTech.Views.Multas
 {
     public partial class frmMultasPendientes : Form
     {
-        MultaController multaController;
+        private MultaController _multaCtrl;
 
-        public frmMultasPendientes(MultaController multa)
+        public frmMultasPendientes()
         {
             InitializeComponent();
-            multaController = multa;
+            _multaCtrl = new MultaController();
+            ConfigurarTabla();
+            lblFechaRegistroValor.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+            CargarTabla();
         }
 
-        // Cargar tabla
-        private void CargarMultasPendientes()
+        private void ConfigurarTabla()
+        {
+            dgvMultasPendientes.Columns.Clear();
+
+            DataGridViewTextBoxColumn colId = new DataGridViewTextBoxColumn();
+            colId.Name = "ID"; colId.Visible = false;
+
+            DataGridViewTextBoxColumn colMonto = new DataGridViewTextBoxColumn();
+            colMonto.Name = "Monto"; colMonto.HeaderText = "Monto ($)"; colMonto.Width = 120;
+
+            DataGridViewTextBoxColumn colEstado = new DataGridViewTextBoxColumn();
+            colEstado.Name = "Estado"; colEstado.HeaderText = "Estado"; colEstado.Width = 110;
+
+            DataGridViewTextBoxColumn colFechaGen = new DataGridViewTextBoxColumn();
+            colFechaGen.Name = "FechaGen"; colFechaGen.HeaderText = "Fecha Generacion"; colFechaGen.Width = 140;
+
+            DataGridViewTextBoxColumn colDias = new DataGridViewTextBoxColumn();
+            colDias.Name = "Dias"; colDias.HeaderText = "Dias Mora"; colDias.Width = 100;
+
+            dgvMultasPendientes.Columns.Add(colId);
+            dgvMultasPendientes.Columns.Add(colMonto);
+            dgvMultasPendientes.Columns.Add(colEstado);
+            dgvMultasPendientes.Columns.Add(colFechaGen);
+            dgvMultasPendientes.Columns.Add(colDias);
+        }
+
+        private void CargarTabla()
         {
             dgvMultasPendientes.Rows.Clear();
+            double total = 0;
 
-            foreach (Multa m in multaController.ObtenerMultasPendientes())
+            foreach (Multa m in _multaCtrl.ObtenerMultasPendientes())
             {
-                string nombreLector = "";
-                if (m.Lector != null)
-                    nombreLector = m.Lector.Nombre;
-
                 dgvMultasPendientes.Rows.Add(
-                    m.CodigoMulta,
-                    nombreLector,
-                    multaController.CalcularDiasMora(m.FechaGeneracion),
-                    m.Monto.ToString()
+                    m.Id,
+                    m.Monto.ToString("F2"),
+                    m.Estado.ToString(),
+                    m.FechaGeneracion.ToString("dd/MM/yyyy"),
+                    _multaCtrl.CalcularDiasMora(m.FechaGeneracion)
                 );
+                total += m.Monto;
             }
+
+            lblTotalValor.Text = "$ " + total.ToString("F2");
         }
 
-        // Obtener el total a cobrar
-        private decimal TotalCobrar()
+        private void btnPagar_Click(object sender, EventArgs e)
         {
-            decimal total = multaController.ObtenerTotalMultasPendientes();
-            txtTotal.Text = total.ToString();
-            return total;
-        }
-
-        private void frmMultasPendientes_Load(object sender, EventArgs e)
-        {
-            CargarMultasPendientes();
-            TotalCobrar();
-        }
-        
-        private void dgvMultasPendientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            /* Verifica que el clic no sea en el encabezado
-            if (e.RowIndex < 0) return;
-
-            // Verifica si se hizo clic en el botón "Ver"
-            if (dgvMultasPendientes.Columns[e.ColumnIndex].Name == "Ver Detalles")
+            if (dgvMultasPendientes.SelectedRows.Count == 0)
             {
-                string codigoMulta = dgvMultasPendientes.Rows[e.RowIndex].Cells["Codigo"].Value.ToString();
-                Multa multaSeleccionada = multaController.BuscarMulta(codigoMulta);
-
-                if (multaSeleccionada != null)
-                {
-                    frmDetalleMulta detalle = new frmPagarMulta(multaController, multaSeleccionada);
-                    frmPagar.ShowDialog();
-
-                    // Recargar la tabla y el total después de pagar
-                    CargarMultasPendientes();
-                    TotalCobrar();
-                }
+                MessageBox.Show("Seleccione una multa de la tabla.", "Aviso",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            */
-        }
 
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            /*
-            string criterio = txtBusqueda.Text.Trim();
-            dgvMultasPendientes.Rows.Clear();
+            int id = int.Parse(dgvMultasPendientes.SelectedRows[0].Cells["ID"].Value.ToString());
 
-            foreach (Multa m in multaController.ObtenerMultasPendientes())
+            bool resultado = _multaCtrl.PagarMulta(id);
+
+            if (resultado)
             {
-                if (m.Id.ToString().Contains(criterio) || m.Lector.Nombre.Contains(criterio))
-                {
-                    dgvMultasPendientes.Rows.Add(
-                        m.Id,
-                        "",
-                        m.FechaPago.ToString(),
-                        multaController.CalcularDiasMora(m.FechaGeneracion),
-                        m.Monto.ToString()
-                    );
-                }
+                MessageBox.Show("Multa pagada correctamente.", "Exito",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CargarTabla();
             }
-            */
+            else
+                MessageBox.Show("No se pudo procesar el pago.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
+
+        private void btnRegistrar_Click(object sender, EventArgs e)
+        {
+            int idMulta;
+            if (!int.TryParse(txtIdMulta.Text, out idMulta) || idMulta <= 0)
+            {
+                MessageBox.Show("El ID debe ser un entero positivo.", "Validacion",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            double monto;
+            if (!double.TryParse(txtMonto.Text, out monto) || monto <= 0)
+            {
+                MessageBox.Show("El monto debe ser un valor positivo.", "Validacion",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            bool resultado = _multaCtrl.RegistrarMulta(idMulta, monto);
+
+            if (resultado)
+            {
+                MessageBox.Show("Multa registrada correctamente.", "Exito",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtIdMulta.Clear();
+                txtMonto.Clear();
+                CargarTabla();
+            }
+            else
+                MessageBox.Show("ID duplicado o datos invalidos.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtIdMulta.Clear();
+            txtMonto.Clear();
+            lblFechaRegistroValor.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e) { this.Close(); }
     }
 }

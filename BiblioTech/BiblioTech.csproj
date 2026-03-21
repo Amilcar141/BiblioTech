@@ -134,12 +134,6 @@
     <Compile Include="Views\Libros\FrmVerDisponibilidad.Designer.cs">
       <DependentUpon>FrmVerDisponibilidad.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Multas\frmDetalleMulta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Multas\frmDetalleMulta.Designer.cs">
-      <DependentUpon>frmDetalleMulta.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\Multas\FrmMultasPagadas.cs">
       <SubType>Form</SubType>
     </Compile>
