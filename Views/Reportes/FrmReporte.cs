@@ -8,7 +8,7 @@ using BiblioTech.Models.Enums;
 
 namespace BiblioTech.Views.Reportes 
 {
-    public partial class FrmReporte : Form
+    public partial class FrmReporte : Form//7
     {
         private LibroController    _libCtrl = new LibroController();
         private PrestamoController _preCtrl = new PrestamoController();

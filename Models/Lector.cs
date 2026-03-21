@@ -8,3 +8,4 @@ namespace BiblioTech.Models
         public Lector(string nombre) { Nombre = nombre; }
     }
 }
+//7

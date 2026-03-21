@@ -9,6 +9,6 @@ namespace BiblioTech.Models.Enums
     public enum Rol
     {
         Lector,
-        Administrador
+        Administrador//8
     }
 } 

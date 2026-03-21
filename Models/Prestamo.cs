@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BiblioTech.Models
 {
-    public class Prestamo
+    public class Prestamo//7
     {
          
         private int _idPrestamo;

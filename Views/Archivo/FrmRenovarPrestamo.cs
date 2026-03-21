@@ -6,7 +6,7 @@ using BiblioTech.Models;
 using BiblioTech.Models.Enums;
 
 namespace BiblioTech.Views.Archivo
-{ 
+{ //7
     public partial class FrmRenovarPrestamo : Form
     {
         private PrestamoController _ctrl = new PrestamoController();

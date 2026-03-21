@@ -6,7 +6,7 @@ using BiblioTech.Controllers;
 using BiblioTech.Models;
 using BiblioTech.Models.Enums;
  
-namespace BiblioTech.Views.Reportes
+namespace BiblioTech.Views.Reportes//7
 {
     public partial class FrmLibrosMasPrestados : Form
     {

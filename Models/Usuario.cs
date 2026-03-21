@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BiblioTech.Models
 {
-    public class Usuario
+    public class Usuario//7
     {
         private int _id;
         private string _nombre;

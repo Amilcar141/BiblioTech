@@ -2,7 +2,7 @@ using BiblioTech.Models.Enums;
 using System;
 
 namespace BiblioTech.Models
-{
+{//7
     public class Multa
     {
         private int           _id;

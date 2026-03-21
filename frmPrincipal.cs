@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BiblioTech
-{
+{//7
     public partial class frmPrincipal : Form
     {
         public frmPrincipal()

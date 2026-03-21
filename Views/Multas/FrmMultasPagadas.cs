@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace BiblioTech.Views.Multas
 { 
-    public partial class FrmMultasPagadas : Form
+    public partial class FrmMultasPagadas : Form//7
     {
         private MultaController multaController;
 

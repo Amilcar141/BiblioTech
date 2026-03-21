@@ -4,7 +4,7 @@ using System.Windows.Forms;
 namespace BiblioTech.Views.Ayuda
 {
     public partial class FrmManualUsuario : Form
-    { 
+    { //7
         public FrmManualUsuario() { InitializeComponent(); }
 
         private void FrmManualUsuario_Load(object sender, EventArgs e)

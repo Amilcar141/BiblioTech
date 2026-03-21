@@ -3,7 +3,8 @@ using System;
 namespace BiblioTech.Models
 {
     public class Categoria
-    {
+    {//7
+
          
         private int    _idCategoria;
         private string _nombreCategoria;

@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using BiblioTech.Controllers;
 using BiblioTech.Models;
-
+//7
 namespace BiblioTech.Views
 {
     public partial class FrmEditarLibro : Form

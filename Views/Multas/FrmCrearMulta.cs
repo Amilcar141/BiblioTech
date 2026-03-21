@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using BiblioTech.Controllers;
 using BiblioTech.Models; 
 
-namespace BiblioTech.Views.Multas
+namespace BiblioTech.Views.Multas//7
 {
     public partial class FrmCrearMulta : Form
     {

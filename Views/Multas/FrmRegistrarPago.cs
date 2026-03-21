@@ -5,7 +5,7 @@ using BiblioTech.Controllers;
 using BiblioTech.Models;
 
 namespace BiblioTech.Views.Multas
-{ 
+{ //7
     public partial class FrmRegistrarPago : Form
     {
         private MultaController _ctrl = new MultaController();

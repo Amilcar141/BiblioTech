@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BiblioTech.Models
-{
+{//7
     internal class Favorito 
     {
          

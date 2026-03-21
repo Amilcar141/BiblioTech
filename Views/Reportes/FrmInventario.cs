@@ -5,7 +5,7 @@ using BiblioTech.Controllers;
 using BiblioTech.Models; 
 
 namespace BiblioTech.Views.Reportes
-{
+{//7
     public partial class FrmInventario : Form
     {
         private LibroController _ctrl = new LibroController();

@@ -5,7 +5,7 @@ using BiblioTech.Models.Enums;
 
 namespace BiblioTech.Controllers
 {
-    public class PrestamoController 
+    public class PrestamoController //5
     {
         // Lista  para que todas las vistas compartan los mismos préstamos
         private static List<Prestamo> _historial = new List<Prestamo>();

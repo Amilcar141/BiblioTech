@@ -5,7 +5,7 @@ using BiblioTech.Controllers;
 using BiblioTech.Models.Enums;
 
 namespace BiblioTech.Views.Usuarios
-{ 
+{ //7
     public partial class frmRegistrarUsuario : Form
     {
         private UsuarioController _ctrl = new UsuarioController();

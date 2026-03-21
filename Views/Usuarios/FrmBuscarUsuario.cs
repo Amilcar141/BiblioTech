@@ -5,7 +5,7 @@ using BiblioTech.Controllers;
 using BiblioTech.Models;
 
 namespace BiblioTech.Views.Usuarios
-{ 
+{ //7
     public partial class FrmBuscarUsuario : Form
     {
         private UsuarioController _ctrl = new UsuarioController();

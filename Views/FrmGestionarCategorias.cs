@@ -6,7 +6,7 @@ using BiblioTech.Controllers;
 using BiblioTech.Models;
 
 namespace BiblioTech.Views
-{
+{//7
     public partial class FrmGestionarCategorias : Form
     {
         // Controlador 

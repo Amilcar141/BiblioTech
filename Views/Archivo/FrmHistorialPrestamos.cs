@@ -5,7 +5,7 @@ using BiblioTech.Controllers;
 using BiblioTech.Models;
 using BiblioTech.Models.Enums;
 
-namespace BiblioTech.Views.Archivo
+namespace BiblioTech.Views.Archivo//7
 { 
     public partial class FrmHistorialPrestamos : Form
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using BiblioTech.Models;
  
-namespace BiblioTech.Controllers
+namespace BiblioTech.Controllers//camo
 { 
     public class CategoriaController
     {

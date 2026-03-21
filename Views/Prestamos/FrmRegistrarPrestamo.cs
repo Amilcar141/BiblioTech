@@ -6,7 +6,7 @@ using BiblioTech.Controllers;
 using BiblioTech.Models;
 
 namespace BiblioTech.Views.Prestamos 
-{
+{//7
     public partial class FrmRegistrarPrestamo : Form
     {
         private LibroController    _libroCtrl    = new LibroController();

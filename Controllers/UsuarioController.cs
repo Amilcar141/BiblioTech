@@ -5,7 +5,7 @@ using BiblioTech.Models.Enums;
 
 namespace BiblioTech.Controllers
 {
-    public class UsuarioController
+    public class UsuarioController//6
     { 
         // ESTÁTICA: todos los formularios comparten la misma lista
         private static List<Usuario> _usuarios = new List<Usuario>();

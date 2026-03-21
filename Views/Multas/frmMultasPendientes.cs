@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace BiblioTech.Views.Multas
-{ 
+{ //7
     public partial class frmMultasPendientes : Form
     {
         private MultaController multaController;

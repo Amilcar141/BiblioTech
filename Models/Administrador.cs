@@ -7,4 +7,4 @@ namespace BiblioTech.Models
         public Administrador(string nombre) { Nombre = nombre; }
     }
 }
- 
+ //7

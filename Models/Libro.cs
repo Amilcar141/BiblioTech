@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 
 namespace BiblioTech.Models
-{ 
+{ //7
     public class Libro
 {
     // Atributos privados

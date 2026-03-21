@@ -11,7 +11,7 @@ namespace BiblioTech.Views
         {
             InitializeComponent();
         }
-
+        //7
         private void txtIdLibro_Leave(object sender, EventArgs e)
         {
             if (!int.TryParse(txtIdLibro.Text, out int idBuscado))
