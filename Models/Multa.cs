@@ -5,69 +5,69 @@ namespace BiblioTech.Models
 {//7
     public class Multa
     {
-        private int           _id;
-        private double        _monto;
-        private EstadoMulta   _estado; 
-        private DateTime      _fechaGeneracion;
-        private DateTime      _fechaPago;
-        private string        _nombreUsuario;   
-        private string        _tituloLibro;     
-        private int           _idPrestamo;      
-        private int           _diasMora;        
-        private string        _motivo;          
+        // Atributos privados
+        private int _id;
+        private string _codigoMulta;
+        private decimal _monto;
+        private string _descripcion;
+        private EstadoMulta _estado;
+        private TipoMulta _tipoMulta;
+        private DateTime _fechaGeneracion;
+        private DateTime _fechaPago;
+        private Lector _lector;
+        private Administrador _administrador;
 
-        
-        public Multa()
-        {
-            _nombreUsuario = "";
-            _tituloLibro   = "";
-            _motivo        = "";
-        }
+        // Contador para los Ids
+        private static int _contadorIds = 1;
 
-        // Constructor para multas generadas manualmente 
-        public Multa(int id, double monto)
+        // Constructores
+        public Multa() { }
+ 
+        public Multa(string descripcion, decimal monto, TipoMulta tipoMulta)
         {
-            _id              = id;
-            _monto           = monto;
-            _estado          = EstadoMulta.Pendiente;
+            _id = _contadorIds++;
+            _codigoMulta = AsignarCodigo(tipoMulta);
+            _descripcion = descripcion;
+            _monto = monto;
+            _estado = EstadoMulta.Pendiente; // Por defecto, la multa se genera como pendiente
+            _tipoMulta = tipoMulta;
             _fechaGeneracion = DateTime.Now;
-            _nombreUsuario   = "";
-            _tituloLibro     = "";
-            _motivo          = "Multa manual";
+            _lector = null; // Se asignará posteriormente
+            _administrador = null; // Se asignará posteriormente
+
         }
 
-        // Constructor completo para multas generadas por préstamos vencidos
-        public Multa(int id, double monto, string nombreUsuario, string tituloLibro,
-                     int idPrestamo, int diasMora)
+        // Metodos getters y setter
+        public int ID { get { return _id; } }
+
+        public string CodigoMulta
         {
-            _id              = id;
-            _monto           = monto;
-            _estado          = EstadoMulta.Pendiente;
-            _fechaGeneracion = DateTime.Now;
-            _nombreUsuario   = nombreUsuario ?? "";
-            _tituloLibro     = tituloLibro   ?? "";
-            _idPrestamo      = idPrestamo;
-            _diasMora        = diasMora;
-            _motivo          = "Devolucion tardía: " + diasMora + " día(s) de retraso";
+            get { return _codigoMulta; }
+            private set { _codigoMulta = value; }
         }
 
-        //  Propiedades 
-        public int Id
+        public string Descripcion
         {
-            get { return _id; }
-            private set { _id = value; }
+            get { return _descripcion; }
+            set { _descripcion = value; }
         }
 
-        public double Monto
+        public decimal Monto
         {
             get { return _monto; }
             set { if (value > 0) _monto = value; }
         }
 
+        public TipoMulta Tipo
+        {
+            get { return _tipoMulta; }
+            set { _tipoMulta = value; }
+        }
+
         public EstadoMulta Estado
         {
             get { return _estado; }
-            private set { _estado = value; }
+            set { _estado = value; }
         }
 
         public DateTime FechaGeneracion
@@ -82,46 +82,39 @@ namespace BiblioTech.Models
             private set { _fechaPago = value; }
         }
 
-        public string NombreUsuario
+        public Lector Lector
         {
-            get { return _nombreUsuario; }
-            set { _nombreUsuario = value ?? ""; }
+            get { return _lector; }
+            set { _lector = value; }
         }
 
-        public string TituloLibro
+        public Administrador Administrador
         {
-            get { return _tituloLibro; }
-            set { _tituloLibro = value ?? ""; }
-        }
-
-        public int IdPrestamo
-        {
-            get { return _idPrestamo; }
-            set { _idPrestamo = value; }
-        }
-
-        public int DiasMora
-        {
-            get { return _diasMora; }
-            set { _diasMora = value; }
-        }
-
-        public string Motivo
-        {
-            get { return _motivo; }
-            set { _motivo = value ?? ""; }
+            get { return _administrador; }
+            set { _administrador = value; }
         }
 
         // Métodos
+        private string AsignarCodigo(TipoMulta tipoMulta)
+        {
+            // Toma la primera letra del tipo de multa
+            string prefijo = _tipoMulta.ToString().Substring(0, 1);
+
+            // Genera el codigo
+            return $"MLT-{prefijo}-{_id.ToString("D4")}";
+        }
+
         public void Pagar()
         {
-            _estado    = EstadoMulta.Pagada;
+            _estado = EstadoMulta.Pagada;
             _fechaPago = DateTime.Now;
         }
 
         public bool EstaPendiente()
         {
-            return _estado == EstadoMulta.Pendiente;
+            if (_estado == EstadoMulta.Pagada)
+                return false;
+            return true;
         }
     }
 }

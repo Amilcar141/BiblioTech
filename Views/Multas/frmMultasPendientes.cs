@@ -5,15 +5,15 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace BiblioTech.Views.Multas
-{ //7
+{
     public partial class frmMultasPendientes : Form
     {
-        private MultaController multaController;
+        private MultaController multaCtrl;
 
         public frmMultasPendientes(MultaController multa)
         {
             InitializeComponent();
-            multaController = multa;
+            multaCtrl = multa;
         }
 
         private void frmMultasPendientes_Load(object sender, EventArgs e)
@@ -27,20 +27,16 @@ namespace BiblioTech.Views.Multas
 
             string filtro = txtBuscar.Text.Trim().ToLower();
 
-            foreach (Multa m in multaController.ObtenerMultasPendientes())
+            foreach (Multa m in multaCtrl.ObtenerMultasPendientes())
             {
-                // Filtro por ID si el usuario escribe algo
-                if (!string.IsNullOrEmpty(filtro) &&
-                    !m.Id.ToString().Contains(filtro))
-                    continue;
-
-                int dias = multaController.CalcularDiasMora(m.FechaGeneracion);
+                int dias = multaCtrl.CalcularDiasMora(m.FechaGeneracion);
+                
                 int fila = dgvMultasPendientes.Rows.Add(
-                    m.Id,
-                    m.FechaGeneracion.ToString("dd/MM/yyyy"),
+                    m.CodigoMulta,
+                    m.FechaGeneracion.ToString("dd/MM/yy"),
                     dias,
                     m.Monto.ToString("F2") + " Lps",
-                    "Pendiente"
+                    m.Estado.ToString()
                 );
 
                 // Colorear fila: más de 30 días en rojo intenso
@@ -51,7 +47,7 @@ namespace BiblioTech.Views.Multas
             }
 
             // Actualizar totales
-            double total = multaController.ObtenerTotalMultasPendientes();
+            decimal total = multaCtrl.ObtenerTotalMultasPendientes();
             txtTotal.Text    = total.ToString("F2");
             lblContador.Text = "Total: " + dgvMultasPendientes.Rows.Count + " multa(s) pendiente(s)";
         }
@@ -70,13 +66,14 @@ namespace BiblioTech.Views.Multas
                 return;
             }
 
-            int id = Convert.ToInt32(dgvMultasPendientes.CurrentRow.Cells["colMPId"].Value);
+            //int id = Convert.ToInt32(dgvMultasPendientes.CurrentRow.Cells["colMPId"].Value);
+            string codigo = dgvMultasPendientes.CurrentRow.Cells["colMPCodigo"].Value.ToString();
 
-            if (MessageBox.Show("¿Registrar el pago de la multa #" + id + "?",
+            if (MessageBox.Show("¿Registrar el pago de la multa #" + codigo + "?",
                 "Confirmar Pago", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
 
-            if (multaController.PagarMulta(id))
+            if (multaCtrl.PagarMulta(codigo))
             {
                 MessageBox.Show("Pago registrado correctamente.",
                     "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);

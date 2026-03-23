@@ -5,77 +5,107 @@ using System;
 namespace BiblioTech.Models
 { //7
     public class Libro
-{
-    // Atributos privados
-    private int _idLibro; 
-    private string _isbn;
-    private string _nombreLibro;
-    private string _autor; 
-    private int _idCategoria;
-    private string _nombreCategoria;
-    private string _fechaPublicacion;
-    private int _numeroPaginas;
-    private string _editorial;
-    private string _aliasUsuario;
-    private string _fechaRegistro;
-    private bool _disponible;
-
-    // Constructor
-    public Libro()
     {
-        _isbn = "";
-        _nombreLibro = "";
-        _autor = "";
-        _nombreCategoria = "";
-        _fechaPublicacion = "";
-        _editorial = "";
-        _aliasUsuario = "";
-        _fechaRegistro = "";
-        _disponible = true;
-    }
+        // Atributos privados
+        private int _id; 
+        private string _isbn;
+        private string _titulo;
+        private Autor _autor; 
+        private Categoria _categoria;
+        private Editorial _editorial;
+        private decimal _precio;
+        private int _numeroPaginas;
+        private DateTime _fechaPublicacion;
+        private DateTime _fechaRegistro;
+
+        // COntador interno
+        private static int _contadorId = 1;
+
+        // Constructores
+        public Libro()
+        {
+        }
+
+        public Libro(string titulo, Autor autor, Categoria categoria, Editorial editorial,
+            decimal precio, int paginas)
+        {
+            _id = _contadorId++;
+            _isbn = ValidarISBN(_isbn);
+            _titulo = titulo;
+            _autor = autor;
+            _categoria = categoria;
+            _editorial = editorial;
+            _precio = precio;
+            _numeroPaginas = paginas;
+        }
 
         // Getters y Setters
-    public int idLibro { get; set; }
-    public string Titulo { get; set; }
-    public string Autor { get; set; }
+        public string ISBN
+        {
+            get { return _isbn; }
+            private set { _isbn = value }
+        }
 
-    public int GetIdLibro() { return _idLibro; }
-    public void SetIdLibro(int id) { _idLibro = id; }
+        public string Titulo
+        {
+            get { return _titulo }
+            set { _titulo = value; }
+        }
 
-    public string GetISBN() { return _isbn; }
-    public void SetISBN(string isbn) { _isbn = isbn; }
+        public Autor Autor
+        {
+            get { return _autor; }
+            set { _autor = value; }
+        }
 
-    public string GetNombreLibro() { return _nombreLibro; }
-    public void SetNombreLibro(string nombreLibro) { _nombreLibro = nombreLibro; }
+        public Categoria Categoria
+        {
+            get { return _categoria; }
+            set { _categoria = value; }
+        }
 
-    public string GetAutor() { return _autor; }
-    public void SetAutor(string autor) { _autor = autor; }
+        public Editorial Editorial
+        {
+            get { return _editorial; }
+            set { _editorial = value; }
+        }
 
-    public int GetIdCategoria() { return _idCategoria; }
-    public void SetIdCategoria(int idCategoria) { _idCategoria = idCategoria; }
+        public decimal Precio
+        {
+            get { return _precio; }
+            set 
+            { 
+                if (value > 0)
+                    _precio = value; 
+            }
+        }
 
-    public string GetNombreCategoria() { return _nombreCategoria; }
-    public void SetNombreCategoria(string nombreCategoria) { _nombreCategoria = nombreCategoria; }
+        public int NumeroPaginas
+        {
+            get { return _numeroPaginas; }
+            set 
+            { 
+                if (value > 0)
+                    _numeroPaginas = value; 
+            }
+        }
 
-    public string GetFechaPublicacion() { return _fechaPublicacion; }
-    public void SetFechaPublicacion(string fechaPublicacion) { _fechaPublicacion = fechaPublicacion; }
 
-    public int GetNumeroPaginas() { return _numeroPaginas; }
-    public void SetNumeroPaginas(int numeroPaginas) { _numeroPaginas = numeroPaginas; }
+        // Metodos propios de la clase libro
+        private string ValidarISBN(string isbn)
+        {
+            if (string.IsNullOrEmpty(isbn))
+                return null;
 
-    public string GetEditorial() { return _editorial; }
-    public void SetEditorial(string editorial) { _editorial = editorial; }
+            // Eliminar guiones y espacios
+            isbn = isbn.Replace("-", "").Replace(" ", "");
+            if (isbn.Length == 13)
+                return isbn;
 
-    public string GetAliasUsuario() { return _aliasUsuario; }
-    public void SetAliasUsuario(string alias) { _aliasUsuario = alias; }
+            return null;
+        }
 
-    public string GetFechaRegistro() { return _fechaRegistro; }
-    public void SetFechaRegistro(string fechaRegistro) { _fechaRegistro = fechaRegistro; }
-
-    public bool GetDisponible() { return _disponible; }
-    public void SetDisponible(bool valor) { _disponible = valor; }
-
-}
+    }
 }
 
 

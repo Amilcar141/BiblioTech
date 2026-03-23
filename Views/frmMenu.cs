@@ -19,14 +19,18 @@ namespace BiblioTech.Views
 
         private void AbrirFormulario(Form formulario)
         {
+            // Elimina el formulario actual del panel
             if (pnlMenu.Controls.Count > 0)
                 pnlMenu.Controls.RemoveAt(0);
-            formulario.TopLevel        = false;
+
+            // Configura el nuevo formulario para que se integre al panel
+            formulario.TopLevel = false;
             formulario.FormBorderStyle = FormBorderStyle.None;
-            formulario.Dock            = DockStyle.Fill;
+            formulario.Dock = DockStyle.Fill;
+
+            // Agrega el formulario al panel y muéstralo
             pnlMenu.Controls.Add(formulario);
             pnlMenu.Tag = formulario;
-            formulario.BringToFront();
             formulario.Show();
         }
 
@@ -52,7 +56,10 @@ namespace BiblioTech.Views
             => AbrirFormulario(new FrmBuscarLibro());
 
         private void agregarLibroToolStripMenuItem_Click(object s, EventArgs e)
-            => AbrirFormulario(new FrmAgregarLibro());
+        {
+            AbrirFormulario(new FrmAgregarLibro());
+        }
+            
 
         private void editarLibroToolStripMenuItem_Click(object s, EventArgs e)
             => AbrirFormulario(new FrmEditarLibro());
@@ -159,6 +166,13 @@ namespace BiblioTech.Views
         {
             FrmReporte reporte = new FrmReporte();
             AbrirFormulario(reporte);
+        }
+
+        private void tsmiRegistrarPrestamo_Click_1(object sender, EventArgs e)
+        {
+            FrmRegistrarPrestamo frm = new FrmRegistrarPrestamo();
+
+            AbrirFormulario(frm);
         }
     }
 }

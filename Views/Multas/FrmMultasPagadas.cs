@@ -8,12 +8,12 @@ namespace BiblioTech.Views.Multas
 { 
     public partial class FrmMultasPagadas : Form//7
     {
-        private MultaController multaController;
+        private MultaController multaCtrl;
 
         public FrmMultasPagadas(MultaController multa)
         {
             InitializeComponent();
-            multaController = multa;
+            multaCtrl = multa;
         }
 
         private void FrmMultasPagadas_Load(object sender, EventArgs e)
@@ -26,28 +26,25 @@ namespace BiblioTech.Views.Multas
             dgvMultasPagadas.Rows.Clear();
 
             string filtro = txtBuscar.Text.Trim().ToLower();
-            double totalRecaudado = 0;
+            decimal totalRecaudado = 0;
 
-            foreach (Multa m in multaController.ObtenerMultasPagadas())
+            foreach (Multa m in multaCtrl.ObtenerMultasPagadas())
             {
-                if (!string.IsNullOrEmpty(filtro) &&
-                    !m.Id.ToString().Contains(filtro))
-                    continue;
-
                 dgvMultasPagadas.Rows.Add(
-                    m.Id,
-                    m.FechaGeneracion.ToString("dd/MM/yyyy"),
-                    m.FechaPago.ToString("dd/MM/yyyy"),
-                    multaController.CalcularDiasMora(m.FechaGeneracion),
-                    m.Monto.ToString("F2") + " Lps",
-                    "Pagada"
+                    m.CodigoMulta,
+                    m.FechaGeneracion.ToString("dd/MM/yy"),
+                    m.FechaPago.ToString("dd/MM/yy"),
+                    multaCtrl.CalcularDiasMora(m.FechaGeneracion),
+                    m.Lector.Nombre,
+                    m.Monto.ToString("F2") + " Lps"
                 );
+
                 totalRecaudado += m.Monto;
             }
 
             txtTotalRecaudado.Text = totalRecaudado.ToString("F2");
-            txtCantidad.Text       = dgvMultasPagadas.Rows.Count.ToString();
-            lblContador.Text       = "Total: " + dgvMultasPagadas.Rows.Count + " multa(s) pagada(s)";
+            txtCantidad.Text = dgvMultasPagadas.Rows.Count.ToString();
+            lblContador.Text = "Total: " + dgvMultasPagadas.Rows.Count + " multa(s) pagada(s)";
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
