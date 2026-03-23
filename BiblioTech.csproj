@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{27E01543-74FB-40F4-AAA1-BA652E2FC9F3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>BiblioTech</RootNamespace>
+    <AssemblyName>BiblioTech</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Program / Entry -->
+    <Compile Include="Models\Autor.cs" />
+    <Compile Include="Models\Catalogo.cs" />
+    <Compile Include="Models\Editorial.cs" />
+    <Compile Include="Models\Ejemplar.cs" />
+    <Compile Include="Models\Enums\TipoMulta.cs" />
+    <Compile Include="Models\Lector.cs" />
+    <Compile Include="Models\Nacionalidad.cs" />
+    <Compile Include="Models\Publicacion.cs" />
+    <Compile Include="Models\Reserva.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <!-- Login -->
+    <Compile Include="frmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrincipal.Designer.cs">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </Compile>
+    <!-- Models -->
+    <Compile Include="Models\Administrador.cs" />
+    <Compile Include="Models\Categoria.cs" />
+    <Compile Include="Models\Enums\EstadoMulta.cs" />
+    <Compile Include="Models\Enums\EstadoPrestamo.cs" />
+    <Compile Include="Models\Enums\Disponibilidad.cs" />
+    <Compile Include="Models\Enums\Rol.cs" />
+    <Compile Include="Models\Favorito.cs" />
+    <Compile Include="Models\Libro.cs" />
+    <Compile Include="Models\Multa.cs" />
+    <Compile Include="Models\Prestamo.cs" />
+    <Compile Include="Models\Usuario.cs" />
+    <!-- Controllers -->
+    <Compile Include="Controllers\CategoriaController.cs" />
+    <Compile Include="Controllers\FavoritoController.cs" />
+    <Compile Include="Controllers\GeneroController.cs" />
+    <Compile Include="Controllers\LibroController.cs" />
+    <Compile Include="Controllers\MultaContoller.cs" />
+    <Compile Include="Controllers\PrestamoController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
+    <!-- Views raiz -->
+    <Compile Include="Views\frmMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmMenu.Designer.cs">
+      <DependentUpon>frmMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmPrestamo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmPrestamo.Designer.cs">
+      <DependentUpon>frmPrestamo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmFavoritos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmFavoritos.Designer.cs">
+      <DependentUpon>frmFavoritos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Libros\FrmAgregarLibro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Libros\FrmAgregarLibro.Designer.cs">
+      <DependentUpon>FrmAgregarLibro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Libros\FrmBuscarLibro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Libros\FrmBuscarLibro.Designer.cs">
+      <DependentUpon>FrmBuscarLibro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Libros\FrmEditarLibro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Libros\FrmEditarLibro.Designer.cs">
+      <DependentUpon>FrmEditarLibro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Libros\FrmEliminarLibro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Libros\FrmEliminarLibro.Designer.cs">
+      <DependentUpon>FrmEliminarLibro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FrmGestionarCategorias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FrmGestionarCategorias.Designer.cs">
+      <DependentUpon>FrmGestionarCategorias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Libros\FrmVerDisponibilidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Libros\FrmVerDisponibilidad.Designer.cs">
+      <DependentUpon>FrmVerDisponibilidad.cs</DependentUpon>
+    </Compile>
+    <!-- Views\Multas -->
+    <Compile Include="Views\Multas\FrmCrearMulta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Multas\FrmCrearMulta.Designer.cs">
+      <DependentUpon>FrmCrearMulta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Multas\FrmMultasPagadas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Multas\FrmMultasPagadas.Designer.cs">
+      <DependentUpon>FrmMultasPagadas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Multas\frmMultasPendientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Multas\frmMultasPendientes.Designer.cs">
+      <DependentUpon>frmMultasPendientes.cs</DependentUpon>
+    </Compile>
+    <!-- Views\Usuarios -->
+    <Compile Include="Views\Reportes\FrmReporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Reportes\FrmReporte.Designer.cs">
+      <DependentUpon>FrmReporte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Usuarios\frmRegistrarUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Usuarios\frmRegistrarUsuario.Designer.cs">
+      <DependentUpon>frmRegistrarUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Usuarios\FrmBuscarUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Usuarios\FrmBuscarUsuario.Designer.cs">
+      <DependentUpon>FrmBuscarUsuario.cs</DependentUpon>
+    </Compile>
+    <!-- Views\Prestamos (NUEVAS) -->
+    <Compile Include="Views\Prestamos\FrmRegistrarPrestamo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Prestamos\FrmRegistrarPrestamo.Designer.cs">
+      <DependentUpon>FrmRegistrarPrestamo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Prestamos\FrmPrestamosVencidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Prestamos\FrmPrestamosVencidos.Designer.cs">
+      <DependentUpon>FrmPrestamosVencidos.cs</DependentUpon>
+    </Compile>
+    <!-- Views\Archivo (NUEVAS) -->
+    <Compile Include="Views\Archivo\FrmDevolverLibro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Archivo\FrmDevolverLibro.Designer.cs">
+      <DependentUpon>FrmDevolverLibro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Archivo\FrmHistorialPrestamos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Archivo\FrmHistorialPrestamos.Designer.cs">
+      <DependentUpon>FrmHistorialPrestamos.cs</DependentUpon>
+    </Compile>
+    <!-- Views\Reportes (NUEVAS) -->
+    <Compile Include="Views\Reportes\FrmInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Reportes\FrmInventario.Designer.cs">
+      <DependentUpon>FrmInventario.cs</DependentUpon>
+    </Compile>
+    <!-- Views\Ayuda (NUEVAS) -->
+    <Compile Include="Views\Ayuda\FrmManualUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Ayuda\FrmManualUsuario.Designer.cs">
+      <DependentUpon>FrmManualUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Ayuda\FrmAcercaDe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Ayuda\FrmAcercaDe.Designer.cs">
+      <DependentUpon>FrmAcercaDe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Ayuda\FrmSoporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Ayuda\FrmSoporte.Designer.cs">
+      <DependentUpon>FrmSoporte.cs</DependentUpon>
+    </Compile>
+    <!-- Views\Archivo nuevas -->
+    <Compile Include="Views\Archivo\FrmRenovarPrestamo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Archivo\FrmRenovarPrestamo.Designer.cs">
+      <DependentUpon>FrmRenovarPrestamo.cs</DependentUpon>
+    </Compile>
+    <!-- Views\Usuarios nuevas -->
+    <Compile Include="Views\Usuarios\FrmEditarUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Usuarios\FrmEditarUsuario.Designer.cs">
+      <DependentUpon>FrmEditarUsuario.cs</DependentUpon>
+    </Compile>
+    <!-- Views\Reportes nuevas -->
+    <Compile Include="Views\Reportes\FrmLibrosMasPrestados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Reportes\FrmLibrosMasPrestados.Designer.cs">
+      <DependentUpon>FrmLibrosMasPrestados.cs</DependentUpon>
+    </Compile>
+    <!-- Views\Multas nuevas -->
+    <Compile Include="Views\Multas\FrmRegistrarPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Multas\FrmRegistrarPago.Designer.cs">
+      <DependentUpon>FrmRegistrarPago.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Archivo\FrmDevolverLibro.resx">
+      <DependentUpon>FrmDevolverLibro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Archivo\FrmHistorialPrestamos.resx">
+      <DependentUpon>FrmHistorialPrestamos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Archivo\FrmRenovarPrestamo.resx">
+      <DependentUpon>FrmRenovarPrestamo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Ayuda\FrmAcercaDe.resx">
+      <DependentUpon>FrmAcercaDe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Ayuda\FrmSoporte.resx">
+      <DependentUpon>FrmSoporte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Libros\FrmAgregarLibro.resx">
+      <DependentUpon>FrmAgregarLibro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Libros\FrmBuscarLibro.resx">
+      <DependentUpon>FrmBuscarLibro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Libros\FrmEditarLibro.resx">
+      <DependentUpon>FrmEditarLibro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Libros\FrmEliminarLibro.resx">
+      <DependentUpon>FrmEliminarLibro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frmFavoritos.resx">
+      <DependentUpon>frmFavoritos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FrmGestionarCategorias.resx">
+      <DependentUpon>FrmGestionarCategorias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frmMenu.resx">
+      <DependentUpon>frmMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frmPrestamo.resx">
+      <DependentUpon>frmPrestamo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Libros\FrmVerDisponibilidad.resx">
+      <DependentUpon>FrmVerDisponibilidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Multas\FrmCrearMulta.resx">
+      <DependentUpon>FrmCrearMulta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Multas\FrmMultasPagadas.resx">
+      <DependentUpon>FrmMultasPagadas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Multas\frmMultasPendientes.resx">
+      <DependentUpon>frmMultasPendientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Multas\FrmRegistrarPago.resx">
+      <DependentUpon>FrmRegistrarPago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Prestamos\FrmPrestamosVencidos.resx">
+      <DependentUpon>FrmPrestamosVencidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Prestamos\FrmRegistrarPrestamo.resx">
+      <DependentUpon>FrmRegistrarPrestamo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Reportes\FrmInventario.resx">
+      <DependentUpon>FrmInventario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Reportes\FrmLibrosMasPrestados.resx">
+      <DependentUpon>FrmLibrosMasPrestados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Reportes\FrmReporte.resx">
+      <DependentUpon>FrmReporte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Usuarios\FrmBuscarUsuario.resx">
+      <DependentUpon>FrmBuscarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Usuarios\FrmEditarUsuario.resx">
+      <DependentUpon>FrmEditarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Usuarios\frmRegistrarUsuario.resx">
+      <DependentUpon>frmRegistrarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Img\metodo-de-pago.png" />
+    <None Include="Img\actualizar.png" />
+    <Content Include="Img\Biblioteca.jpg" />
+    <None Include="Img\eliminar.png" />
+    <None Include="Img\escoba.png" />
+    <None Include="Img\guardar-el-archivo.png" />
+    <None Include="Img\updates_16.png" />
+    <None Include="Img\borrar.png" />
+    <None Include="Img\salvar.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
