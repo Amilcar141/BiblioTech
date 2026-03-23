@@ -74,6 +74,7 @@
             this.txtContrasenia.BackColor = System.Drawing.Color.White;
             this.txtContrasenia.Location = new System.Drawing.Point(135, 172);
             this.txtContrasenia.Name = "txtContrasenia";
+            this.txtContrasenia.PasswordChar = '●';
             this.txtContrasenia.Size = new System.Drawing.Size(244, 20);
             this.txtContrasenia.TabIndex = 6;
             // 
@@ -107,6 +108,7 @@
             this.lblRegistro.TabIndex = 3;
             this.lblRegistro.TabStop = true;
             this.lblRegistro.Text = "Regístrate";
+            this.lblRegistro.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblRegistro_LinkClicked);
             // 
             // lblContrasenia
             // 
@@ -129,11 +131,11 @@
             // lblBienvenido
             // 
             this.lblBienvenido.AutoSize = true;
-            this.lblBienvenido.Font = new System.Drawing.Font("MingLiU_MSCS-ExtB", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBienvenido.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBienvenido.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.lblBienvenido.Location = new System.Drawing.Point(133, 31);
+            this.lblBienvenido.Location = new System.Drawing.Point(95, 30);
             this.lblBienvenido.Name = "lblBienvenido";
-            this.lblBienvenido.Size = new System.Drawing.Size(187, 11);
+            this.lblBienvenido.Size = new System.Drawing.Size(273, 18);
             this.lblBienvenido.TabIndex = 0;
             this.lblBienvenido.Text = "¡BIENVENIDOS A BIBLIOTECH!";
             // 

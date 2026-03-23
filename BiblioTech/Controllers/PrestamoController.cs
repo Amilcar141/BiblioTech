@@ -32,7 +32,7 @@ namespace BiblioTech.Controllers
                 idLibro = idLibro,
                 idUsuario = idUsuario,
                 FechaSalida = System.DateTime.Now,
-                FechaEntrega = System.DateTime.Now.AddDays(30), // Se entrega en 30 días
+                FechaEntrega = System.DateTime.Now.AddDays(7), // Se entrega en 7 días
                 FueDevuelto = false
             };
 

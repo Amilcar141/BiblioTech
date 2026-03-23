@@ -6,23 +6,31 @@ using System.Threading.Tasks;
 
 namespace BiblioTech.Models
 {
-    internal class Usuario
-    {
-        public int idUsuario { get; set; }
-        public string usuario { get; set; }
-        public string password { get; set; }
-
+    public class Usuario
+    {        
+        public string Cuenta { get; set; }
+        public string Contrasenia { get; set; }
+        public string Nombres { get; set; }
+        public string Apellidos { get; set; }
+        public string Correo { get; set; }
+        public string Rol { get; set; }
 
         public Usuario()
         {
 
         }
 
-        public Usuario(int idUsuario, string usuario, string password)
+        public Usuario(string Cuenta, string Contrasenia, 
+            string Nombres = "", string Apellidos = "",
+                       string Correo = "", string Rol = "Lector")
+
         {
-            this.idUsuario = idUsuario;
-            this.usuario = usuario;
-            this.password = password;
+            this.Cuenta = Cuenta;
+            this.Contrasenia = Contrasenia;
+            this.Nombres = Nombres;
+            this.Apellidos = Apellidos;
+            this.Correo = Correo;
+            this.Rol = Rol;
         }
     }
 }
