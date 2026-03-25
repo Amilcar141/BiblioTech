@@ -31,7 +31,7 @@ namespace BiblioTech.Views
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.tlpMenu = new System.Windows.Forms.TableLayoutPanel();
             this.mnuMenu = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoPréstamoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,18 +75,21 @@ namespace BiblioTech.Views
             this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel2.SuspendLayout();
+            this.tlpMenu.SuspendLayout();
             this.mnuMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMenu
             // 
+            this.pnlMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlMenu.BackColor = System.Drawing.Color.Tan;
             this.pnlMenu.Controls.Add(this.label1);
             this.pnlMenu.Controls.Add(this.pictureBox1);
-            this.pnlMenu.Location = new System.Drawing.Point(0, 25);
+            this.pnlMenu.Location = new System.Drawing.Point(3, 38);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(735, 459);
+            this.pnlMenu.Size = new System.Drawing.Size(730, 443);
             this.pnlMenu.TabIndex = 0;
             // 
             // label1
@@ -111,18 +114,30 @@ namespace BiblioTech.Views
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // panel2
+            // tlpMenu
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel2.Controls.Add(this.mnuMenu);
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(735, 27);
-            this.panel2.TabIndex = 1;
+            this.tlpMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpMenu.ColumnCount = 1;
+            this.tlpMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.71751F));
+            this.tlpMenu.Controls.Add(this.mnuMenu, 0, 0);
+            this.tlpMenu.Controls.Add(this.pnlMenu, 0, 1);
+            this.tlpMenu.Location = new System.Drawing.Point(0, 0);
+            this.tlpMenu.Name = "tlpMenu";
+            this.tlpMenu.RowCount = 2;
+            this.tlpMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.438016F));
+            this.tlpMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.56198F));
+            this.tlpMenu.Size = new System.Drawing.Size(736, 484);
+            this.tlpMenu.TabIndex = 4;
             // 
             // mnuMenu
             // 
+            this.mnuMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.mnuMenu.BackColor = System.Drawing.Color.Peru;
+            this.mnuMenu.Dock = System.Windows.Forms.DockStyle.None;
             this.mnuMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.mnuMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
@@ -136,8 +151,9 @@ namespace BiblioTech.Views
             this.mnuMenu.Location = new System.Drawing.Point(0, 0);
             this.mnuMenu.Name = "mnuMenu";
             this.mnuMenu.Padding = new System.Windows.Forms.Padding(35, 2, 0, 5);
-            this.mnuMenu.Size = new System.Drawing.Size(735, 26);
-            this.mnuMenu.TabIndex = 4;
+            this.mnuMenu.Size = new System.Drawing.Size(736, 35);
+            this.mnuMenu.TabIndex = 5;
+            this.mnuMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mnuMenu_ItemClicked);
             // 
             // archivoToolStripMenuItem
             // 
@@ -147,7 +163,7 @@ namespace BiblioTech.Views
             this.renovarPréstamoToolStripMenuItem,
             this.historialDePréstamosToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 19);
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 28);
             this.archivoToolStripMenuItem.Text = "Archivo";
             // 
             // nuevoPréstamoToolStripMenuItem
@@ -189,55 +205,55 @@ namespace BiblioTech.Views
             this.gestiónCategoríaToolStripMenuItem,
             this.tsmiFavoritos});
             this.catálogoToolStripMenuItem.Name = "catálogoToolStripMenuItem";
-            this.catálogoToolStripMenuItem.Size = new System.Drawing.Size(67, 19);
+            this.catálogoToolStripMenuItem.Size = new System.Drawing.Size(67, 28);
             this.catálogoToolStripMenuItem.Text = "Catálogo";
             // 
             // buscarLibroToolStripMenuItem
             // 
             this.buscarLibroToolStripMenuItem.Name = "buscarLibroToolStripMenuItem";
-            this.buscarLibroToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.buscarLibroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.buscarLibroToolStripMenuItem.Text = "Buscar Libro";
             this.buscarLibroToolStripMenuItem.Click += new System.EventHandler(this.buscarLibroToolStripMenuItem_Click);
             // 
             // agregarLibroToolStripMenuItem
             // 
             this.agregarLibroToolStripMenuItem.Name = "agregarLibroToolStripMenuItem";
-            this.agregarLibroToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.agregarLibroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.agregarLibroToolStripMenuItem.Text = "Agregar Libro";
             this.agregarLibroToolStripMenuItem.Click += new System.EventHandler(this.agregarLibroToolStripMenuItem_Click);
             // 
             // editarLibroToolStripMenuItem
             // 
             this.editarLibroToolStripMenuItem.Name = "editarLibroToolStripMenuItem";
-            this.editarLibroToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.editarLibroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editarLibroToolStripMenuItem.Text = "Editar Libro";
             this.editarLibroToolStripMenuItem.Click += new System.EventHandler(this.editarLibroToolStripMenuItem_Click);
             // 
             // eliminarLibroToolStripMenuItem
             // 
             this.eliminarLibroToolStripMenuItem.Name = "eliminarLibroToolStripMenuItem";
-            this.eliminarLibroToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.eliminarLibroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.eliminarLibroToolStripMenuItem.Text = "Eliminar Libro";
             this.eliminarLibroToolStripMenuItem.Click += new System.EventHandler(this.eliminarLibroToolStripMenuItem_Click);
             // 
             // verDisponibilidadToolStripMenuItem
             // 
             this.verDisponibilidadToolStripMenuItem.Name = "verDisponibilidadToolStripMenuItem";
-            this.verDisponibilidadToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.verDisponibilidadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.verDisponibilidadToolStripMenuItem.Text = "Ver Disponibilidad";
             this.verDisponibilidadToolStripMenuItem.Click += new System.EventHandler(this.verDisponibilidadToolStripMenuItem_Click);
             // 
             // gestiónCategoríaToolStripMenuItem
             // 
             this.gestiónCategoríaToolStripMenuItem.Name = "gestiónCategoríaToolStripMenuItem";
-            this.gestiónCategoríaToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.gestiónCategoríaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gestiónCategoríaToolStripMenuItem.Text = "Gestión Categoría";
             this.gestiónCategoríaToolStripMenuItem.Click += new System.EventHandler(this.gestiónCategoríaToolStripMenuItem_Click);
             // 
             // tsmiFavoritos
             // 
             this.tsmiFavoritos.Name = "tsmiFavoritos";
-            this.tsmiFavoritos.Size = new System.Drawing.Size(169, 22);
+            this.tsmiFavoritos.Size = new System.Drawing.Size(180, 22);
             this.tsmiFavoritos.Text = "Favoritos";
             this.tsmiFavoritos.Click += new System.EventHandler(this.tsmiFavoritos_Click);
             // 
@@ -248,7 +264,7 @@ namespace BiblioTech.Views
             this.tsmiBuscarUsuario,
             this.tsmiEditarDatos});
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(64, 19);
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(64, 28);
             this.usuariosToolStripMenuItem.Text = "Usuarios";
             // 
             // tsmiRegistrarUsuario
@@ -281,7 +297,7 @@ namespace BiblioTech.Views
             this.préstamosVencidosToolStripMenuItem,
             this.multasToolStripMenuItem});
             this.préstamosToolStripMenuItem.Name = "préstamosToolStripMenuItem";
-            this.préstamosToolStripMenuItem.Size = new System.Drawing.Size(74, 19);
+            this.préstamosToolStripMenuItem.Size = new System.Drawing.Size(74, 28);
             this.préstamosToolStripMenuItem.Text = "Préstamos";
             // 
             // tsmiRegistrarPrestamo
@@ -358,7 +374,7 @@ namespace BiblioTech.Views
             this.inventarioToolStripMenuItem,
             this.generarReporteToolStripMenuItem});
             this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 19);
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 28);
             this.reportesToolStripMenuItem.Text = "Reportes";
             // 
             // librosToolStripMenuItem
@@ -389,7 +405,7 @@ namespace BiblioTech.Views
             this.permisosYRolesToolStripMenuItem,
             this.copiaDeSeguridadToolStripMenuItem});
             this.configuraciónToolStripMenuItem.Name = "configuraciónToolStripMenuItem";
-            this.configuraciónToolStripMenuItem.Size = new System.Drawing.Size(95, 19);
+            this.configuraciónToolStripMenuItem.Size = new System.Drawing.Size(95, 28);
             this.configuraciónToolStripMenuItem.Text = "Configuración";
             // 
             // usuarioDelSistemaToolStripMenuItem
@@ -420,7 +436,7 @@ namespace BiblioTech.Views
             this.acercaDeToolStripMenuItem,
             this.soporteToolStripMenuItem});
             this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
-            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(53, 19);
+            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(53, 28);
             this.ayudaToolStripMenuItem.Text = "Ayuda";
             // 
             // manualDeUsuarioToolStripMenuItem
@@ -447,7 +463,7 @@ namespace BiblioTech.Views
             // cerrarSesiónToolStripMenuItem
             // 
             this.cerrarSesiónToolStripMenuItem.Name = "cerrarSesiónToolStripMenuItem";
-            this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(88, 19);
+            this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(88, 28);
             this.cerrarSesiónToolStripMenuItem.Text = "Cerrar Sesión";
             this.cerrarSesiónToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesiónToolStripMenuItem_Click);
             // 
@@ -456,8 +472,7 @@ namespace BiblioTech.Views
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 484);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.pnlMenu);
+            this.Controls.Add(this.tlpMenu);
             this.Name = "frmMenu";
             this.Text = "Menu";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -465,8 +480,8 @@ namespace BiblioTech.Views
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.tlpMenu.ResumeLayout(false);
+            this.tlpMenu.PerformLayout();
             this.mnuMenu.ResumeLayout(false);
             this.mnuMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -478,7 +493,7 @@ namespace BiblioTech.Views
         private System.Windows.Forms.Panel pnlMenu;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TableLayoutPanel tlpMenu;
         private System.Windows.Forms.MenuStrip mnuMenu;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nuevoPréstamoToolStripMenuItem;
@@ -506,9 +521,11 @@ namespace BiblioTech.Views
         private System.Windows.Forms.ToolStripMenuItem tsmiMultasPendientes;
         private System.Windows.Forms.ToolStripMenuItem multasPagadasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem registrarPagoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem crearMultasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem librosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inventarioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem generarReporteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem configuraciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usuarioDelSistemaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem permisosYRolesToolStripMenuItem;
@@ -518,7 +535,5 @@ namespace BiblioTech.Views
         private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem soporteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cerrarSesiónToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem crearMultasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem generarReporteToolStripMenuItem;
     }
 }

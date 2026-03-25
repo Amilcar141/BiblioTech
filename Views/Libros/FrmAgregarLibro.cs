@@ -1,134 +1,57 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using BiblioTech.Controllers;
 using BiblioTech.Models;
-//7
+
 namespace BiblioTech.Views
 { 
     public partial class FrmAgregarLibro : Form
     {
         
-        private LibroController     _libroCtrl;
+        private LibroController _libroCtrl;
         private CategoriaController _catCtrl;
+        private AutorController _autorCtrl;
+        private EditorialController _editorialCtrl;
+
+        // Variables para guardar datos
+        private Autor autor;
+        private Categoria categoria;
+        private Editorial editorial; 
 
         // Constructor
-        public FrmAgregarLibro()
+        public FrmAgregarLibro(SistemaLibreria _sistema)
         {
             InitializeComponent();
-            _libroCtrl = new LibroController();
-            _catCtrl   = new CategoriaController();
+            _libroCtrl = new LibroController(_sistema);
+            _catCtrl = new CategoriaController(_sistema);
+            _autorCtrl = new AutorController(_sistema);
+            _editorialCtrl = new EditorialController(_sistema);
 
-            ConfigurarTabla();
             lblFechaRegistroValor.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
             CargarTabla();
         }
-
-        // Configurar columnas de la tabla
-        private void ConfigurarTabla()
-        {
-            dgvLibros.Columns.Clear();
-
-            DataGridViewTextBoxColumn colISBN = new DataGridViewTextBoxColumn();
-            colISBN.Name       = "ISBN";
-            colISBN.HeaderText = "ISBN";
-            colISBN.Width      = 120;
-
-            DataGridViewTextBoxColumn colNombre = new DataGridViewTextBoxColumn();
-            colNombre.Name       = "Nombre";
-            colNombre.HeaderText = "Nombre Libro";
-            colNombre.Width      = 200;
-
-            DataGridViewTextBoxColumn colAutor = new DataGridViewTextBoxColumn();
-            colAutor.Name       = "Autor";
-            colAutor.HeaderText = "Autor";
-            colAutor.Width      = 150;
-
-            DataGridViewTextBoxColumn colCategoria = new DataGridViewTextBoxColumn();
-            colCategoria.Name       = "Categoria";
-            colCategoria.HeaderText = "Categoría";
-            colCategoria.Width      = 130;
-
-            DataGridViewTextBoxColumn colFecha = new DataGridViewTextBoxColumn();
-            colFecha.Name       = "FechaPub";
-            colFecha.HeaderText = "Fecha Pub.";
-            colFecha.Width      = 100;
-
-            DataGridViewTextBoxColumn colPaginas = new DataGridViewTextBoxColumn();
-            colPaginas.Name       = "Paginas";
-            colPaginas.HeaderText = "Páginas";
-            colPaginas.Width      = 70;
-
-            DataGridViewTextBoxColumn colEditorial = new DataGridViewTextBoxColumn();
-            colEditorial.Name       = "Editorial";
-            colEditorial.HeaderText = "Editorial";
-            colEditorial.Width      = 130;
-
-            DataGridViewTextBoxColumn colAlias = new DataGridViewTextBoxColumn();
-            colAlias.Name       = "Alias";
-            colAlias.HeaderText = "Registrado por";
-            colAlias.Width      = 120;
-
-            DataGridViewTextBoxColumn colIdOculto = new DataGridViewTextBoxColumn();
-            colIdOculto.Name    = "ID";
-            colIdOculto.Visible = false;
-
-            dgvLibros.Columns.Add(colIdOculto);
-            dgvLibros.Columns.Add(colISBN);
-            dgvLibros.Columns.Add(colNombre);
-            dgvLibros.Columns.Add(colAutor);
-            dgvLibros.Columns.Add(colCategoria);
-            dgvLibros.Columns.Add(colFecha);
-            dgvLibros.Columns.Add(colPaginas);
-            dgvLibros.Columns.Add(colEditorial);
-            dgvLibros.Columns.Add(colAlias);
-        }
-
         
         private void CargarTabla()
         {
             dgvLibros.Rows.Clear();
 
-            List<Libro> libros = _libroCtrl.Buscar("", "Todos");
-
-            foreach (Libro lib in libros)
+            foreach (Libro lib in _libroCtrl.Inventario())
             {
                 dgvLibros.Rows.Add(
-                    lib.GetIdLibro(),
-                    lib.GetISBN(),
-                    lib.GetNombreLibro(),
-                    lib.GetAutor(),
-                    lib.GetNombreCategoria(),
-                    lib.GetFechaPublicacion(),
-                    lib.GetNumeroPaginas(),
-                    lib.GetEditorial(),
-                    lib.GetAliasUsuario()
+                    lib.ISBN,
+                    lib.Titulo,
+                    lib.Autor.NombreCompleto(),
+                    lib.Categoria?.NombreCategoria ?? "Sin categoría",
+                    lib.Editorial?.Nombre ?? "Sin editorial",
+                    lib.FechaPublicacion.ToString("dd/MM/yy"),
+                    lib.NumeroPaginas.ToString(),
+                    lib.Precio
                 );
             }
         }
-
-        // busca existente, si no la crea
-        private Categoria ResolverCategoria(string nombreCat)
-        {
-            Categoria existente = _catCtrl.ObtenerPorNombre(nombreCat);
-
-            if (existente != null)
-                return existente;
-
-            string mensajeCategoria = "";
-            bool creada = _catCtrl.Guardar(nombreCat, out mensajeCategoria);
-
-            if (!creada)
-            {
-                MessageBox.Show(mensajeCategoria, "Error en categoría",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
-            }
-
-            return _catCtrl.ObtenerPorNombre(nombreCat);
-        }
-
         
         private void LimpiarCampos()
         {
@@ -138,51 +61,98 @@ namespace BiblioTech.Views
             txtCategoria.Clear();
             txtNumeroPaginas.Clear();
             txtEditorial.Clear();
-            txtAliasUsuario.Clear();
+            txtPrecio.Clear();
             dtpFechaPublicacion.Value  = DateTime.Today;
             lblFechaRegistroValor.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+            
+            // Limpiar selecciones
+            autor = null;
+            categoria = null;
+            editorial = null;
+            
+            // Ocultar listas
+            lstAutores.Visible = false;
+            lstCategorias.Visible = false;
+            lstEditoriales.Visible = false;
         }
 
-        
+        // Valida si todos los campos estan bien
+        private bool ValidarCampos()
+        {
+            if (string.IsNullOrWhiteSpace(txtISBN.Text) ||
+                string.IsNullOrWhiteSpace(txtNombreLibro.Text) ||
+                string.IsNullOrWhiteSpace(txtAutor.Text) ||
+                string.IsNullOrWhiteSpace(txtCategoria.Text) ||
+                string.IsNullOrWhiteSpace(txtNumeroPaginas.Text) ||
+                string.IsNullOrWhiteSpace(txtEditorial.Text) ||
+                string.IsNullOrWhiteSpace(txtPrecio.Text))
+            {
+                MessageBox.Show("Por favor, complete todos los campos.", "Campos Incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            if (autor == null)
+            {
+                MessageBox.Show("Por favor, seleccione un autor válido de la lista.", "Autor Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            if (categoria == null)
+            {
+                MessageBox.Show("Por favor, seleccione una categoría válida de la lista.", "Categoría Inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            if (editorial == null)
+            {
+                MessageBox.Show("Por favor, seleccione una editorial válida de la lista.", "Editorial Inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            if (!int.TryParse(txtNumeroPaginas.Text, out int paginas) || paginas <= 0)
+            {
+                MessageBox.Show("Número de páginas debe ser un entero positivo.", "Campo Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            if (!decimal.TryParse(txtPrecio.Text, out decimal precio) || precio < 0)
+            {
+                MessageBox.Show("Precio debe ser un número decimal no negativo.", "Campo Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
+        }
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            string nombreCat = txtCategoria.Text.Trim();
+            // Obtener los datos del formulario
+            string isbn = txtISBN.Text.Trim();
+            string titulo = txtNombreLibro.Text.Trim();
+            decimal precio = decimal.Parse(txtPrecio.Text.Trim());
+            int numPaginas = int.Parse(txtNumeroPaginas.Text.Trim());
+            DateTime fecha = dtpFechaPublicacion.Value;
 
-            if (string.IsNullOrWhiteSpace(nombreCat))
+            if (ValidarCampos())
             {
-                MessageBox.Show("La categoría no puede estar vacía.", "Validación",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                try
+                {   // Crear el libro
+                    Libro nuevoLibro = new Libro(isbn, titulo, autor, categoria, editorial, precio, numPaginas, fecha);
 
-            Categoria categoria = ResolverCategoria(nombreCat);
-            if (categoria == null)
-                return;
+                    // Agregar el libro al sistema
+                    if (_libroCtrl.AgregarLibro(nuevoLibro))
+                    {
+                        MessageBox.Show("Libro agregado exitosamente.", "Éxito",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            string mensaje = "";
-            bool resultado = _libroCtrl.Guardar(
-                txtISBN.Text,
-                txtNombreLibro.Text,
-                txtAutor.Text,
-                categoria.GetIdCategoria(),
-                categoria.GetNombreCategoria(),
-                dtpFechaPublicacion.Value.ToString("dd/MM/yyyy"),
-                txtNumeroPaginas.Text,
-                txtEditorial.Text,
-                txtAliasUsuario.Text,
-                out mensaje);
+                        CargarTabla();
+                        LimpiarCampos();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ya existe un libro con ese ISBN.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al agregar el libro: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            if (resultado)
-            {
-                MessageBox.Show(mensaje, "Éxito",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LimpiarCampos();
-                CargarTabla();
-            }
-            else
-            {
-                MessageBox.Show(mensaje, "Error de validación",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
 
@@ -203,6 +173,137 @@ namespace BiblioTech.Views
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        // Metodos que manejan la busqueda y seleccion de Autor, Categoria y Editorial
+        private void txtAutor_TextChanged(object sender, EventArgs e)
+        {
+            string busqueda = txtAutor.Text.Trim();
+
+            // Valida si el texto está vacío para ocultar la lista de inmediato
+            if (string.IsNullOrWhiteSpace(busqueda))
+            {
+                lstAutores.Visible = false;
+                return;
+            }
+
+            // Filtrar por Nombre O Apellido
+            var autoresEncontrados = _autorCtrl.ObtenerTodos()
+                .Where(a => a.Nombres.Contains(busqueda) ||
+                            a.Apellidos.Contains(busqueda))
+                .ToList();
+
+            // Mostrar u ocultar según resultados
+            if (autoresEncontrados.Any())
+            {
+                lstAutores.DataSource = autoresEncontrados;
+                // Importante: Indicar qué propiedad mostrar en el ListBox
+                lstAutores.DisplayMember = "Nombres"; // Ver nota abajo
+                lstAutores.Visible = true;
+                lstAutores.BringToFront();
+            }
+            else
+            {
+                lstAutores.Visible = false;
+            }
+        }
+
+        private void lstAutores_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstAutores.SelectedItem is Autor autorSeleccionado)
+            {
+                txtAutor.Text = autorSeleccionado.NombreCompleto();
+                lstAutores.Visible = false;
+
+                // Guardar el autor seleccionado para usarlo al crear el libro
+                autor = autorSeleccionado; 
+            }
+        }
+
+        private void txtCategoria_TextChanged(object sender, EventArgs e)
+        {
+            string busqueda = txtCategoria.Text.Trim();
+
+            // Valida si el texto está vacío para ocultar la lista de inmediato
+            if (string.IsNullOrWhiteSpace(busqueda))
+            {
+                lstCategorias.Visible = false;
+                return;
+            }
+
+            // Filtrar por Nombre O Apellido
+            var categoriasEncontradas = _catCtrl.ObtenerTodas()
+                .Where(a => a.NombreCategoria.Contains(busqueda))
+                .ToList();
+
+            // Mostrar u ocultar según resultados
+            if (categoriasEncontradas.Any())
+            {
+                lstCategorias.DataSource = categoriasEncontradas;
+                // Importante: Indicar qué propiedad mostrar en el ListBox
+                lstCategorias.DisplayMember = "NombreCategoria"; // Ver nota abajo
+                lstCategorias.Visible = true;
+                lstCategorias.BringToFront();
+            }
+            else
+            {
+                lstCategorias.Visible = false;
+            }
+        }
+
+        private void lstCategorias_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstCategorias.SelectedItem is Categoria catSeleccionada)
+            {
+                txtCategoria.Text = catSeleccionada.NombreCategoria;
+                lstCategorias.Visible = false;
+
+                // Guardar la categoria seleccionado
+                categoria = catSeleccionada;
+            }
+        }
+
+        private void txtEditorial_TextChanged(object sender, EventArgs e)
+        {
+            string busqueda = txtEditorial.Text.Trim();
+
+            // Valida si el texto está vacío para ocultar la lista de inmediato
+            if (string.IsNullOrWhiteSpace(busqueda))
+            {
+                lstEditoriales.Visible = false;
+                return;
+            }
+
+            // Filtrar por Nombre O Apellido
+            var editorialesEncontradas = _editorialCtrl.ObtenerTodas()
+                .Where(a => a.Nombre.Contains(busqueda))
+                .ToList();
+
+            // Mostrar u ocultar según resultados
+            if (editorialesEncontradas.Any())
+            {
+                lstEditoriales.DataSource = editorialesEncontradas;
+                // Importante: Indicar qué propiedad mostrar en el ListBox
+                lstEditoriales.DisplayMember = "Nombre"; // Ver nota abajo
+                lstEditoriales.Visible = true;
+                lstEditoriales.BringToFront();
+            }
+            else
+            {
+                lstEditoriales.Visible = false;
+            }
+        }
+
+        private void lstEditoriales_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstEditoriales.SelectedItem is Editorial editorialSelccionada)
+            {
+                txtEditorial.Text = editorialSelccionada.Nombre;
+                lstEditoriales.Visible = false;
+
+                // Guardar la categoria seleccionado
+                editorial = editorialSelccionada;
+            }
         }
     }
 }

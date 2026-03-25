@@ -1,112 +1,134 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using BiblioTech.Controllers;
 using BiblioTech.Models;
-//7
-namespace BiblioTech.Views 
+
+namespace BiblioTech.Views
 {
     public partial class FrmEliminarLibro : Form
     {
         // Controlador
-        private LibroController _ctrl;
-        private int _idSeleccionado;
+        private LibroController _libroCtrl;
 
         // Constructor
-        public FrmEliminarLibro()
+        public FrmEliminarLibro(SistemaLibreria sistema)
         {
             InitializeComponent();
-            _ctrl           = new LibroController();
-            _idSeleccionado = 0;
+            _libroCtrl = new LibroController(sistema);
 
-            ConfigurarTabla();
+            // Conectar evento de doble clic
+            dgvLibros.CellDoubleClick += dgvLibros_CellDoubleClick;
+
             CargarTabla();
         }
 
-        // Configurar columnas de la tabla 
-        private void ConfigurarTabla()
-        {
-            dgvLibros.Columns.Clear();
-
-            DataGridViewTextBoxColumn colISBN = new DataGridViewTextBoxColumn();
-            colISBN.Name = "ISBN"; colISBN.HeaderText = "ISBN"; colISBN.Width = 120;
-
-            DataGridViewTextBoxColumn colNombre = new DataGridViewTextBoxColumn();
-            colNombre.Name = "Nombre"; colNombre.HeaderText = "Nombre Libro"; colNombre.Width = 200;
-
-            DataGridViewTextBoxColumn colAutor = new DataGridViewTextBoxColumn();
-            colAutor.Name = "Autor"; colAutor.HeaderText = "Autor"; colAutor.Width = 150;
-
-            DataGridViewTextBoxColumn colCategoria = new DataGridViewTextBoxColumn();
-            colCategoria.Name = "Categoria"; colCategoria.HeaderText = "Categoría"; colCategoria.Width = 130;
-
-            DataGridViewTextBoxColumn colEstado = new DataGridViewTextBoxColumn();
-            colEstado.Name = "Estado"; colEstado.HeaderText = "Estado"; colEstado.Width = 100;
-
-            DataGridViewTextBoxColumn colIdOculto = new DataGridViewTextBoxColumn();
-            colIdOculto.Name = "ID"; colIdOculto.Visible = false;
-
-            dgvLibros.Columns.Add(colIdOculto);
-            dgvLibros.Columns.Add(colISBN);
-            dgvLibros.Columns.Add(colNombre);
-            dgvLibros.Columns.Add(colAutor);
-            dgvLibros.Columns.Add(colCategoria);
-            dgvLibros.Columns.Add(colEstado);
-        }
-
-        
+        // Cargar datos en la tabla
         private void CargarTabla()
         {
             dgvLibros.Rows.Clear();
 
-            List<Libro> libros = _ctrl.Buscar(txtBuscar.Text, "Todos");
-
-            foreach (Libro lib in libros)
+            try
             {
-                string estado = lib.GetDisponible() ? "Disponible" : "Prestado";
-                dgvLibros.Rows.Add(
-                    lib.GetIdLibro(),
-                    lib.GetISBN(),
-                    lib.GetNombreLibro(),
-                    lib.GetAutor(),
-                    lib.GetNombreCategoria(),
-                    estado
-                );
-            }
+                List<Libro> libros = ObtenerLibrosFiltrados();
 
-            lblContador.Text = "Total: " + dgvLibros.Rows.Count + " libro(s)";
+                foreach (Libro lib in libros)
+                {
+                    dgvLibros.Rows.Add(
+                        lib.ISBN,
+                        lib.Titulo,
+                        lib.Autor.NombreCompleto(),
+                        lib.Categoria.NombreCategoria,
+                        lib.Editorial.Nombre,
+                        lib.FechaPublicacion.ToString("dd/MM/yy"),
+                        lib.Precio.ToString("C")
+                    );
+                }
+
+                lblContador.Text = "Total: " + dgvLibros.Rows.Count + " libro(s)";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar la tabla: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        
+        // Obtener libros filtrados según búsqueda
+        private List<Libro> ObtenerLibrosFiltrados()
+        {
+            string busqueda = txtBuscar.Text.Trim().ToLower();
+            List<Libro> todosLibros = _libroCtrl.Inventario();
+
+            if (string.IsNullOrWhiteSpace(busqueda))
+                return todosLibros;
+
+            return todosLibros.Where(l =>
+                l.ISBN.ToLower().Contains(busqueda) ||
+                l.Titulo.ToLower().Contains(busqueda) ||
+                l.Autor.NombreCompleto().ToLower().Contains(busqueda) ||
+                l.Categoria.NombreCategoria.ToLower().Contains(busqueda)
+            ).ToList();
+        }
+
+        // Evento cambio en campo de búsqueda
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
             CargarTabla();
         }
 
+        // Evento selección en tabla
         private void dgvLibros_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvLibros.CurrentRow == null)
-                return;
-
-            _idSeleccionado = Convert.ToInt32(dgvLibros.CurrentRow.Cells["ID"].Value);
+            // El libro seleccionado se obtiene del DataGridView cuando se necesite
         }
 
+        // Doble clic en la tabla para eliminar
+        private void dgvLibros_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                EliminarLibroSeleccionado();
+            }
+        }
+
+        // Botón eliminar
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (_idSeleccionado == 0)
+            if (dgvLibros.CurrentRow == null)
             {
-                MessageBox.Show("Seleccione un libro de la tabla.",
+                MessageBox.Show("Seleccione un libro de la tabla para eliminar.",
                     "Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string nombreLibro = "";
-            if (dgvLibros.CurrentRow != null)
-                nombreLibro = dgvLibros.CurrentRow.Cells["Nombre"].Value.ToString();
+            EliminarLibroSeleccionado();
+        }
+
+        // Método para eliminar el libro seleccionado
+        private void EliminarLibroSeleccionado()
+        {
+            if (dgvLibros.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione un libro de la tabla para eliminar.",
+                    "Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string isbn = dgvLibros.CurrentRow.Cells[0].Value?.ToString();
+            Libro libroSeleccionado = _libroCtrl.Inventario().FirstOrDefault(l => l.ISBN == isbn);
+
+            if (libroSeleccionado == null)
+            {
+                MessageBox.Show("No se pudo identificar el libro seleccionado.",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             DialogResult respuesta = MessageBox.Show(
-                "¿Está seguro de que desea eliminar ,Esta acción no se puede deshacer.",
+                $"¿Está seguro de que desea eliminar '{libroSeleccionado.Titulo}'? Esta acción no se puede deshacer.",
                 "Confirmar eliminación",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning);
@@ -114,30 +136,31 @@ namespace BiblioTech.Views
             if (respuesta != DialogResult.Yes)
                 return;
 
-            string mensaje  = "";
-            bool   resultado = _ctrl.Eliminar(_idSeleccionado, out mensaje);
-
-            if (resultado)
+            try
             {
-                MessageBox.Show(mensaje, "Eliminado",
+                _libroCtrl.EliminarLibro(libroSeleccionado.ISBN);
+
+                MessageBox.Show("Libro eliminado exitosamente.", "Éxito",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                _idSeleccionado = 0;
+
                 CargarTabla();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show(mensaje, "Error",
+                MessageBox.Show("Error al eliminar el libro: " + ex.Message, "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        // Botón limpiar
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtBuscar.Clear();
-            _idSeleccionado = 0;
             CargarTabla();
+            txtBuscar.Focus();
         }
 
+        // Botón cerrar
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();

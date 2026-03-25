@@ -6,14 +6,16 @@ using BiblioTech.Controllers;
 using BiblioTech.Models;
 using BiblioTech.Models.Enums;
 
-namespace BiblioTech.Views.Multas//7
+namespace BiblioTech.Views.Multas
 {
     public partial class FrmCrearMulta : Form
     {
-        private MultaController multaCtrl = new MultaController();
+        private MultaController _multaCtrl;
 
-        public FrmCrearMulta() 
-        { 
+        public FrmCrearMulta(SistemaLibreria sistema) 
+        {
+            _multaCtrl = new MultaController(sistema);
+
             InitializeComponent(); 
         }
 
@@ -135,7 +137,7 @@ namespace BiblioTech.Views.Multas//7
                 monto = decimal.Parse(txtMonto.Text);
                 tipoMulta = (TipoMulta)cmbMotivo.SelectedItem;
 
-                bool exito = multaCtrl.RegistrarMulta(desc, monto, tipoMulta);
+                bool exito = _multaCtrl.RegistrarMulta(desc, monto, tipoMulta);
 
                 if (exito)
                 {

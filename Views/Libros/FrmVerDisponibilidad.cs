@@ -1,98 +1,87 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using BiblioTech.Controllers;
 using BiblioTech.Models;
- //7
+
 namespace BiblioTech.Views
 {
     public partial class FrmVerDisponibilidad : Form
     {
-        
-        private LibroController _ctrl;
+        // Controlador
+        private EjemplarController _ejemplarCtrl;
 
         // Constructor
-        public FrmVerDisponibilidad()
+        public FrmVerDisponibilidad(SistemaLibreria sistema)
         {
             InitializeComponent();
-            _ctrl = new LibroController();
+            _ejemplarCtrl = new EjemplarController(sistema);
 
-            ConfigurarTabla();
             CargarTabla();
         }
 
-        // Configurar columnas de la tabla manualmente
-        private void ConfigurarTabla()
-        {
-            dgvDisponibilidad.Columns.Clear();
-
-            DataGridViewTextBoxColumn colISBN = new DataGridViewTextBoxColumn();
-            colISBN.Name = "ISBN"; colISBN.HeaderText = "ISBN"; colISBN.Width = 120;
-
-            DataGridViewTextBoxColumn colNombre = new DataGridViewTextBoxColumn();
-            colNombre.Name = "Nombre"; colNombre.HeaderText = "Nombre Libro"; colNombre.Width = 200;
-
-            DataGridViewTextBoxColumn colAutor = new DataGridViewTextBoxColumn();
-            colAutor.Name = "Autor"; colAutor.HeaderText = "Autor"; colAutor.Width = 150;
-
-            DataGridViewTextBoxColumn colCategoria = new DataGridViewTextBoxColumn();
-            colCategoria.Name = "Categoria"; colCategoria.HeaderText = "Categoría"; colCategoria.Width = 130;
-
-            DataGridViewTextBoxColumn colEstado = new DataGridViewTextBoxColumn();
-            colEstado.Name = "Estado"; colEstado.HeaderText = "Estado"; colEstado.Width = 130;
-
-            dgvDisponibilidad.Columns.Add(colISBN);
-            dgvDisponibilidad.Columns.Add(colNombre);
-            dgvDisponibilidad.Columns.Add(colAutor);
-            dgvDisponibilidad.Columns.Add(colCategoria);
-            dgvDisponibilidad.Columns.Add(colEstado);
-        }
-
-        
+        // Cargar datos en la tabla
         private void CargarTabla()
         {
             dgvDisponibilidad.Rows.Clear();
 
-            List<Libro> libros = _ctrl.Buscar(txtBuscar.Text, "Todos");
-
-            foreach (Libro lib in libros)
+            try
             {
-                string estado = lib.GetDisponible() ? "✔ Disponible" : "✘ Prestado";
-                int fila = dgvDisponibilidad.Rows.Add(
-                    lib.GetISBN(),
-                    lib.GetNombreLibro(),
-                    lib.GetAutor(),
-                    lib.GetNombreCategoria(),
-                    estado
-                );
+                List<Ejemplar> ejemplares = ObtenerEjemplaresFiltrados();
 
-                // Colorear fila segun disponibilidad
-                if (lib.GetDisponible())
+                foreach (Ejemplar ejem in ejemplares)
                 {
-                    dgvDisponibilidad.Rows[fila].DefaultCellStyle.ForeColor = Color.DarkGreen;
+                    dgvDisponibilidad.Rows.Add(
+                        ejem.CodigoEjemplar,
+                        ejem.Libro.Titulo,
+                        ejem.Libro.Categoria.NombreCategoria,
+                        ejem.Estado.ToString()
+                    );
                 }
-                else
-                {
-                    dgvDisponibilidad.Rows[fila].DefaultCellStyle.ForeColor = Color.DarkRed;
-                }
+
+                lblContador.Text = "Total: " + dgvDisponibilidad.Rows.Count + " ejemplar(es)";
             }
-
-            lblContador.Text = "Total: " + dgvDisponibilidad.Rows.Count + " libro(s)";
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar la tabla: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        
+        // Obtener ejemplares filtrados según búsqueda
+        private List<Ejemplar> ObtenerEjemplaresFiltrados()
+        {
+            string busqueda = txtBuscar.Text.Trim().ToLower();
+            List<Ejemplar> todosEjemplares = _ejemplarCtrl.ObtenerTodos();
+
+            if (string.IsNullOrWhiteSpace(busqueda))
+                return todosEjemplares;
+
+            return todosEjemplares.Where(e =>
+                e.CodigoEjemplar.ToLower().Contains(busqueda) ||
+                e.Libro.Titulo.ToLower().Contains(busqueda) ||
+                e.Libro.Autor.NombreCompleto().ToLower().Contains(busqueda) ||
+                e.Estado.ToString().ToLower().Contains(busqueda)
+            ).ToList();
+        }
+
+        // Evento cambio en campo de búsqueda
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
             CargarTabla();
         }
 
+        // Botón limpiar
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtBuscar.Clear();
             CargarTabla();
+            txtBuscar.Focus();
         }
 
+        // Botón cerrar
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();

@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System;
 
 namespace BiblioTech.Models
-{ //7
+{
     public class Libro
     {
         // Atributos privados
         private int _id; 
         private string _isbn;
         private string _titulo;
+        private decimal _precio;
+        private int _numeroPaginas;
         private Autor _autor; 
         private Categoria _categoria;
         private Editorial _editorial;
-        private decimal _precio;
-        private int _numeroPaginas;
         private DateTime _fechaPublicacion;
         private DateTime _fechaRegistro;
 
@@ -26,29 +26,31 @@ namespace BiblioTech.Models
         {
         }
 
-        public Libro(string titulo, Autor autor, Categoria categoria, Editorial editorial,
-            decimal precio, int paginas)
+        public Libro(string isbn, string titulo, Autor autor, Categoria categoria, Editorial editorial,
+            decimal precio, int paginas, DateTime fechaPublicacion)
         {
             _id = _contadorId++;
-            _isbn = ValidarISBN(_isbn);
+            _isbn = ValidarISBN(isbn);
             _titulo = titulo;
             _autor = autor;
             _categoria = categoria;
             _editorial = editorial;
             _precio = precio;
             _numeroPaginas = paginas;
+            _fechaRegistro = DateTime.Now;
+            _fechaPublicacion = fechaPublicacion;
         }
 
         // Getters y Setters
         public string ISBN
         {
             get { return _isbn; }
-            private set { _isbn = value }
+            private set { _isbn = value; }
         }
 
         public string Titulo
         {
-            get { return _titulo }
+            get { return _titulo; }
             set { _titulo = value; }
         }
 
@@ -90,13 +92,21 @@ namespace BiblioTech.Models
             }
         }
 
+        public DateTime FechaPublicacion
+        {
+            get { return _fechaPublicacion; }
+            set { _fechaPublicacion = value; }
+        }
+
+        public DateTime FechaRegistro
+        {
+            get { return _fechaRegistro; }
+        }
+
 
         // Metodos propios de la clase libro
         private string ValidarISBN(string isbn)
         {
-            if (string.IsNullOrEmpty(isbn))
-                return null;
-
             // Eliminar guiones y espacios
             isbn = isbn.Replace("-", "").Replace(" ", "");
             if (isbn.Length == 13)

@@ -20,7 +20,9 @@ namespace BiblioTech
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
-            frmMenu menu = new frmMenu();
+            BiblioTech.Models.SistemaLibreria sistema = new BiblioTech.Models.SistemaLibreria();
+            CargarDatos.CargarDatosIniciales(sistema);
+            frmMenu menu = new frmMenu(sistema);
             menu.Show();
             this.Hide();
         }

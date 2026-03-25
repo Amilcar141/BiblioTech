@@ -1,41 +1,77 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using BiblioTech.Controllers;
 using BiblioTech.Models;
 using BiblioTech.Models.Enums;
- //7
+
 namespace BiblioTech.Views.Prestamos
 {
     public partial class FrmPrestamosVencidos : Form
     {
-        private PrestamoController _ctrl = new PrestamoController();
+        // Controlador
+        private PrestamoController _prestamoCtrl;
 
-        public FrmPrestamosVencidos() { InitializeComponent(); }
+        // Constructor
+        public FrmPrestamosVencidos(SistemaLibreria sistema)
+        {
+            InitializeComponent();
+            _prestamoCtrl = new PrestamoController(sistema);
+        }
 
-        private void FrmPrestamosVencidos_Load(object sender, EventArgs e) { CargarTabla(); }
+        // Evento de carga del formulario
+        private void FrmPrestamosVencidos_Load(object sender, EventArgs e)
+        {
+            CargarTabla();
+        }
 
+        // Cargar tabla de préstamos vencidos
         private void CargarTabla()
         {
             dgvVencidos.Rows.Clear();
-            foreach (Prestamo p in _ctrl.Historial)
+
+            try
             {
-                if (!p.EstaVencido() || p.Estado == EstadoPrestamo.Devuelto) continue;
-                int dias      = p.ObtenerDiasDeRetraso();
-                decimal multa = p.CalcularMulta();
-                int fila = dgvVencidos.Rows.Add(
-                    p.IdPrestamo,
-                    p.Lector != null ? p.Lector.Nombre : "",
-                    p.Libro  != null ? p.Libro.GetNombreLibro() : "",
-                    p.FechaLimite.ToString("dd/MM/yyyy"),
-                    dias,
-                    multa.ToString("F2") + " Lps");
-                dgvVencidos.Rows[fila].DefaultCellStyle.ForeColor = Color.DarkRed;
+                List<Prestamo> prestamosVencidos = _prestamoCtrl.ObtenerVencidos();
+
+                foreach (Prestamo prestamo in prestamosVencidos)
+                {
+                    int diasDeRetraso = prestamo.ObtenerDiasDeRetraso();
+                    decimal multa = prestamo.CalcularMulta();
+
+                    int fila = dgvVencidos.Rows.Add(
+                        prestamo.Codigo,
+                        prestamo.Lector != null ? prestamo.Lector.Nombre : "-",
+                        prestamo.Libros != null && prestamo.Libros.Count > 0 ? prestamo.Libros[0].Libro.Titulo : "-",
+                        prestamo.FechaLimite.ToString("dd/MM/yyyy"),
+                        diasDeRetraso,
+                        multa.ToString("C")
+                    );
+
+                    // Resaltar fila en rojo
+                    dgvVencidos.Rows[fila].DefaultCellStyle.ForeColor = Color.DarkRed;
+                }
+
+                lblContador.Text = "Total vencidos: " + dgvVencidos.Rows.Count;
             }
-            lblContador.Text = "Total vencidos: " + dgvVencidos.Rows.Count;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar la tabla: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void btnRefrescar_Click(object sender, EventArgs e) { CargarTabla(); }
-        private void btnCerrar_Click(object sender, EventArgs e) { this.Close(); }
+        // Botón refrescar
+        private void btnRefrescar_Click(object sender, EventArgs e)
+        {
+            CargarTabla();
+        }
+
+        // Botón cerrar
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

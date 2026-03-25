@@ -1,51 +1,103 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using BiblioTech.Controllers;
-using BiblioTech.Models; 
+using BiblioTech.Models;
 
 namespace BiblioTech.Views.Reportes
-{//7
+{
     public partial class FrmInventario : Form
     {
-        private LibroController _ctrl = new LibroController();
+        // Controlador
+        private LibroController _libroCtrl;
 
-        public FrmInventario() { InitializeComponent(); }
+        // Constructor
+        public FrmInventario(SistemaLibreria sistema)
+        {
+            InitializeComponent();
+            _libroCtrl = new LibroController(sistema);
+        }
 
-        private void FrmInventario_Load(object sender, EventArgs e) { CargarTabla(); }
+        // Evento de carga del formulario
+        private void FrmInventario_Load(object sender, EventArgs e)
+        {
+            CargarTabla();
+        }
 
+        // Cargar tabla de inventario
         private void CargarTabla()
         {
             dgvInventario.Rows.Clear();
-            string filtro = txtBuscar.Text.Trim().ToLower();
-            int disp = 0, pres = 0;
 
-            foreach (Libro lib in _ctrl.ObtenerTodos())
+            try
             {
-                if (!string.IsNullOrEmpty(filtro) &&
-                    !lib.GetNombreLibro().ToLower().Contains(filtro) &&
-                    !lib.GetAutor().ToLower().Contains(filtro) &&
-                    !lib.GetISBN().ToLower().Contains(filtro)) continue;
+                List<Libro> libros = ObtenerLibrosFiltrados();
+                int disponibles = 0, prestados = 0;
 
-                string estado = lib.GetDisponible() ? "Disponible" : "Prestado";
-                int fila = dgvInventario.Rows.Add(
-                    lib.GetISBN(), lib.GetNombreLibro(), lib.GetAutor(),
-                    lib.GetNombreCategoria(), lib.GetEditorial(),
-                    lib.GetFechaPublicacion(), lib.GetNumeroPaginas(), estado);
-
-                if (!lib.GetDisponible())
+                foreach (Libro lib in libros)
                 {
-                    dgvInventario.Rows[fila].DefaultCellStyle.ForeColor = Color.DarkRed;
-                    pres++;
+                    int fila = dgvInventario.Rows.Add(
+                        lib.ISBN,
+                        lib.Titulo,
+                        lib.Autor.NombreCompleto(),
+                        lib.Categoria.NombreCategoria,
+                        lib.Editorial.Nombre,
+                        lib.FechaPublicacion.ToString("dd/MM/yyyy"),
+                        lib.NumeroPaginas.ToString(),
+                        lib.Precio.ToString("C")
+                    );
+
+                    // Contar libros (podría representar disponibilidad según lógica del negocio)
+                    disponibles++;
                 }
-                else disp++;
+
+                lblContador.Text = string.Format("Total: {0} libro(s)", dgvInventario.Rows.Count);
             }
-            lblContador.Text = string.Format("Total: {0}  |  Disponibles: {1}  |  Prestados: {2}",
-                dgvInventario.Rows.Count, disp, pres);
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar la tabla: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void txtBuscar_TextChanged(object sender, EventArgs e) { CargarTabla(); }
-        private void btnLimpiar_Click(object sender, EventArgs e) { txtBuscar.Clear(); }
-        private void btnCerrar_Click(object sender, EventArgs e) { this.Close(); }
+        // Obtener libros filtrados según búsqueda
+        private List<Libro> ObtenerLibrosFiltrados()
+        {
+            string filtro = txtBuscar.Text.Trim().ToLower();
+            List<Libro> todosLibros = _libroCtrl.Inventario();
+
+            if (string.IsNullOrWhiteSpace(filtro))
+                return todosLibros;
+
+            return todosLibros.Where(lib =>
+                lib.ISBN.ToLower().Contains(filtro) ||
+                lib.Titulo.ToLower().Contains(filtro) ||
+                lib.Autor.NombreCompleto().ToLower().Contains(filtro) ||
+                lib.Categoria.NombreCategoria.ToLower().Contains(filtro) ||
+                lib.Editorial.Nombre.ToLower().Contains(filtro)
+            ).ToList();
+        }
+
+        // Evento cambio en campo de búsqueda
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            CargarTabla();
+        }
+
+        // Botón limpiar
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtBuscar.Clear();
+            CargarTabla();
+            txtBuscar.Focus();
+        }
+
+        // Botón cerrar
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

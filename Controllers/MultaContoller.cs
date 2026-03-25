@@ -2,34 +2,37 @@ using BiblioTech.Models;
 using BiblioTech.Models.Enums;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BiblioTech.Controllers
-{ 
-    public class MultaController//4
+{
+    public class MultaController
     {
-        // Lista de las multas registradas en el sistema
-        private static List<Multa> _multas;
+        // Instancia del SistemaLibreria para el manejo de datos
+        private SistemaLibreria _sistema;
 
-        public MultaController() 
-        { 
-            _multas = new List<Multa>();
+        // Constructor
+        public MultaController(SistemaLibreria sistema)
+        {
+            _sistema = sistema;
         }
 
-        // Metodos del controlador
-        public List<Multa> ObtenerMultas()
-        { 
-            return _multas; 
+        // Metodos principales
+
+        // Obtener todas las multas
+        public List<Multa> ObtenerTodas()
+        {
+            return _sistema.Multas;
         }
 
-        // Metodos Principales
-        // Registrar multa 
+        // Registrar multa
         public bool RegistrarMulta(string descripcion, decimal monto, TipoMulta tipo)
         {
-            if (monto <= 0) 
+            if (monto <= 0)
                 return false;
 
             Multa nueva = new Multa(descripcion, monto, tipo);
-            _multas.Add(nueva);
+            _sistema.Multas.Add(nueva);
 
             return true;
         }
@@ -37,76 +40,50 @@ namespace BiblioTech.Controllers
         // Editar multa en caso de error en el registro
         public bool EditarMulta(string codigo, string descripcion, decimal monto, TipoMulta tipo)
         {
-            if (monto <= 0) 
+            if (monto <= 0)
                 return false;
 
-            foreach (Multa m in _multas)
-            {
-                if (m.CodigoMulta == codigo)
-                {
-                    m.Descripcion = descripcion;
-                    m.Monto = monto;
-                    m.Tipo = tipo;
-                    return true;
-                }
-            }
+            Multa multa = ObtenerPorCodigo(codigo);
 
-            return false;
+            if (multa == null)
+                return false;
+
+            multa.Descripcion = descripcion;
+            multa.Monto = monto;
+            multa.Tipo = tipo;
+            return true;
         }
 
-        // Pagar Multa
+        // Pagar multa
         public bool PagarMulta(string codigo)
         {
-            Multa m = ObtenerMultaPorCodigo(codigo);
+            Multa multa = ObtenerPorCodigo(codigo);
 
-            if (m == null) 
+            if (multa == null)
                 return false;
 
-            m.Pagar();
+            multa.Pagar();
             return true;
         }
 
+        // Eliminar multa
         public bool EliminarMulta(string codigo)
         {
-            Multa m = ObtenerMultaPorCodigo(codigo);
+            Multa multa = ObtenerPorCodigo(codigo);
 
-            if (m == null) 
+            if (multa == null)
                 return false;
 
-            _multas.Remove(m);
+            _sistema.Multas.Remove(multa);
             return true;
         }
 
-        // Otros metodos
-        public List<Multa> ObtenerMultasPendientes()
+        // Metodos de busqueda y filtrado
+
+        // Obtener multa por código
+        public Multa ObtenerPorCodigo(string codigo)
         {
-            List<Multa> lista = new List<Multa>();
-
-            foreach (Multa m in _multas)
-            {
-                if (m.EstaPendiente())
-                    lista.Add(m);
-            }
-
-            return lista;
-        }
-
-        public List<Multa> ObtenerMultasPagadas()
-        {
-            List<Multa> lista = new List<Multa>();
-
-            foreach (Multa m in _multas)
-            {
-                if (!m.EstaPendiente())
-                    lista.Add(m);
-            }
-
-            return lista;
-        }
-
-        public Multa ObtenerMultaPorCodigo(string codigo)
-        {
-            foreach (Multa m in _multas)
+            foreach (Multa m in ObtenerTodas())
             {
                 if (m.CodigoMulta == codigo)
                     return m;
@@ -115,30 +92,42 @@ namespace BiblioTech.Controllers
             return null;
         }
 
-        public List<Multa> ObtenerMultaPorTipo(TipoMulta tipo)
+        // Obtener multas pendientes
+        public List<Multa> ObtenerMultasPendientes()
         {
-            List<Multa> multas = new List<Multa>();
-
-            foreach (Multa m in _multas)
-            {
-                if (m.Tipo == tipo)
-                    multas.Add(m);
-            }
-
-            return multas;
+            return ObtenerTodas()
+                .Where(m => m.EstaPendiente())
+                .ToList();
         }
 
-        public List<Multa> ObtenerMultaPorLector(Lector lector)
+        // Obtener multas pagadas
+        public List<Multa> ObtenerMultasPagadas()
         {
-            List<Multa> multas = new List<Multa>();
-
-            foreach (Multa m in _multas)
-            {
-                if (m.Lector != null && m.Lector.Cuenta == lector.Cuenta)
-                    multas.Add(m);
-            }
-            return multas;
+            return ObtenerTodas()
+                .Where(m => !m.EstaPendiente())
+                .ToList();
         }
+
+        // Obtener multas por tipo
+        public List<Multa> ObtenerPorTipo(TipoMulta tipo)
+        {
+            return ObtenerTodas()
+                .Where(m => m.Tipo == tipo)
+                .ToList();
+        }
+
+        // Obtener multas por lector
+        public List<Multa> ObtenerPorLector(Lector lector)
+        {
+            if (lector == null)
+                return new List<Multa>();
+
+            return ObtenerTodas()
+                .Where(m => m.Lector != null && m.Lector.Cuenta == lector.Cuenta)
+                .ToList();
+        }
+
+        // Otros metodos
 
         // Calcular días de mora a partir de la fecha de generación de la multa
         public int CalcularDiasMora(DateTime fechaGeneracion)
@@ -147,17 +136,25 @@ namespace BiblioTech.Controllers
             return (int)diff.TotalDays;
         }
 
-        // Obtiene el total de multas pendientes
+        // Obtener el total de multas pendientes
         public decimal ObtenerTotalMultasPendientes()
         {
-            decimal total = 0;
+            return ObtenerMultasPendientes()
+                .Sum(m => m.Monto);
+        }
 
-            foreach (Multa m in _multas)
-            {
-                if (m.EstaPendiente()) 
-                    total += m.Monto;
-            }
-            return total;
+        // Obtener el total de multas pagadas
+        public decimal ObtenerTotalMultasPagadas()
+        {
+            return ObtenerMultasPagadas()
+                .Sum(m => m.Monto);
+        }
+
+        // Obtener total general de multas
+        public decimal ObtenerTotalMultas()
+        {
+            return ObtenerTodas()
+                .Sum(m => m.Monto);
         }
     }
 }

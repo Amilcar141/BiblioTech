@@ -10,10 +10,10 @@ namespace BiblioTech.Views.Multas
     {
         private MultaController multaCtrl;
 
-        public frmMultasPendientes(MultaController multa)
+        public frmMultasPendientes(SistemaLibreria sistema)
         {
             InitializeComponent();
-            multaCtrl = multa;
+            multaCtrl = new MultaController(sistema);
         }
 
         private void frmMultasPendientes_Load(object sender, EventArgs e)

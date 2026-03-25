@@ -8,20 +8,20 @@ using BiblioTech.Models.Enums;
 
 namespace BiblioTech.Views.Reportes 
 {
-    public partial class FrmReporte : Form//7
-    {
+    public partial class FrmReporte : Form
+    {/*
         private LibroController    _libCtrl = new LibroController();
         private PrestamoController _preCtrl = new PrestamoController();
         private MultaController    _mulCtrl = new MultaController();
         private UsuarioController  _usrCtrl = new UsuarioController();
 
         public FrmReporte() { InitializeComponent(); }
-
+        */
         private void FrmReporte_Load(object sender, EventArgs e)
         {
-            GenerarReporte();
+            //GenerarReporte();
         }
-
+        /*
         private void GenerarReporte()
         {
             // Calcular totales 
@@ -150,8 +150,8 @@ namespace BiblioTech.Views.Reportes
 
             rtbReporte.Text = sb.ToString();
         }
-
-        private void btnRefrescar_Click(object sender, EventArgs e) { GenerarReporte(); }
+        */
+        private void btnRefrescar_Click(object sender, EventArgs e) { }//GenerarReporte(); }
         private void btnCerrar_Click(object sender, EventArgs e)    { this.Close(); }
     }
 }

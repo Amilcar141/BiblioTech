@@ -37,10 +37,9 @@ namespace BiblioTech.Views.Archivo
             // 
             this.lblTitulo.Font = new System.Drawing.Font("Lucida Handwriting", 16F, System.Drawing.FontStyle.Bold);
             this.lblTitulo.ForeColor = System.Drawing.Color.Black;
-            this.lblTitulo.Location = new System.Drawing.Point(218, 9);
-            this.lblTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTitulo.Location = new System.Drawing.Point(145, 6);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(520, 65);
+            this.lblTitulo.Size = new System.Drawing.Size(347, 42);
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "RENOVAR PRESTAMO";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -50,29 +49,26 @@ namespace BiblioTech.Views.Archivo
             this.pnlBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(133)))), ((int)(((byte)(82)))));
             this.pnlBuscar.Controls.Add(this.lblBuscar);
             this.pnlBuscar.Controls.Add(this.txtBuscar);
-            this.pnlBuscar.Location = new System.Drawing.Point(18, 92);
-            this.pnlBuscar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pnlBuscar.Location = new System.Drawing.Point(12, 60);
             this.pnlBuscar.Name = "pnlBuscar";
-            this.pnlBuscar.Size = new System.Drawing.Size(951, 71);
+            this.pnlBuscar.Size = new System.Drawing.Size(634, 46);
             this.pnlBuscar.TabIndex = 1;
             // 
             // lblBuscar
             // 
             this.lblBuscar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblBuscar.ForeColor = System.Drawing.Color.White;
-            this.lblBuscar.Location = new System.Drawing.Point(15, 18);
-            this.lblBuscar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblBuscar.Location = new System.Drawing.Point(10, 12);
             this.lblBuscar.Name = "lblBuscar";
-            this.lblBuscar.Size = new System.Drawing.Size(90, 34);
+            this.lblBuscar.Size = new System.Drawing.Size(60, 22);
             this.lblBuscar.TabIndex = 0;
             this.lblBuscar.Text = "Buscar:";
             // 
             // txtBuscar
             // 
-            this.txtBuscar.Location = new System.Drawing.Point(111, 17);
-            this.txtBuscar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtBuscar.Location = new System.Drawing.Point(74, 11);
             this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(448, 26);
+            this.txtBuscar.Size = new System.Drawing.Size(300, 20);
             this.txtBuscar.TabIndex = 1;
             this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
@@ -97,14 +93,13 @@ namespace BiblioTech.Views.Archivo
             this.colRLimite,
             this.colREstado});
             this.dgvPrestamos.EnableHeadersVisualStyles = false;
-            this.dgvPrestamos.Location = new System.Drawing.Point(18, 178);
-            this.dgvPrestamos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dgvPrestamos.Location = new System.Drawing.Point(12, 116);
             this.dgvPrestamos.MultiSelect = false;
             this.dgvPrestamos.Name = "dgvPrestamos";
             this.dgvPrestamos.ReadOnly = true;
             this.dgvPrestamos.RowHeadersWidth = 30;
             this.dgvPrestamos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPrestamos.Size = new System.Drawing.Size(951, 446);
+            this.dgvPrestamos.Size = new System.Drawing.Size(634, 290);
             this.dgvPrestamos.TabIndex = 2;
             this.dgvPrestamos.SelectionChanged += new System.EventHandler(this.dgvPrestamos_SelectionChanged);
             // 
@@ -149,42 +144,39 @@ namespace BiblioTech.Views.Archivo
             this.grpNuevaFecha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(220)))), ((int)(((byte)(180)))));
             this.grpNuevaFecha.Controls.Add(this.lblNuevaFecha);
             this.grpNuevaFecha.Controls.Add(this.dtpNuevaFecha);
+            this.grpNuevaFecha.Controls.Add(this.btnRenovar);
+            this.grpNuevaFecha.Controls.Add(this.btnLimpiar);
             this.grpNuevaFecha.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.grpNuevaFecha.Location = new System.Drawing.Point(18, 638);
-            this.grpNuevaFecha.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grpNuevaFecha.Location = new System.Drawing.Point(12, 415);
             this.grpNuevaFecha.Name = "grpNuevaFecha";
-            this.grpNuevaFecha.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.grpNuevaFecha.Size = new System.Drawing.Size(750, 85);
+            this.grpNuevaFecha.Size = new System.Drawing.Size(634, 55);
             this.grpNuevaFecha.TabIndex = 3;
             this.grpNuevaFecha.TabStop = false;
             this.grpNuevaFecha.Text = "Nueva Fecha Limite";
             // 
             // lblNuevaFecha
             // 
-            this.lblNuevaFecha.Location = new System.Drawing.Point(15, 40);
-            this.lblNuevaFecha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNuevaFecha.Location = new System.Drawing.Point(10, 26);
             this.lblNuevaFecha.Name = "lblNuevaFecha";
-            this.lblNuevaFecha.Size = new System.Drawing.Size(165, 34);
+            this.lblNuevaFecha.Size = new System.Drawing.Size(110, 22);
             this.lblNuevaFecha.TabIndex = 0;
             this.lblNuevaFecha.Text = "Nueva Fecha:";
             // 
             // dtpNuevaFecha
             // 
             this.dtpNuevaFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpNuevaFecha.Location = new System.Drawing.Point(188, 37);
-            this.dtpNuevaFecha.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtpNuevaFecha.Location = new System.Drawing.Point(125, 24);
             this.dtpNuevaFecha.Name = "dtpNuevaFecha";
-            this.dtpNuevaFecha.Size = new System.Drawing.Size(298, 31);
+            this.dtpNuevaFecha.Size = new System.Drawing.Size(200, 23);
             this.dtpNuevaFecha.TabIndex = 1;
             // 
             // lblContador
             // 
             this.lblContador.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Italic);
             this.lblContador.ForeColor = System.Drawing.Color.DarkGray;
-            this.lblContador.Location = new System.Drawing.Point(18, 738);
-            this.lblContador.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblContador.Location = new System.Drawing.Point(12, 480);
             this.lblContador.Name = "lblContador";
-            this.lblContador.Size = new System.Drawing.Size(375, 34);
+            this.lblContador.Size = new System.Drawing.Size(250, 22);
             this.lblContador.TabIndex = 4;
             this.lblContador.Text = "Activos: 0";
             // 
@@ -194,10 +186,9 @@ namespace BiblioTech.Views.Archivo
             this.btnRenovar.ForeColor = System.Drawing.Color.White;
             this.btnRenovar.Image = global::BiblioTech.Properties.Resources.guardar_el_archivo;
             this.btnRenovar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRenovar.Location = new System.Drawing.Point(446, 733);
-            this.btnRenovar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnRenovar.Location = new System.Drawing.Point(347, 20);
             this.btnRenovar.Name = "btnRenovar";
-            this.btnRenovar.Size = new System.Drawing.Size(180, 54);
+            this.btnRenovar.Size = new System.Drawing.Size(120, 35);
             this.btnRenovar.TabIndex = 5;
             this.btnRenovar.Text = "Renovar";
             this.btnRenovar.UseVisualStyleBackColor = false;
@@ -209,10 +200,9 @@ namespace BiblioTech.Views.Archivo
             this.btnLimpiar.ForeColor = System.Drawing.Color.White;
             this.btnLimpiar.Image = global::BiblioTech.Properties.Resources.escoba;
             this.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLimpiar.Location = new System.Drawing.Point(634, 733);
-            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnLimpiar.Location = new System.Drawing.Point(473, 20);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(120, 54);
+            this.btnLimpiar.Size = new System.Drawing.Size(80, 35);
             this.btnLimpiar.TabIndex = 6;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = false;
@@ -224,10 +214,9 @@ namespace BiblioTech.Views.Archivo
             this.btnCerrar.ForeColor = System.Drawing.Color.White;
             this.btnCerrar.Image = global::BiblioTech.Properties.Resources.eliminar;
             this.btnCerrar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCerrar.Location = new System.Drawing.Point(762, 732);
-            this.btnCerrar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnCerrar.Location = new System.Drawing.Point(508, 476);
             this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(141, 54);
+            this.btnCerrar.Size = new System.Drawing.Size(94, 35);
             this.btnCerrar.TabIndex = 7;
             this.btnCerrar.Text = "Cerrar";
             this.btnCerrar.UseVisualStyleBackColor = false;
@@ -235,20 +224,17 @@ namespace BiblioTech.Views.Archivo
             // 
             // FrmRenovarPrestamo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.ClientSize = new System.Drawing.Size(1006, 800);
+            this.ClientSize = new System.Drawing.Size(671, 487);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.pnlBuscar);
             this.Controls.Add(this.dgvPrestamos);
             this.Controls.Add(this.grpNuevaFecha);
             this.Controls.Add(this.lblContador);
-            this.Controls.Add(this.btnRenovar);
-            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnCerrar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "FrmRenovarPrestamo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

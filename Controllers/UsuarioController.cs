@@ -1,128 +1,178 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using BiblioTech.Models;
 using BiblioTech.Models.Enums;
 
 namespace BiblioTech.Controllers
 {
-    public class UsuarioController//6
-    { 
-        // ESTÁTICA: todos los formularios comparten la misma lista
-        private static List<Usuario> _usuarios = new List<Usuario>();
-        private static int _nextId = 1;
+    public class UsuarioController
+    {
+        // Instancia del SistemaLibreria para el manejo de datos
+        private SistemaLibreria _sistema;
 
-        public UsuarioController() { }
+        // Constructor
+        public UsuarioController(SistemaLibreria sistema)
+        {
+            _sistema = sistema;
+        }
 
-        // Registra un nuevo usuario
-        public bool RegistrarUsuario(int id, string nombre, string correo, string password, Rol rol)
+        // Métodos principales
+
+        // Obtener todos los lectores
+        public List<Lector> ObtenerTodosLectores()
+        {
+            return _sistema.Lectores;
+        }
+
+        // Registrar un nuevo lector
+        public bool RegistrarLector(string nombre, string correo, string password, bool activo = true)
         {
             // Verificar correo duplicado
-            foreach (Usuario u in _usuarios)
-            {
-                if (u.Correo.ToLower() == correo.ToLower())
-                    return false;
-            }
+            if (ExisteCorreoLector(correo))
+                return false;
 
-            Usuario nuevo = new Usuario();
-            nuevo.Id       = _nextId++;
-            nuevo.Nombre   = nombre;
-            nuevo.Correo   = correo;
-            nuevo.Password = password;
-            nuevo.Rol      = rol;
-            nuevo.Activo   = true;
-
-            _usuarios.Add(nuevo);
+            Lector nuevoLector = new Lector(nombre, correo, password, activo);
+            _sistema.Lectores.Add(nuevoLector);
+            
             return true;
         }
 
-        // Autentica un usuario
-        public Usuario Autenticar(string correo, string password)
+        // Autenticar un lector
+        public Lector AutenticarLector(string correo, string password)
         {
-            foreach (Usuario u in _usuarios)
-            {
-                if (u.Correo.ToLower() == correo.ToLower() && u.Password == password)
-                    return u;
-            }
-            return null;
+            return ObtenerTodosLectores()
+                .FirstOrDefault(l => l.Correo.ToLower() == correo.ToLower() && l.Password == password && l.Activo);
         }
 
-        // Obtiene un usuario por ID
-        public Usuario ObtenerUsuario(int id)
+        // Actualizar lector
+        public bool ActualizarLector(string cuenta, string nombre, string correo, string password)
         {
-            foreach (Usuario u in _usuarios)
-                if (u.Id == id) return u;
-            return null;
-        }
+            Lector lector = ObtenerLectorPorCuenta(cuenta);
+            
+            if (lector == null)
+                return false;
 
-        // Obtiene un usuario por correo
-        public Usuario ObtenerUsuarioPorCorreo(string correo)
-        {
-            foreach (Usuario u in _usuarios)
-                if (u.Correo.ToLower() == correo.ToLower()) return u;
-            return null;
-        }
+            // Verificar que el correo no lo use otro lector
+            if (ObtenerTodosLectores().Any(l => l.Cuenta != cuenta && l.Correo.ToLower() == correo.ToLower()))
+                return false;
 
-        // Obtiene todos los usuarios
-        public List<Usuario> ObtenerTodosUsuarios()
-        {
-            return _usuarios;
-        }
-
-        // Obtiene todos los usuarios activos
-        public List<Usuario> ObtenerUsuariosActivos()
-        {
-            List<Usuario> activos = new List<Usuario>();
-            foreach (Usuario u in _usuarios)
-                if (u.Activo) activos.Add(u);
-            return activos;
-        }
-
-        // Actualiza los datos de un usuario
-        
-        public bool ActualizarUsuario(int id, string nombre, string correo, string password)
-        {
-            Usuario usuario = ObtenerUsuario(id);
-            if (usuario == null) return false;
-
-            // Verificar que el correo no lo use OTRO usuario
-            foreach (Usuario u in _usuarios)
-            {
-                if (u.Id != id && u.Correo.ToLower() == correo.ToLower())
-                    return false;
-            }
-
-            usuario.Nombre   = nombre;
-            usuario.Correo   = correo;
-            usuario.Password = password;
+            lector.Nombre = nombre;
+            lector.Correo = correo;
+            lector.Password = password;
+            
             return true;
         }
 
-        // Activa / Desactiva un usuario
-        public bool DesactivarUsuario(int id)
+        // Desactivar lector
+        public bool DesactivarLector(string cuenta)
         {
-            Usuario u = ObtenerUsuario(id);
-            if (u == null) return false;
-            u.Activo = false;
+            Lector lector = ObtenerLectorPorCuenta(cuenta);
+            
+            if (lector == null)
+                return false;
+
+            lector.Activo = false;
             return true;
         }
 
-        public bool ActivarUsuario(int id)
+        // Activar lector
+        public bool ActivarLector(string cuenta)
         {
-            Usuario u = ObtenerUsuario(id);
-            if (u == null) return false;
-            u.Activo = true;
+            Lector lector = ObtenerLectorPorCuenta(cuenta);
+            
+            if (lector == null)
+                return false;
+
+            lector.Activo = true;
             return true;
         }
 
-        // Elimina un usuario
-        public bool EliminarUsuario(int id)
+        // Eliminar lector
+        public bool EliminarLector(string cuenta)
         {
-            Usuario u = ObtenerUsuario(id);
-            if (u == null) return false;
-            _usuarios.Remove(u);
+            Lector lector = ObtenerLectorPorCuenta(cuenta);
+            
+            if (lector == null)
+                return false;
+
+            _sistema.Lectores.Remove(lector);
             return true;
         }
 
-        public int ObtenerTotalUsuarios() { return _usuarios.Count; }
+        // Métodos de búsqueda y filtrado
+
+        // Obtener lector por cuenta
+        public Lector ObtenerLectorPorCuenta(string cuenta)
+        {
+            if (string.IsNullOrWhiteSpace(cuenta))
+                return null;
+
+            return ObtenerTodosLectores()
+                .FirstOrDefault(l => l.Cuenta == cuenta);
+        }
+
+        // Obtener lector por correo
+        public Lector ObtenerLectorPorCorreo(string correo)
+        {
+            if (string.IsNullOrWhiteSpace(correo))
+                return null;
+
+            return ObtenerTodosLectores()
+                .FirstOrDefault(l => l.Correo.ToLower() == correo.ToLower());
+        }
+
+        // Obtener lectores activos
+        public List<Lector> ObtenerLectoresActivos()
+        {
+            return ObtenerTodosLectores()
+                .Where(l => l.Activo)
+                .ToList();
+        }
+
+        // Obtener lectores inactivos
+        public List<Lector> ObtenerLectoresInactivos()
+        {
+            return ObtenerTodosLectores()
+                .Where(l => !l.Activo)
+                .ToList();
+        }
+
+        // Otros métodos
+
+        // Verificar si existe un correo
+        private bool ExisteCorreoLector(string correo)
+        {
+            return ObtenerTodosLectores()
+                .Any(l => l.Correo.ToLower() == correo.ToLower());
+        }
+
+        // Obtener total de lectores
+        public int ObtenerTotal()
+        {
+            return ObtenerTodosLectores().Count;
+        }
+
+        // Obtener total de lectores activos
+        public int ObtenerTotalActivos()
+        {
+            return ObtenerLectoresActivos().Count;
+        }
+
+        // Búsqueda de lectores
+        public List<Lector> Buscar(string termino)
+        {
+            if (string.IsNullOrWhiteSpace(termino))
+                return ObtenerTodosLectores();
+
+            termino = termino.ToLower();
+
+            return ObtenerTodosLectores()
+                .Where(l => 
+                    l.Nombre.ToLower().Contains(termino) ||
+                    l.Correo.ToLower().Contains(termino) ||
+                    l.Cuenta.ToLower().Contains(termino))
+                .ToList();
+        }
     }
 }

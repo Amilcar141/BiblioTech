@@ -7,26 +7,47 @@ using System.Threading.Tasks;
 
 namespace BiblioTech.Models
 {
-    public class Prestamo//7
+    public class Prestamo
     {
          
         private int _idPrestamo;
+        private string _codigo;
         private DateTime _fechaInicio;
         private DateTime _fechaLimite;
         private DateTime _fechaDevolucion;
         private EstadoPrestamo _estado;
         private Multa _multa;
-        private Lector _lector;
-        private Libro _libro;
+        private List<Ejemplar> _libros;
         private List<Multa> _multas;
+        private Lector _lector;
         private Administrador _gestionadoPor;
         private decimal _tarifaDiaria = 5.00m; // Extra: tarifa 
 
-        // Propiedades
-        public int IdPrestamo
+        // Contador autogenerado para ID
+        private static int _contadorId = 1;
+
+        // Constructores
+        public Prestamo() { }
+
+        public Prestamo(Lector lector, List<Ejemplar> libros, DateTime fechaInicio,
+            DateTime fechaLimite, Administrador gestionadoPor)
         {
-            get { return _idPrestamo; }
-            set { _idPrestamo = value; }
+            _idPrestamo = _contadorId++;
+            _codigo = AsignarCodigo();
+            _libros = libros;
+            _fechaInicio = fechaInicio;
+            _fechaLimite = fechaLimite;
+            _lector = lector;
+            _gestionadoPor = gestionadoPor;
+            _multas = new List<Multa>();
+            _estado = EstadoPrestamo.Activo;
+        }
+
+        // Propiedades
+        public string Codigo
+        {
+            get { return _codigo; }
+            private set { _codigo = value; }
         }
 
         public DateTime FechaInicio
@@ -65,10 +86,10 @@ namespace BiblioTech.Models
             set { _lector = value; }
         }
 
-        public Libro Libro
+        public List<Ejemplar> Libros
         {
-            get { return _libro; }
-            set { _libro = value; }
+            get { return _libros; }
+            set { _libros = value; }
         }
 
         public List<Multa> Multas
@@ -89,27 +110,16 @@ namespace BiblioTech.Models
             set { _tarifaDiaria = value; }
         }
 
-        // Constructores
-        public Prestamo()
-        {
-            _multas = new List<Multa>();
-            _estado = EstadoPrestamo.Activo;
-        }
 
-        public Prestamo(int idPrestamo, Lector lector, Libro libro, DateTime fechaInicio,
-            DateTime fechaLimite, Administrador gestionadoPor)
-        {
-            _idPrestamo = idPrestamo;
-            _lector = lector;
-            _libro = libro;
-            _fechaInicio = fechaInicio;
-            _fechaLimite = fechaLimite;
-            _gestionadoPor = gestionadoPor;
-            _multas = new List<Multa>();
-            _estado = EstadoPrestamo.Activo;
-        }
 
         // Métodos
+
+        // Método privado para asignar código
+        private string AsignarCodigo()
+        {
+            return "PREST" + _contadorId.ToString("D3");
+        }
+
         public bool EstaVencido()
         {
             if (DateTime.Now > _fechaLimite)

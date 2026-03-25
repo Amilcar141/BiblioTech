@@ -6,14 +6,14 @@ using System.Windows.Forms;
 
 namespace BiblioTech.Views.Multas
 { 
-    public partial class FrmMultasPagadas : Form//7
+    public partial class FrmMultasPagadas : Form
     {
         private MultaController multaCtrl;
 
-        public FrmMultasPagadas(MultaController multa)
+        public FrmMultasPagadas(SistemaLibreria sistema)
         {
             InitializeComponent();
-            multaCtrl = multa;
+            multaCtrl = new MultaController(sistema);
         }
 
         private void FrmMultasPagadas_Load(object sender, EventArgs e)

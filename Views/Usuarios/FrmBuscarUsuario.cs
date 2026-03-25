@@ -1,42 +1,84 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using BiblioTech.Controllers;
 using BiblioTech.Models;
 
 namespace BiblioTech.Views.Usuarios
-{ //7
+{
     public partial class FrmBuscarUsuario : Form
     {
-        private UsuarioController _ctrl = new UsuarioController();
+        // Controlador
+        private LectorController _lectorCtrl;
 
-        public FrmBuscarUsuario() { InitializeComponent(); }
+        // Constructor
+        public FrmBuscarUsuario(SistemaLibreria sistema)
+        {
+            InitializeComponent();
+            _lectorCtrl = new LectorController(sistema);
+        }
 
-        private void FrmBuscarUsuario_Load(object sender, EventArgs e) { CargarTabla(); }
+        // Evento de carga del formulario
+        private void FrmBuscarUsuario_Load(object sender, EventArgs e)
+        {
+            CargarTabla();
+        }
 
+        // Cargar tabla de lectores
         private void CargarTabla()
         {
             dgvUsuarios.Rows.Clear();
-            string t = txtBuscar.Text.Trim().ToLower();
-            foreach (Usuario u in _ctrl.ObtenerTodosUsuarios())
+            string termino = txtBuscar.Text.Trim().ToLower();
+
+            try
             {
-                if (!string.IsNullOrEmpty(t) &&
-                    !u.Nombre.ToLower().Contains(t) &&
-                    !u.Correo.ToLower().Contains(t)) continue;
+                foreach (Lector lector in _lectorCtrl.ObtenerTodos())
+                {
+                    // Aplicar filtro de búsqueda
+                    if (!string.IsNullOrEmpty(termino) &&
+                        !lector.Nombre.ToLower().Contains(termino) &&
+                        !lector.Correo.ToLower().Contains(termino) &&
+                        !lector.Cuenta.ToLower().Contains(termino))
+                        continue;
 
-                int fila = dgvUsuarios.Rows.Add(
-                    u.Id, u.Nombre, u.Correo,
-                    u.Rol.ToString(),
-                    u.Activo ? "Activo" : "Inactivo");
+                    int fila = dgvUsuarios.Rows.Add(
+                        lector.Cuenta,
+                        lector.Nombre,
+                        lector.Correo,
+                        lector.Activo ? "Activo" : "Inactivo");
 
-                if (!u.Activo)
-                    dgvUsuarios.Rows[fila].DefaultCellStyle.ForeColor = Color.Gray;
+                    if (!lector.Activo)
+                        dgvUsuarios.Rows[fila].DefaultCellStyle.ForeColor = Color.Gray;
+                }
+
+                lblContador.Text = "Total: " + dgvUsuarios.Rows.Count + " lector(es)";
             }
-            lblContador.Text = "Total: " + dgvUsuarios.Rows.Count + " usuario(s)";
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar la tabla: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void txtBuscar_TextChanged(object sender, EventArgs e) { CargarTabla(); }
-        private void btnLimpiar_Click(object sender, EventArgs e) { txtBuscar.Clear(); }
-        private void btnCerrar_Click(object sender, EventArgs e) { this.Close(); }
+        // Evento cambio en búsqueda
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            CargarTabla();
+        }
+
+        // Botón limpiar
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtBuscar.Clear();
+            CargarTabla();
+            txtBuscar.Focus();
+        }
+
+        // Botón cerrar
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
