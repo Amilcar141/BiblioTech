@@ -18,6 +18,8 @@ namespace BiblioTech.Views.Usuarios
             _lectorCtrl = new LectorController(sistema);
         }
 
+
+
         // Mostrar/ocultar contraseña
         private void btnVerPassword_Click(object sender, EventArgs e)
         {

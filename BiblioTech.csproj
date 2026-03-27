@@ -55,6 +55,8 @@
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Models\Autor.cs" />
     <Compile Include="Models\Catalogo.cs" />
+    <Compile Include="Models\ConexionMulta.cs" />
+    <Compile Include="Models\ConexionUsuario1.cs" />
     <Compile Include="Models\Editorial.cs" />
     <Compile Include="Models\Ejemplar.cs" />
     <Compile Include="Models\Enums\TipoMulta.cs" />

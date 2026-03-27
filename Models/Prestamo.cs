@@ -1,53 +1,108 @@
 ﻿using BiblioTech.Models.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BiblioTech.Models
 {
-    public class Prestamo
+    /// <summary>
+    /// Representa un préstamo del sistema.
+    /// Mapea la tabla Prestamos. Los objetos Lector, Libro y Administrador
+    /// se cargan opcionalmente por JOIN en el controller.
+    /// </summary>
+    public class Prestamo //7
     {
-         
+        // ── Campos privados — columnas directas ────────────────────────
         private int _idPrestamo;
-        private string _codigo;
+        private int _idEstadoPrestamo;   // FK → EstadoPrestamo
+        private int _idEjemplar;         // FK → Ejemplares
+        private int _idLector;           // FK → Lectores
+        private int _idAdministrador;    // FK → Administradores (nullable)
+        private string _codigoPrestamo;
         private DateTime _fechaInicio;
         private DateTime _fechaLimite;
         private DateTime _fechaDevolucion;
+        private DateTime _createdAt;
+        private DateTime _deletedAt;
         private EstadoPrestamo _estado;
-        private Multa _multa;
-        private List<Ejemplar> _libros;
-        private List<Multa> _multas;
+        private decimal _tarifaDiaria = 5.00m;
+
+        // Objetos relacionados (cargados por JOIN, no almacenados en BD)
         private Lector _lector;
+        private Libro _libro;
         private Administrador _gestionadoPor;
-        private decimal _tarifaDiaria = 5.00m; // Extra: tarifa 
+        private Multa _multa;
+        private List<Multa> _multas;
 
-        // Contador autogenerado para ID
-        private static int _contadorId = 1;
-
-        // Constructores
-        public Prestamo() { }
-
-        public Prestamo(Lector lector, List<Ejemplar> libros, DateTime fechaInicio,
-            DateTime fechaLimite, Administrador gestionadoPor)
+        // ── Constructores ──────────────────────────────────────────────
+        public Prestamo()
         {
-            _idPrestamo = _contadorId++;
-            _codigo = AsignarCodigo();
-            _libros = libros;
-            _fechaInicio = fechaInicio;
-            _fechaLimite = fechaLimite;
-            _lector = lector;
-            _gestionadoPor = gestionadoPor;
+            _codigoPrestamo = "";
             _multas = new List<Multa>();
             _estado = EstadoPrestamo.Activo;
+            _idEstadoPrestamo = 1;
         }
 
-        // Propiedades
-        public string Codigo
+        public Prestamo(int idPrestamo, Lector lector, Libro libro,
+                        DateTime fechaInicio, DateTime fechaLimite,
+                        Administrador gestionadoPor)
         {
-            get { return _codigo; }
-            private set { _codigo = value; }
+            _idPrestamo = idPrestamo;
+            _lector = lector;
+            _libro = libro;
+            _fechaInicio = fechaInicio;
+            _fechaLimite = fechaLimite;
+            _gestionadoPor = gestionadoPor;
+            _codigoPrestamo = "";
+            _multas = new List<Multa>();
+            _estado = EstadoPrestamo.Activo;
+            _idEstadoPrestamo = 1;
+        }
+
+        // ── Propiedades — columnas de la tabla Prestamos ───────────────
+        public int IdPrestamo
+        {
+            get { return _idPrestamo; }
+            set { _idPrestamo = value; }
+        }
+
+        public int IdEstadoPrestamo
+        {
+            get { return _idEstadoPrestamo; }
+            set
+            {
+                _idEstadoPrestamo = value;
+                switch (value)
+                {
+                    case 1: _estado = EstadoPrestamo.Activo; break;
+                    case 2: _estado = EstadoPrestamo.Devuelto; break;
+                    case 3: _estado = EstadoPrestamo.Vencido; break;
+                    default: _estado = EstadoPrestamo.Activo; break;
+                }
+            }
+        }
+
+        public int IdEjemplar
+        {
+            get { return _idEjemplar; }
+            set { _idEjemplar = value; }
+        }
+
+        public int IdLector
+        {
+            get { return _idLector; }
+            set { _idLector = value; }
+        }
+
+        public int IdAdministrador
+        {
+            get { return _idAdministrador; }
+            set { _idAdministrador = value; }
+        }
+
+        public string CodigoPrestamo
+        {
+            get { return _codigoPrestamo; }
+            set { _codigoPrestamo = value ?? ""; }
         }
 
         public DateTime FechaInicio
@@ -68,110 +123,66 @@ namespace BiblioTech.Models
             set { _fechaDevolucion = value; }
         }
 
+        public DateTime CreatedAt { get { return _createdAt; } set { _createdAt = value; } }
+        public DateTime DeletedAt { get { return _deletedAt; } set { _deletedAt = value; } }
+
         public EstadoPrestamo Estado
         {
             get { return _estado; }
-            set { _estado = value; }
+            set
+            {
+                _estado = value;
+                switch (value)
+                {
+                    case EstadoPrestamo.Activo: _idEstadoPrestamo = 1; break;
+                    case EstadoPrestamo.Devuelto: _idEstadoPrestamo = 2; break;
+                    case EstadoPrestamo.Vencido: _idEstadoPrestamo = 3; break;
+                }
+            }
         }
 
-        public Multa Multa
-        {
-            get { return _multa; }
-            set { _multa = value; }
-        }
+        // ── Propiedades — objetos relacionados ─────────────────────────
+        public Lector Lector { get { return _lector; } set { _lector = value; } }
+        public Libro Libro { get { return _libro; } set { _libro = value; } }
+        public Administrador GestionadoPor { get { return _gestionadoPor; } set { _gestionadoPor = value; } }
+        public Multa Multa { get { return _multa; } set { _multa = value; } }
+        public List<Multa> Multas { get { return _multas; } set { _multas = value; } }
+        public decimal TarifaDiaria { get { return _tarifaDiaria; } set { _tarifaDiaria = value; } }
 
-        public Lector Lector
-        {
-            get { return _lector; }
-            set { _lector = value; }
-        }
-
-        public List<Ejemplar> Libros
-        {
-            get { return _libros; }
-            set { _libros = value; }
-        }
-
-        public List<Multa> Multas
-        {
-            get { return _multas; }
-            set { _multas = value; }
-        }
-
-        public Administrador GestionadoPor
-        {
-            get { return _gestionadoPor; }
-            set { _gestionadoPor = value; }
-        }
-
-        public decimal TarifaDiaria
-        {
-            get { return _tarifaDiaria; }
-            set { _tarifaDiaria = value; }
-        }
-
-
-
-        // Métodos
-
-        // Método privado para asignar código
-        private string AsignarCodigo()
-        {
-            return "PREST" + _contadorId.ToString("D3");
-        }
-
+        // ── Métodos de negocio ─────────────────────────────────────────
         public bool EstaVencido()
         {
-            if (DateTime.Now > _fechaLimite)
-                return true;
-            return false;
+            return DateTime.Now > _fechaLimite;
         }
 
-        // Obtiene la cantidad de días de retraso
         public int ObtenerDiasDeRetraso()
         {
-            if (!EstaVencido())
-                return 0;
-
-            // Compara las fechas, si se devolvio usa la fecha de devolucion, sino
-            // usa la fecha actual
-            DateTime fechaComparacion = _fechaDevolucion != DateTime.MinValue 
+            if (!EstaVencido()) return 0;
+            DateTime fechaComp = _fechaDevolucion != DateTime.MinValue
                 ? _fechaDevolucion : DateTime.Now;
-
-           
-            TimeSpan diferencia = fechaComparacion - _fechaLimite;
-
-            // Retorna la cantidad de días de retraso y no sera negativa
-            return (int)Math.Max(0, diferencia.TotalDays);
+            TimeSpan dif = fechaComp - _fechaLimite;
+            return (int)Math.Max(0, dif.TotalDays);
         }
 
-        // Calcula la multa por retraso en la devolución
         public decimal CalcularMulta()
         {
-            int diasRetraso = ObtenerDiasDeRetraso();
-
-            decimal multa = diasRetraso * _tarifaDiaria;
-
-            return multa;
+            return ObtenerDiasDeRetraso() * _tarifaDiaria;
         }
 
-        // Registra la devolución del préstamo 
         public void RegistrarDevolucion(DateTime fechaDevolucion, Administrador administrador)
         {
             _fechaDevolucion = fechaDevolucion;
             _estado = EstadoPrestamo.Devuelto;
+            _idEstadoPrestamo = 2;
             _gestionadoPor = administrador;
 
-            // Si hay retraso creaa una multa
             int diasRetraso = ObtenerDiasDeRetraso();
-
             if (diasRetraso > 0)
             {
-                decimal montoMulta = CalcularMulta();
                 Multa multa = new Multa();
-
+                multa.Descripcion = "Devolucion tardía: " + diasRetraso + " día(s) de retraso";
                 _multas.Add(multa);
-                _multa = multa; 
+                _multa = multa;
             }
         }
     }

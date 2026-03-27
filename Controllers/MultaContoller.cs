@@ -1,160 +1,283 @@
+using BiblioTech.Data;
 using BiblioTech.Models;
 using BiblioTech.Models.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace BiblioTech.Controllers
 {
-    public class MultaController
+    /// <summary>
+    /// Controller de Multas.
+    /// Toda persistencia contra la tabla Multas (+ EstadoMulta y TipoMulta).
+    /// </summary>
+    public class MultaController //4
     {
-        // Instancia del SistemaLibreria para el manejo de datos
-        private SistemaLibreria _sistema;
+        private readonly ConexionMulta _db = new ConexionMulta();
 
-        // Constructor
-        public MultaController(SistemaLibreria sistema)
+        // ── Obtener todas ──────────────────────────────────────────────
+        public List<Multa> ObtenerMultas()
         {
-            _sistema = sistema;
-        }
-
-        // Metodos principales
-
-        // Obtener todas las multas
-        public List<Multa> ObtenerTodas()
-        {
-            return _sistema.Multas;
-        }
-
-        // Registrar multa
-        public bool RegistrarMulta(string descripcion, decimal monto, TipoMulta tipo)
-        {
-            if (monto <= 0)
-                return false;
-
-            Multa nueva = new Multa(descripcion, monto, tipo);
-            _sistema.Multas.Add(nueva);
-
-            return true;
-        }
-
-        // Editar multa en caso de error en el registro
-        public bool EditarMulta(string codigo, string descripcion, decimal monto, TipoMulta tipo)
-        {
-            if (monto <= 0)
-                return false;
-
-            Multa multa = ObtenerPorCodigo(codigo);
-
-            if (multa == null)
-                return false;
-
-            multa.Descripcion = descripcion;
-            multa.Monto = monto;
-            multa.Tipo = tipo;
-            return true;
-        }
-
-        // Pagar multa
-        public bool PagarMulta(string codigo)
-        {
-            Multa multa = ObtenerPorCodigo(codigo);
-
-            if (multa == null)
-                return false;
-
-            multa.Pagar();
-            return true;
-        }
-
-        // Eliminar multa
-        public bool EliminarMulta(string codigo)
-        {
-            Multa multa = ObtenerPorCodigo(codigo);
-
-            if (multa == null)
-                return false;
-
-            _sistema.Multas.Remove(multa);
-            return true;
-        }
-
-        // Metodos de busqueda y filtrado
-
-        // Obtener multa por código
-        public Multa ObtenerPorCodigo(string codigo)
-        {
-            foreach (Multa m in ObtenerTodas())
+            List<Multa> lista = new List<Multa>();
+            try
             {
-                if (m.CodigoMulta == codigo)
-                    return m;
-            }
+                string sql = BuildSelectMulta() +
+                    "WHERE m.DeletedAt IS NULL " +
+                    "ORDER BY m.FechaGeneracion DESC";
 
-            return null;
+                DataTable dt = _db.EjecutarConsulta(sql);
+                foreach (DataRow row in dt.Rows)
+                    lista.Add(MapearMulta(row));
+            }
+            catch (Exception) { }
+            return lista;
         }
 
-        // Obtener multas pendientes
+        // ── Pendientes ─────────────────────────────────────────────────
         public List<Multa> ObtenerMultasPendientes()
         {
-            return ObtenerTodas()
-                .Where(m => m.EstaPendiente())
-                .ToList();
+            List<Multa> lista = new List<Multa>();
+            try
+            {
+                string sql = BuildSelectMulta() +
+                    "WHERE m.IdEstadoMulta = 1 AND m.DeletedAt IS NULL " +  // 1 = PENDIENTE
+                    "ORDER BY m.FechaGeneracion DESC";
+
+                DataTable dt = _db.EjecutarConsulta(sql);
+                foreach (DataRow row in dt.Rows)
+                    lista.Add(MapearMulta(row));
+            }
+            catch (Exception) { }
+            return lista;
         }
 
-        // Obtener multas pagadas
+        // ── Pagadas ────────────────────────────────────────────────────
         public List<Multa> ObtenerMultasPagadas()
         {
-            return ObtenerTodas()
-                .Where(m => !m.EstaPendiente())
-                .ToList();
+            List<Multa> lista = new List<Multa>();
+            try
+            {
+                string sql = BuildSelectMulta() +
+                    "WHERE m.IdEstadoMulta = 2 AND m.DeletedAt IS NULL " +  // 2 = PAGADA
+                    "ORDER BY m.FechaPago DESC";
+
+                DataTable dt = _db.EjecutarConsulta(sql);
+                foreach (DataRow row in dt.Rows)
+                    lista.Add(MapearMulta(row));
+            }
+            catch (Exception) { }
+            return lista;
         }
 
-        // Obtener multas por tipo
-        public List<Multa> ObtenerPorTipo(TipoMulta tipo)
+        // ── Por ID ─────────────────────────────────────────────────────
+        public Multa ObtenerMultaPorId(int id)
         {
-            return ObtenerTodas()
-                .Where(m => m.Tipo == tipo)
-                .ToList();
+            try
+            {
+                string sql = BuildSelectMulta() +
+                    "WHERE m.IdMulta = @id AND m.DeletedAt IS NULL";
+
+                DataTable dt = _db.EjecutarConsulta(sql, cmd =>
+                    cmd.Parameters.AddWithValue("@id", id));
+
+                if (dt.Rows.Count == 0) return null;
+                return MapearMulta(dt.Rows[0]);
+            }
+            catch (Exception) { return null; }
         }
 
-        // Obtener multas por lector
-        public List<Multa> ObtenerPorLector(Lector lector)
+        // ── Por lector ─────────────────────────────────────────────────
+        public List<Multa> ObtenerMultasPorLector(int idLector)
         {
-            if (lector == null)
-                return new List<Multa>();
+            List<Multa> lista = new List<Multa>();
+            try
+            {
+                string sql = BuildSelectMulta() +
+                    "WHERE m.IdLector = @idLector AND m.DeletedAt IS NULL " +
+                    "ORDER BY m.FechaGeneracion DESC";
 
-            return ObtenerTodas()
-                .Where(m => m.Lector != null && m.Lector.Cuenta == lector.Cuenta)
-                .ToList();
+                DataTable dt = _db.EjecutarConsulta(sql, cmd =>
+                    cmd.Parameters.AddWithValue("@idLector", idLector));
+
+                foreach (DataRow row in dt.Rows)
+                    lista.Add(MapearMulta(row));
+            }
+            catch (Exception) { }
+            return lista;
         }
 
-        // Otros metodos
-
-        // Calcular días de mora a partir de la fecha de generación de la multa
-        public int CalcularDiasMora(DateTime fechaGeneracion)
+        // ── Registrar multa simple (manual) ────────────────────────────
+        public bool RegistrarMulta(int idIgnorado, double monto)
         {
-            TimeSpan diff = DateTime.Now - fechaGeneracion;
-            return (int)diff.TotalDays;
+            if (monto <= 0) return false;
+            try
+            {
+                string codigo = "MU" + DateTime.Now.ToString("yyMMddHHmmss");
+                string sql =
+                    "INSERT INTO Multas (IdEstadoMulta, IdTipoMulta, IdLector, CodigoMulta, " +
+                    "                    Descripcion, Monto, FechaGeneracion, CreatedAt) " +
+                    "VALUES (1, 1, 0, @codigo, @desc, @monto, GETDATE(), GETDATE())";
+                // IdLector=0 es una multa sin lector asignado; en uso real pasarías el idLector real
+
+                _db.EjecutarComando(sql, cmd =>
+                {
+                    cmd.Parameters.AddWithValue("@codigo", codigo);
+                    cmd.Parameters.AddWithValue("@desc", "Multa manual");
+                    cmd.Parameters.AddWithValue("@monto", monto);
+                });
+                return true;
+            }
+            catch (Exception) { return false; }
         }
 
-        // Obtener el total de multas pendientes
-        public decimal ObtenerTotalMultasPendientes()
+        // ── Registrar multa completa por préstamo vencido ──────────────
+        public Multa RegistrarMultaPrestamo(double monto, string nombreUsuario,
+            string tituloLibro, int idPrestamo, int diasMora)
         {
-            return ObtenerMultasPendientes()
-                .Sum(m => m.Monto);
+            if (monto <= 0) return null;
+            try
+            {
+                string codigo = "MU" + DateTime.Now.ToString("yyMMddHHmmss");
+                string descripcion = $"Devolucion tardía: {diasMora} día(s) de retraso - {tituloLibro}";
+
+                // Obtener idLector desde el préstamo
+                int idLector = ObtenerIdLectorDePrestamo(idPrestamo);
+
+                string sql =
+                    "INSERT INTO Multas (IdEstadoMulta, IdTipoMulta, IdLector, IdPrestamo, CodigoMulta, " +
+                    "                    Descripcion, Monto, FechaGeneracion, CreatedAt) " +
+                    "VALUES (1, 1, @idLector, @idPrestamo, @codigo, @desc, @monto, GETDATE(), GETDATE()); " +
+                    "SELECT SCOPE_IDENTITY();";
+
+                object resultado = _db.EjecutarScalar(sql, cmd =>
+                {
+                    cmd.Parameters.AddWithValue("@idLector", idLector > 0 ? (object)idLector : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@idPrestamo", idPrestamo > 0 ? (object)idPrestamo : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@codigo", codigo);
+                    cmd.Parameters.AddWithValue("@desc", descripcion);
+                    cmd.Parameters.AddWithValue("@monto", monto);
+                });
+
+                Multa nueva = new Multa(Convert.ToInt32(resultado), monto,
+                    nombreUsuario, tituloLibro, idPrestamo, diasMora);
+                nueva.CodigoMulta = codigo;
+                return nueva;
+            }
+            catch (Exception) { return null; }
         }
 
-        // Obtener el total de multas pagadas
-        public decimal ObtenerTotalMultasPagadas()
+        // ── Pagar multa ────────────────────────────────────────────────
+        public bool PagarMulta(int id)
         {
-            return ObtenerMultasPagadas()
-                .Sum(m => m.Monto);
+            try
+            {
+                string sql =
+                    "UPDATE Multas SET IdEstadoMulta = 2, FechaPago = GETDATE() " +  // 2 = PAGADA
+                    "WHERE IdMulta = @id AND IdEstadoMulta = 1 AND DeletedAt IS NULL";
+
+                return _db.EjecutarComando(sql, cmd =>
+                    cmd.Parameters.AddWithValue("@id", id)) > 0;
+            }
+            catch (Exception) { return false; }
         }
 
-        // Obtener total general de multas
-        public decimal ObtenerTotalMultas()
+        // ── Eliminar multa (soft delete) ───────────────────────────────
+        public bool EliminarMulta(int id)
         {
-            return ObtenerTodas()
-                .Sum(m => m.Monto);
+            try
+            {
+                string sql = "UPDATE Multas SET DeletedAt = GETDATE() " +
+                             "WHERE IdMulta = @id AND DeletedAt IS NULL";
+                return _db.EjecutarComando(sql, cmd =>
+                    cmd.Parameters.AddWithValue("@id", id)) > 0;
+            }
+            catch (Exception) { return false; }
+        }
+
+        // ── Total pendiente ────────────────────────────────────────────
+        public double ObtenerTotalMultasPendientes()
+        {
+            try
+            {
+                object r = _db.EjecutarScalar(
+                    "SELECT ISNULL(SUM(Monto), 0) FROM Multas WHERE IdEstadoMulta = 1 AND DeletedAt IS NULL");
+                return r != null ? Convert.ToDouble(r) : 0;
+            }
+            catch (Exception) { return 0; }
+        }
+
+        // ── Calcular días de mora ──────────────────────────────────────
+        public int CalcularDiasMora(DateTime fechaLimite)
+        {
+            if (DateTime.Now <= fechaLimite) return 0;
+            return (int)(DateTime.Now - fechaLimite).TotalDays;
+        }
+
+        // ── Helpers privados ───────────────────────────────────────────
+        private int ObtenerIdLectorDePrestamo(int idPrestamo)
+        {
+            try
+            {
+                object r = _db.EjecutarScalar(
+                    "SELECT IdLector FROM Prestamos WHERE IdPrestamo = @id",
+                    cmd => cmd.Parameters.AddWithValue("@id", idPrestamo));
+                return r != null && r != DBNull.Value ? Convert.ToInt32(r) : 0;
+            }
+            catch (Exception) { return 0; }
+        }
+
+        private string BuildSelectMulta()
+        {
+            return
+                "SELECT m.IdMulta, m.IdEstadoMulta, m.IdTipoMulta, m.IdLector, m.IdPrestamo, " +
+                "       m.CodigoMulta, m.Descripcion, m.Monto, m.FechaGeneracion, m.FechaPago, " +
+                "       m.CreatedAt, " +
+                "       em.EstadoMulta AS EstadoTexto, " +
+                "       tm.TipoMulta  AS TipoTexto, " +
+                "       ub.Nombre     AS NombreLector, " +
+                "       ISNULL(l.TituloLibro, '') AS TituloLibro, " +
+                "       ISNULL(DATEDIFF(DAY, p.FechaLimite, ISNULL(p.FechaDevolucion, GETDATE())), 0) AS DiasMora " +
+                "FROM Multas m " +
+                "INNER JOIN EstadoMulta em     ON m.IdEstadoMulta = em.IdEstadoMulta " +
+                "INNER JOIN TipoMulta tm       ON m.IdTipoMulta   = tm.IdTipoMulta " +
+                "INNER JOIN Lectores lec       ON m.IdLector       = lec.IdUsuario " +
+                "INNER JOIN UsuarioBase ub     ON lec.IdUsuario    = ub.IdUsuario " +
+                "LEFT  JOIN Prestamos p        ON m.IdPrestamo     = p.IdPrestamo " +
+                "LEFT  JOIN Ejemplares ej      ON p.IdEjemplar     = ej.IdEjemplar " +
+                "LEFT  JOIN Libros l           ON ej.IdLibro       = l.IdLibro ";
+        }
+
+        private Multa MapearMulta(DataRow row)
+        {
+            Multa m = new Multa();
+            m.Id = Convert.ToInt32(row["IdMulta"]);
+            m.IdEstadoMulta = Convert.ToInt32(row["IdEstadoMulta"]);
+            m.IdTipoMulta = Convert.ToInt32(row["IdTipoMulta"]);
+            m.IdLector = Convert.ToInt32(row["IdLector"]);
+            m.CodigoMulta = row["CodigoMulta"].ToString();
+            m.Monto = row["Monto"] != DBNull.Value ? Convert.ToDouble(row["Monto"]) : 0;
+            m.Descripcion = row["Descripcion"].ToString();
+            m.NombreUsuario = row["NombreLector"].ToString();
+            m.TituloLibro = row["TituloLibro"].ToString();
+            m.DiasMora = Convert.ToInt32(row["DiasMora"]);
+
+            if (row["IdPrestamo"] != DBNull.Value)
+                m.IdPrestamo = Convert.ToInt32(row["IdPrestamo"]);
+
+            if (row["FechaGeneracion"] != DBNull.Value)
+                m.FechaGeneracion = Convert.ToDateTime(row["FechaGeneracion"]);
+
+            if (row["FechaPago"] != DBNull.Value)
+                m.FechaPago = Convert.ToDateTime(row["FechaPago"]);
+
+            if (row["CreatedAt"] != DBNull.Value)
+                m.CreatedAt = Convert.ToDateTime(row["CreatedAt"]);
+
+            // El Motivo se usa en vistas existentes como alias de Descripcion
+            m.Motivo = m.Descripcion;
+
+            return m;
         }
     }
 }
