@@ -52,6 +52,7 @@
     <Compile Include="Controllers\EditorialController.cs" />
     <Compile Include="Controllers\EjemplarController.cs" />
     <Compile Include="Controllers\LectorController.cs" />
+    <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Models\Autor.cs" />
     <Compile Include="Models\Catalogo.cs" />
     <Compile Include="Models\Editorial.cs" />
@@ -169,6 +170,36 @@
       <DependentUpon>frmMultasPendientes.cs</DependentUpon>
     </Compile>
     <!-- Views\Usuarios -->
+    <Compile Include="Views\Perfil\FrmEditarPerfil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Perfil\FrmEditarPerfil.Designer.cs">
+      <DependentUpon>FrmEditarPerfil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Perfil\FrmPerfil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Perfil\FrmPerfil.Designer.cs">
+      <DependentUpon>FrmPerfil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Perfil\FrmVerLibrosPerfil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Perfil\FrmVerLibrosPerfil.Designer.cs">
+      <DependentUpon>FrmVerLibrosPerfil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Perfil\FrmVerMultasPerfil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Perfil\FrmVerMultasPerfil.Designer.cs">
+      <DependentUpon>FrmVerMultasPerfil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Perfil\FrmVerPrestamosPerfil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Perfil\FrmVerPrestamosPerfil.Designer.cs">
+      <DependentUpon>FrmVerPrestamosPerfil.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Reportes\FrmReporte.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -323,6 +354,9 @@
     <EmbeddedResource Include="Views\Multas\FrmRegistrarPago.resx">
       <DependentUpon>FrmRegistrarPago.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Perfil\FrmEditarPerfil.resx">
+      <DependentUpon>FrmEditarPerfil.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Prestamos\FrmPrestamosVencidos.resx">
       <DependentUpon>FrmPrestamosVencidos.cs</DependentUpon>
     </EmbeddedResource>
@@ -361,8 +395,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Img\literatura.png" />
+    <None Include="Img\escoba %281%29.png" />
+    <None Include="Img\gestion-de-archivos.png" />
+    <None Include="Img\informe.png" />
+    <None Include="Img\nueva-cuenta.png" />
+    <None Include="Img\catalogo.png" />
+    <None Include="Img\eliminar %281%29.png" />
+    <None Include="Img\guardar-el-archivo %281%29.png" />
     <None Include="Img\metodo-de-pago.png" />
     <None Include="Img\actualizar.png" />
+    <None Include="Img\adjunto-archivo.png" />
+    <None Include="Img\agregar-usuario.png" />
+    <None Include="Img\actualizar - copia.png" />
+    <None Include="Img\ayudar.png" />
+    <None Include="Img\agregar-usuario %281%29.png" />
     <Content Include="Img\Biblioteca.jpg" />
     <None Include="Img\eliminar.png" />
     <None Include="Img\escoba.png" />

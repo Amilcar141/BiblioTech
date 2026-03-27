@@ -15,24 +15,23 @@ namespace BiblioTech.Views
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAgregarLibro));
             this.lblTitulo = new System.Windows.Forms.Label();
             this.grpDatos = new System.Windows.Forms.GroupBox();
+            this.lstCategorias = new System.Windows.Forms.ListBox();
+            this.lstEditoriales = new System.Windows.Forms.ListBox();
+            this.lstAutores = new System.Windows.Forms.ListBox();
             this.lblPrecio = new System.Windows.Forms.Label();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.lblISBN = new System.Windows.Forms.Label();
             this.txtISBN = new System.Windows.Forms.TextBox();
             this.lblNombreLibro = new System.Windows.Forms.Label();
             this.txtNombreLibro = new System.Windows.Forms.TextBox();
-            this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnNuevo = new System.Windows.Forms.Button();
-            this.btnGuardar = new System.Windows.Forms.Button();
             this.lblAutor = new System.Windows.Forms.Label();
             this.txtAutor = new System.Windows.Forms.TextBox();
             this.lblCategoria = new System.Windows.Forms.Label();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.txtCategoria = new System.Windows.Forms.TextBox();
             this.lblFechaPublicacion = new System.Windows.Forms.Label();
             this.dtpFechaPublicacion = new System.Windows.Forms.DateTimePicker();
@@ -52,9 +51,10 @@ namespace BiblioTech.Views
             this.Paginas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lstAutores = new System.Windows.Forms.ListBox();
-            this.lstEditoriales = new System.Windows.Forms.ListBox();
-            this.lstCategorias = new System.Windows.Forms.ListBox();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnNuevo = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.grpDatos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLibros)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -64,9 +64,10 @@ namespace BiblioTech.Views
             // 
             this.lblTitulo.Font = new System.Drawing.Font("Lucida Handwriting", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitulo.ForeColor = System.Drawing.Color.Black;
-            this.lblTitulo.Location = new System.Drawing.Point(273, 6);
+            this.lblTitulo.Location = new System.Drawing.Point(410, 9);
+            this.lblTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(352, 42);
+            this.lblTitulo.Size = new System.Drawing.Size(528, 65);
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "REGISTRO DE LIBROS";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -99,229 +100,236 @@ namespace BiblioTech.Views
             this.grpDatos.Controls.Add(this.txtEditorial);
             this.grpDatos.Controls.Add(this.lblFechaRegistro);
             this.grpDatos.Controls.Add(this.lblFechaRegistroValor);
-            this.grpDatos.Location = new System.Drawing.Point(32, 50);
+            this.grpDatos.Location = new System.Drawing.Point(48, 77);
+            this.grpDatos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grpDatos.Name = "grpDatos";
-            this.grpDatos.Size = new System.Drawing.Size(764, 179);
+            this.grpDatos.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grpDatos.Size = new System.Drawing.Size(1146, 275);
             this.grpDatos.TabIndex = 1;
             this.grpDatos.TabStop = false;
             this.grpDatos.Text = "Datos del Libro";
             // 
+            // lstCategorias
+            // 
+            this.lstCategorias.FormattingEnabled = true;
+            this.lstCategorias.ItemHeight = 20;
+            this.lstCategorias.Location = new System.Drawing.Point(158, 54);
+            this.lstCategorias.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lstCategorias.Name = "lstCategorias";
+            this.lstCategorias.Size = new System.Drawing.Size(230, 104);
+            this.lstCategorias.TabIndex = 22;
+            this.lstCategorias.Visible = false;
+            this.lstCategorias.SelectedIndexChanged += new System.EventHandler(this.lstCategorias_SelectedIndexChanged);
+            // 
+            // lstEditoriales
+            // 
+            this.lstEditoriales.FormattingEnabled = true;
+            this.lstEditoriales.ItemHeight = 20;
+            this.lstEditoriales.Location = new System.Drawing.Point(650, 165);
+            this.lstEditoriales.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lstEditoriales.Name = "lstEditoriales";
+            this.lstEditoriales.Size = new System.Drawing.Size(230, 104);
+            this.lstEditoriales.TabIndex = 21;
+            this.lstEditoriales.Visible = false;
+            this.lstEditoriales.SelectedIndexChanged += new System.EventHandler(this.lstEditoriales_SelectedIndexChanged);
+            // 
+            // lstAutores
+            // 
+            this.lstAutores.FormattingEnabled = true;
+            this.lstAutores.ItemHeight = 20;
+            this.lstAutores.Location = new System.Drawing.Point(158, 158);
+            this.lstAutores.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lstAutores.Name = "lstAutores";
+            this.lstAutores.Size = new System.Drawing.Size(230, 104);
+            this.lstAutores.TabIndex = 20;
+            this.lstAutores.Visible = false;
+            this.lstAutores.SelectedIndexChanged += new System.EventHandler(this.lstAutores_SelectedIndexChanged);
+            // 
             // lblPrecio
             // 
             this.lblPrecio.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblPrecio.Location = new System.Drawing.Point(355, 116);
+            this.lblPrecio.Location = new System.Drawing.Point(532, 178);
+            this.lblPrecio.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPrecio.Name = "lblPrecio";
-            this.lblPrecio.Size = new System.Drawing.Size(63, 20);
+            this.lblPrecio.Size = new System.Drawing.Size(94, 31);
             this.lblPrecio.TabIndex = 18;
             this.lblPrecio.Text = "Precio:";
             this.lblPrecio.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // txtPrecio
             // 
-            this.txtPrecio.Location = new System.Drawing.Point(434, 114);
+            this.txtPrecio.Location = new System.Drawing.Point(651, 175);
+            this.txtPrecio.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.Size = new System.Drawing.Size(145, 20);
+            this.txtPrecio.Size = new System.Drawing.Size(216, 26);
             this.txtPrecio.TabIndex = 19;
             // 
             // lblISBN
             // 
             this.lblISBN.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblISBN.Location = new System.Drawing.Point(7, 22);
+            this.lblISBN.Location = new System.Drawing.Point(10, 34);
+            this.lblISBN.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblISBN.Name = "lblISBN";
-            this.lblISBN.Size = new System.Drawing.Size(46, 20);
+            this.lblISBN.Size = new System.Drawing.Size(69, 31);
             this.lblISBN.TabIndex = 0;
             this.lblISBN.Text = "ISBN:";
             // 
             // txtISBN
             // 
-            this.txtISBN.Location = new System.Drawing.Point(105, 22);
+            this.txtISBN.Location = new System.Drawing.Point(158, 34);
+            this.txtISBN.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtISBN.Name = "txtISBN";
-            this.txtISBN.Size = new System.Drawing.Size(171, 20);
+            this.txtISBN.Size = new System.Drawing.Size(254, 26);
             this.txtISBN.TabIndex = 1;
             // 
             // lblNombreLibro
             // 
             this.lblNombreLibro.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblNombreLibro.Location = new System.Drawing.Point(7, 52);
+            this.lblNombreLibro.Location = new System.Drawing.Point(10, 80);
+            this.lblNombreLibro.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNombreLibro.Name = "lblNombreLibro";
-            this.lblNombreLibro.Size = new System.Drawing.Size(93, 20);
+            this.lblNombreLibro.Size = new System.Drawing.Size(140, 31);
             this.lblNombreLibro.TabIndex = 2;
             this.lblNombreLibro.Text = "Nombre Libro:";
             // 
             // txtNombreLibro
             // 
-            this.txtNombreLibro.Location = new System.Drawing.Point(105, 52);
+            this.txtNombreLibro.Location = new System.Drawing.Point(158, 80);
+            this.txtNombreLibro.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNombreLibro.Name = "txtNombreLibro";
-            this.txtNombreLibro.Size = new System.Drawing.Size(171, 20);
+            this.txtNombreLibro.Size = new System.Drawing.Size(254, 26);
             this.txtNombreLibro.TabIndex = 3;
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(165)))), ((int)(((byte)(0)))));
-            this.btnLimpiar.ForeColor = System.Drawing.Color.White;
-            this.btnLimpiar.Location = new System.Drawing.Point(632, 90);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(77, 25);
-            this.btnLimpiar.TabIndex = 5;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.UseVisualStyleBackColor = false;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
-            // btnNuevo
-            // 
-            this.btnNuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
-            this.btnNuevo.ForeColor = System.Drawing.Color.White;
-            this.btnNuevo.Location = new System.Drawing.Point(632, 19);
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(77, 25);
-            this.btnNuevo.TabIndex = 4;
-            this.btnNuevo.Text = "Nuevo";
-            this.btnNuevo.UseVisualStyleBackColor = false;
-            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(76)))));
-            this.btnGuardar.ForeColor = System.Drawing.Color.White;
-            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(632, 52);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(77, 27);
-            this.btnGuardar.TabIndex = 3;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = false;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // lblAutor
             // 
             this.lblAutor.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblAutor.Location = new System.Drawing.Point(7, 82);
+            this.lblAutor.Location = new System.Drawing.Point(10, 126);
+            this.lblAutor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAutor.Name = "lblAutor";
-            this.lblAutor.Size = new System.Drawing.Size(46, 20);
+            this.lblAutor.Size = new System.Drawing.Size(69, 31);
             this.lblAutor.TabIndex = 4;
             this.lblAutor.Text = "Autor:";
             // 
             // txtAutor
             // 
-            this.txtAutor.Location = new System.Drawing.Point(105, 82);
+            this.txtAutor.Location = new System.Drawing.Point(158, 126);
+            this.txtAutor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtAutor.Name = "txtAutor";
-            this.txtAutor.Size = new System.Drawing.Size(171, 20);
+            this.txtAutor.Size = new System.Drawing.Size(254, 26);
             this.txtAutor.TabIndex = 5;
             this.txtAutor.TextChanged += new System.EventHandler(this.txtAutor_TextChanged);
             // 
             // lblCategoria
             // 
             this.lblCategoria.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblCategoria.Location = new System.Drawing.Point(7, 110);
+            this.lblCategoria.Location = new System.Drawing.Point(10, 169);
+            this.lblCategoria.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCategoria.Name = "lblCategoria";
-            this.lblCategoria.Size = new System.Drawing.Size(70, 20);
+            this.lblCategoria.Size = new System.Drawing.Size(105, 31);
             this.lblCategoria.TabIndex = 6;
             this.lblCategoria.Text = "Categoría:";
             // 
-            // btnCancelar
-            // 
-            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnCancelar.ForeColor = System.Drawing.Color.White;
-            this.btnCancelar.Location = new System.Drawing.Point(632, 125);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(77, 27);
-            this.btnCancelar.TabIndex = 6;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
             // txtCategoria
             // 
-            this.txtCategoria.Location = new System.Drawing.Point(105, 110);
+            this.txtCategoria.Location = new System.Drawing.Point(158, 169);
+            this.txtCategoria.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCategoria.Name = "txtCategoria";
-            this.txtCategoria.Size = new System.Drawing.Size(171, 20);
+            this.txtCategoria.Size = new System.Drawing.Size(254, 26);
             this.txtCategoria.TabIndex = 7;
             this.txtCategoria.TextChanged += new System.EventHandler(this.txtCategoria_TextChanged);
             // 
             // lblFechaPublicacion
             // 
             this.lblFechaPublicacion.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblFechaPublicacion.Location = new System.Drawing.Point(313, 21);
+            this.lblFechaPublicacion.Location = new System.Drawing.Point(470, 32);
+            this.lblFechaPublicacion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFechaPublicacion.Name = "lblFechaPublicacion";
-            this.lblFechaPublicacion.Size = new System.Drawing.Size(114, 20);
+            this.lblFechaPublicacion.Size = new System.Drawing.Size(171, 31);
             this.lblFechaPublicacion.TabIndex = 8;
             this.lblFechaPublicacion.Text = "Fecha Publicación:";
             // 
             // dtpFechaPublicacion
             // 
             this.dtpFechaPublicacion.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaPublicacion.Location = new System.Drawing.Point(441, 20);
+            this.dtpFechaPublicacion.Location = new System.Drawing.Point(662, 31);
+            this.dtpFechaPublicacion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dtpFechaPublicacion.Name = "dtpFechaPublicacion";
-            this.dtpFechaPublicacion.Size = new System.Drawing.Size(136, 20);
+            this.dtpFechaPublicacion.Size = new System.Drawing.Size(202, 26);
             this.dtpFechaPublicacion.TabIndex = 9;
             // 
             // lblNumeroPaginas
             // 
             this.lblNumeroPaginas.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblNumeroPaginas.Location = new System.Drawing.Point(346, 57);
+            this.lblNumeroPaginas.Location = new System.Drawing.Point(519, 88);
+            this.lblNumeroPaginas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNumeroPaginas.Name = "lblNumeroPaginas";
-            this.lblNumeroPaginas.Size = new System.Drawing.Size(81, 20);
+            this.lblNumeroPaginas.Size = new System.Drawing.Size(122, 31);
             this.lblNumeroPaginas.TabIndex = 10;
             this.lblNumeroPaginas.Text = "N° Páginas:";
             // 
             // txtNumeroPaginas
             // 
-            this.txtNumeroPaginas.Location = new System.Drawing.Point(435, 55);
+            this.txtNumeroPaginas.Location = new System.Drawing.Point(652, 85);
+            this.txtNumeroPaginas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNumeroPaginas.Name = "txtNumeroPaginas";
-            this.txtNumeroPaginas.Size = new System.Drawing.Size(143, 20);
+            this.txtNumeroPaginas.Size = new System.Drawing.Size(212, 26);
             this.txtNumeroPaginas.TabIndex = 11;
             // 
             // lblEditorial
             // 
             this.lblEditorial.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblEditorial.Location = new System.Drawing.Point(364, 90);
+            this.lblEditorial.Location = new System.Drawing.Point(546, 138);
+            this.lblEditorial.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEditorial.Name = "lblEditorial";
-            this.lblEditorial.Size = new System.Drawing.Size(63, 20);
+            this.lblEditorial.Size = new System.Drawing.Size(94, 31);
             this.lblEditorial.TabIndex = 12;
             this.lblEditorial.Text = "Editorial:";
             // 
             // txtEditorial
             // 
-            this.txtEditorial.Location = new System.Drawing.Point(433, 84);
+            this.txtEditorial.Location = new System.Drawing.Point(650, 129);
+            this.txtEditorial.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtEditorial.Name = "txtEditorial";
-            this.txtEditorial.Size = new System.Drawing.Size(145, 20);
+            this.txtEditorial.Size = new System.Drawing.Size(216, 26);
             this.txtEditorial.TabIndex = 13;
             this.txtEditorial.TextChanged += new System.EventHandler(this.txtEditorial_TextChanged);
             // 
             // lblFechaRegistro
             // 
             this.lblFechaRegistro.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblFechaRegistro.Location = new System.Drawing.Point(150, 152);
+            this.lblFechaRegistro.Location = new System.Drawing.Point(225, 234);
+            this.lblFechaRegistro.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFechaRegistro.Name = "lblFechaRegistro";
-            this.lblFechaRegistro.Size = new System.Drawing.Size(101, 20);
+            this.lblFechaRegistro.Size = new System.Drawing.Size(152, 31);
             this.lblFechaRegistro.TabIndex = 16;
             this.lblFechaRegistro.Text = "Fecha Registro:";
             // 
             // lblFechaRegistroValor
             // 
             this.lblFechaRegistroValor.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lblFechaRegistroValor.Location = new System.Drawing.Point(111, 261);
+            this.lblFechaRegistroValor.Location = new System.Drawing.Point(166, 402);
+            this.lblFechaRegistroValor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFechaRegistroValor.Name = "lblFechaRegistroValor";
-            this.lblFechaRegistroValor.Size = new System.Drawing.Size(149, 20);
+            this.lblFechaRegistroValor.Size = new System.Drawing.Size(224, 31);
             this.lblFechaRegistroValor.TabIndex = 17;
             this.lblFechaRegistroValor.Text = "-";
             // 
             // dgvLibros
             // 
             this.dgvLibros.AllowUserToAddRows = false;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.dgvLibros.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.dgvLibros.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvLibros.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvLibros.BackgroundColor = System.Drawing.Color.White;
             this.dgvLibros.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLibros.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLibros.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvLibros.ColumnHeadersHeight = 34;
             this.dgvLibros.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ISBN,
@@ -333,12 +341,13 @@ namespace BiblioTech.Views
             this.Paginas,
             this.colPrecio});
             this.dgvLibros.EnableHeadersVisualStyles = false;
-            this.dgvLibros.Location = new System.Drawing.Point(32, 235);
+            this.dgvLibros.Location = new System.Drawing.Point(48, 362);
+            this.dgvLibros.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvLibros.Name = "dgvLibros";
             this.dgvLibros.ReadOnly = true;
             this.dgvLibros.RowHeadersWidth = 62;
             this.dgvLibros.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLibros.Size = new System.Drawing.Size(764, 243);
+            this.dgvLibros.Size = new System.Drawing.Size(1146, 374);
             this.dgvLibros.TabIndex = 2;
             // 
             // ISBN
@@ -400,55 +409,85 @@ namespace BiblioTech.Views
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(22, 6);
+            this.pictureBox1.Location = new System.Drawing.Point(33, 9);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(65, 47);
+            this.pictureBox1.Size = new System.Drawing.Size(98, 72);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 286;
             this.pictureBox1.TabStop = false;
             // 
-            // lstAutores
+            // btnLimpiar
             // 
-            this.lstAutores.FormattingEnabled = true;
-            this.lstAutores.Location = new System.Drawing.Point(105, 103);
-            this.lstAutores.Name = "lstAutores";
-            this.lstAutores.Size = new System.Drawing.Size(155, 69);
-            this.lstAutores.TabIndex = 20;
-            this.lstAutores.Visible = false;
-            this.lstAutores.SelectedIndexChanged += new System.EventHandler(this.lstAutores_SelectedIndexChanged);
+            this.btnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(165)))), ((int)(((byte)(0)))));
+            this.btnLimpiar.ForeColor = System.Drawing.Color.White;
+            this.btnLimpiar.Image = global::BiblioTech.Properties.Resources.escoba__1_;
+            this.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLimpiar.Location = new System.Drawing.Point(948, 138);
+            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(116, 38);
+            this.btnLimpiar.TabIndex = 5;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
-            // lstEditoriales
+            // btnNuevo
             // 
-            this.lstEditoriales.FormattingEnabled = true;
-            this.lstEditoriales.Location = new System.Drawing.Point(433, 107);
-            this.lstEditoriales.Name = "lstEditoriales";
-            this.lstEditoriales.Size = new System.Drawing.Size(155, 69);
-            this.lstEditoriales.TabIndex = 21;
-            this.lstEditoriales.Visible = false;
-            this.lstEditoriales.SelectedIndexChanged += new System.EventHandler(this.lstEditoriales_SelectedIndexChanged);
+            this.btnNuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
+            this.btnNuevo.ForeColor = System.Drawing.Color.White;
+            this.btnNuevo.Image = global::BiblioTech.Properties.Resources.actualizar___copia;
+            this.btnNuevo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNuevo.Location = new System.Drawing.Point(948, 29);
+            this.btnNuevo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(116, 38);
+            this.btnNuevo.TabIndex = 4;
+            this.btnNuevo.Text = "Nuevo";
+            this.btnNuevo.UseVisualStyleBackColor = false;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
-            // lstCategorias
+            // btnGuardar
             // 
-            this.lstCategorias.FormattingEnabled = true;
-            this.lstCategorias.Location = new System.Drawing.Point(105, 35);
-            this.lstCategorias.Name = "lstCategorias";
-            this.lstCategorias.Size = new System.Drawing.Size(155, 69);
-            this.lstCategorias.TabIndex = 22;
-            this.lstCategorias.Visible = false;
-            this.lstCategorias.SelectedIndexChanged += new System.EventHandler(this.lstCategorias_SelectedIndexChanged);
+            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(76)))));
+            this.btnGuardar.ForeColor = System.Drawing.Color.White;
+            this.btnGuardar.Image = global::BiblioTech.Properties.Resources.guardar_el_archivo__1_;
+            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGuardar.Location = new System.Drawing.Point(948, 80);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(116, 42);
+            this.btnGuardar.TabIndex = 3;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnCancelar.ForeColor = System.Drawing.Color.White;
+            this.btnCancelar.Image = global::BiblioTech.Properties.Resources.eliminar__1_;
+            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancelar.Location = new System.Drawing.Point(948, 192);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(116, 42);
+            this.btnCancelar.TabIndex = 6;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // FrmAgregarLibro
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.ClientSize = new System.Drawing.Size(1050, 650);
+            this.ClientSize = new System.Drawing.Size(1575, 1000);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.grpDatos);
             this.Controls.Add(this.dgvLibros);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
-            this.MaximizeBox = true;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FrmAgregarLibro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar Libro";

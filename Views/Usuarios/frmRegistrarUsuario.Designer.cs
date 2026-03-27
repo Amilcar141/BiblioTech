@@ -40,9 +40,10 @@ namespace BiblioTech.Views.Usuarios
             // 
             this.lblTitulo.Font = new System.Drawing.Font("Lucida Handwriting", 16F, System.Drawing.FontStyle.Bold);
             this.lblTitulo.ForeColor = System.Drawing.Color.Black;
-            this.lblTitulo.Location = new System.Drawing.Point(95, 6);
+            this.lblTitulo.Location = new System.Drawing.Point(142, 9);
+            this.lblTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(587, 42);
+            this.lblTitulo.Size = new System.Drawing.Size(880, 65);
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "REGISTRAR USUARIO - LECTOR";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -61,78 +62,88 @@ namespace BiblioTech.Views.Usuarios
             this.pnlDatos.Controls.Add(this.btnVerPassword);
             this.pnlDatos.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.pnlDatos.ForeColor = System.Drawing.Color.White;
-            this.pnlDatos.Location = new System.Drawing.Point(12, 60);
+            this.pnlDatos.Location = new System.Drawing.Point(18, 92);
+            this.pnlDatos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlDatos.Name = "pnlDatos";
-            this.pnlDatos.Size = new System.Drawing.Size(440, 226);
+            this.pnlDatos.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pnlDatos.Size = new System.Drawing.Size(660, 348);
             this.pnlDatos.TabIndex = 1;
             this.pnlDatos.TabStop = false;
             this.pnlDatos.Text = "Datos de la Cuenta";
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(10, 30);
+            this.label3.Location = new System.Drawing.Point(15, 46);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 22);
+            this.label3.Size = new System.Drawing.Size(135, 34);
             this.label3.TabIndex = 0;
             this.label3.Text = "Nombre:";
             // 
             // txtNombre
             // 
             this.txtNombre.BackColor = System.Drawing.Color.White;
-            this.txtNombre.Location = new System.Drawing.Point(110, 28);
+            this.txtNombre.Location = new System.Drawing.Point(165, 43);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(310, 23);
+            this.txtNombre.Size = new System.Drawing.Size(463, 31);
             this.txtNombre.TabIndex = 1;
             this.txtNombre.Enter += new System.EventHandler(this.TextBox_Enter);
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(10, 70);
+            this.label4.Location = new System.Drawing.Point(15, 108);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(90, 22);
+            this.label4.Size = new System.Drawing.Size(135, 34);
             this.label4.TabIndex = 2;
             this.label4.Text = "Apellidos:";
             // 
             // txtApellidos
             // 
             this.txtApellidos.BackColor = System.Drawing.Color.White;
-            this.txtApellidos.Location = new System.Drawing.Point(110, 68);
+            this.txtApellidos.Location = new System.Drawing.Point(165, 105);
+            this.txtApellidos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtApellidos.Name = "txtApellidos";
-            this.txtApellidos.Size = new System.Drawing.Size(310, 23);
+            this.txtApellidos.Size = new System.Drawing.Size(463, 31);
             this.txtApellidos.TabIndex = 3;
             this.txtApellidos.Enter += new System.EventHandler(this.TextBox_Enter);
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(10, 110);
+            this.label5.Location = new System.Drawing.Point(15, 169);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(90, 22);
+            this.label5.Size = new System.Drawing.Size(135, 34);
             this.label5.TabIndex = 4;
             this.label5.Text = "Correo:";
             // 
             // txtCorreo
             // 
             this.txtCorreo.BackColor = System.Drawing.Color.White;
-            this.txtCorreo.Location = new System.Drawing.Point(110, 108);
+            this.txtCorreo.Location = new System.Drawing.Point(165, 166);
+            this.txtCorreo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCorreo.Name = "txtCorreo";
-            this.txtCorreo.Size = new System.Drawing.Size(310, 23);
+            this.txtCorreo.Size = new System.Drawing.Size(463, 31);
             this.txtCorreo.TabIndex = 5;
             this.txtCorreo.Enter += new System.EventHandler(this.TextBox_Enter);
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(10, 155);
+            this.label6.Location = new System.Drawing.Point(15, 238);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(90, 22);
+            this.label6.Size = new System.Drawing.Size(135, 34);
             this.label6.TabIndex = 6;
             this.label6.Text = "Contrasena:";
             // 
             // txtPassword
             // 
             this.txtPassword.BackColor = System.Drawing.Color.White;
-            this.txtPassword.Location = new System.Drawing.Point(110, 153);
+            this.txtPassword.Location = new System.Drawing.Point(165, 235);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(240, 23);
+            this.txtPassword.Size = new System.Drawing.Size(358, 31);
             this.txtPassword.TabIndex = 7;
             this.txtPassword.UseSystemPasswordChar = true;
             this.txtPassword.Enter += new System.EventHandler(this.TextBox_Enter);
@@ -141,9 +152,10 @@ namespace BiblioTech.Views.Usuarios
             // 
             this.btnVerPassword.BackColor = System.Drawing.Color.Chocolate;
             this.btnVerPassword.ForeColor = System.Drawing.Color.White;
-            this.btnVerPassword.Location = new System.Drawing.Point(358, 151);
+            this.btnVerPassword.Location = new System.Drawing.Point(537, 232);
+            this.btnVerPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnVerPassword.Name = "btnVerPassword";
-            this.btnVerPassword.Size = new System.Drawing.Size(62, 26);
+            this.btnVerPassword.Size = new System.Drawing.Size(93, 40);
             this.btnVerPassword.TabIndex = 8;
             this.btnVerPassword.Text = "○";
             this.btnVerPassword.UseVisualStyleBackColor = false;
@@ -157,18 +169,21 @@ namespace BiblioTech.Views.Usuarios
             this.gbxRol.Controls.Add(this.rbtnAdministrador);
             this.gbxRol.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.gbxRol.ForeColor = System.Drawing.Color.White;
-            this.gbxRol.Location = new System.Drawing.Point(10, 200);
+            this.gbxRol.Location = new System.Drawing.Point(15, 308);
+            this.gbxRol.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbxRol.Name = "gbxRol";
-            this.gbxRol.Size = new System.Drawing.Size(420, 85);
+            this.gbxRol.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbxRol.Size = new System.Drawing.Size(630, 131);
             this.gbxRol.TabIndex = 9;
             this.gbxRol.TabStop = false;
             this.gbxRol.Text = "Rol del Usuario";
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(10, 22);
+            this.label8.Location = new System.Drawing.Point(15, 34);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(80, 22);
+            this.label8.Size = new System.Drawing.Size(120, 34);
             this.label8.TabIndex = 0;
             this.label8.Text = "Rol:";
             // 
@@ -177,9 +192,10 @@ namespace BiblioTech.Views.Usuarios
             this.rbtnLector.AutoSize = true;
             this.rbtnLector.Checked = true;
             this.rbtnLector.ForeColor = System.Drawing.Color.White;
-            this.rbtnLector.Location = new System.Drawing.Point(90, 20);
+            this.rbtnLector.Location = new System.Drawing.Point(135, 31);
+            this.rbtnLector.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rbtnLector.Name = "rbtnLector";
-            this.rbtnLector.Size = new System.Drawing.Size(61, 19);
+            this.rbtnLector.Size = new System.Drawing.Size(90, 29);
             this.rbtnLector.TabIndex = 1;
             this.rbtnLector.TabStop = true;
             this.rbtnLector.Text = "Lector";
@@ -188,9 +204,10 @@ namespace BiblioTech.Views.Usuarios
             // 
             this.rbtnAdministrador.AutoSize = true;
             this.rbtnAdministrador.ForeColor = System.Drawing.Color.White;
-            this.rbtnAdministrador.Location = new System.Drawing.Point(200, 20);
+            this.rbtnAdministrador.Location = new System.Drawing.Point(300, 31);
+            this.rbtnAdministrador.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rbtnAdministrador.Name = "rbtnAdministrador";
-            this.rbtnAdministrador.Size = new System.Drawing.Size(104, 19);
+            this.rbtnAdministrador.Size = new System.Drawing.Size(159, 29);
             this.rbtnAdministrador.TabIndex = 2;
             this.rbtnAdministrador.Text = "Administrador";
             // 
@@ -201,9 +218,11 @@ namespace BiblioTech.Views.Usuarios
             this.gbxEstado.Controls.Add(this.rbtnInactivo);
             this.gbxEstado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.gbxEstado.ForeColor = System.Drawing.Color.White;
-            this.gbxEstado.Location = new System.Drawing.Point(470, 60);
+            this.gbxEstado.Location = new System.Drawing.Point(705, 92);
+            this.gbxEstado.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbxEstado.Name = "gbxEstado";
-            this.gbxEstado.Size = new System.Drawing.Size(240, 85);
+            this.gbxEstado.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbxEstado.Size = new System.Drawing.Size(360, 131);
             this.gbxEstado.TabIndex = 3;
             this.gbxEstado.TabStop = false;
             this.gbxEstado.Text = "Estado";
@@ -213,9 +232,10 @@ namespace BiblioTech.Views.Usuarios
             this.rbtnActivo.AutoSize = true;
             this.rbtnActivo.Checked = true;
             this.rbtnActivo.ForeColor = System.Drawing.Color.White;
-            this.rbtnActivo.Location = new System.Drawing.Point(15, 28);
+            this.rbtnActivo.Location = new System.Drawing.Point(22, 43);
+            this.rbtnActivo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rbtnActivo.Name = "rbtnActivo";
-            this.rbtnActivo.Size = new System.Drawing.Size(61, 19);
+            this.rbtnActivo.Size = new System.Drawing.Size(92, 29);
             this.rbtnActivo.TabIndex = 0;
             this.rbtnActivo.TabStop = true;
             this.rbtnActivo.Text = "Activo";
@@ -224,9 +244,10 @@ namespace BiblioTech.Views.Usuarios
             // 
             this.rbtnInactivo.AutoSize = true;
             this.rbtnInactivo.ForeColor = System.Drawing.Color.White;
-            this.rbtnInactivo.Location = new System.Drawing.Point(100, 28);
+            this.rbtnInactivo.Location = new System.Drawing.Point(150, 43);
+            this.rbtnInactivo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rbtnInactivo.Name = "rbtnInactivo";
-            this.rbtnInactivo.Size = new System.Drawing.Size(70, 19);
+            this.rbtnInactivo.Size = new System.Drawing.Size(106, 29);
             this.rbtnInactivo.TabIndex = 1;
             this.rbtnInactivo.Text = "Inactivo";
             // 
@@ -235,11 +256,12 @@ namespace BiblioTech.Views.Usuarios
             this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(76)))));
             this.btnGuardar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnGuardar.ForeColor = System.Drawing.Color.White;
-            this.btnGuardar.Image = global::BiblioTech.Properties.Resources.guardar_el_archivo;
+            this.btnGuardar.Image = global::BiblioTech.Properties.Resources.agregar_usuario;
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(12, 305);
+            this.btnGuardar.Location = new System.Drawing.Point(18, 469);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(110, 38);
+            this.btnGuardar.Size = new System.Drawing.Size(165, 58);
             this.btnGuardar.TabIndex = 10;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = false;
@@ -252,9 +274,10 @@ namespace BiblioTech.Views.Usuarios
             this.btnNuevo.ForeColor = System.Drawing.Color.White;
             this.btnNuevo.Image = global::BiblioTech.Properties.Resources.updates_16;
             this.btnNuevo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNuevo.Location = new System.Drawing.Point(134, 305);
+            this.btnNuevo.Location = new System.Drawing.Point(201, 469);
+            this.btnNuevo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(110, 38);
+            this.btnNuevo.Size = new System.Drawing.Size(165, 58);
             this.btnNuevo.TabIndex = 11;
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.UseVisualStyleBackColor = false;
@@ -267,9 +290,10 @@ namespace BiblioTech.Views.Usuarios
             this.btnLimpiar.ForeColor = System.Drawing.Color.White;
             this.btnLimpiar.Image = global::BiblioTech.Properties.Resources.escoba;
             this.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLimpiar.Location = new System.Drawing.Point(256, 305);
+            this.btnLimpiar.Location = new System.Drawing.Point(384, 469);
+            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(110, 38);
+            this.btnLimpiar.Size = new System.Drawing.Size(165, 58);
             this.btnLimpiar.TabIndex = 12;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = false;
@@ -282,9 +306,10 @@ namespace BiblioTech.Views.Usuarios
             this.btnCancelar.ForeColor = System.Drawing.Color.White;
             this.btnCancelar.Image = global::BiblioTech.Properties.Resources.eliminar;
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(378, 305);
+            this.btnCancelar.Location = new System.Drawing.Point(567, 469);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(110, 38);
+            this.btnCancelar.Size = new System.Drawing.Size(165, 58);
             this.btnCancelar.TabIndex = 13;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
@@ -292,10 +317,10 @@ namespace BiblioTech.Views.Usuarios
             // 
             // frmRegistrarUsuario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.ClientSize = new System.Drawing.Size(784, 355);
+            this.ClientSize = new System.Drawing.Size(1176, 546);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.pnlDatos);
             this.Controls.Add(this.gbxEstado);
@@ -305,6 +330,7 @@ namespace BiblioTech.Views.Usuarios
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnCancelar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "frmRegistrarUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

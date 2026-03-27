@@ -3,6 +3,7 @@ using BiblioTech.Models;
 using BiblioTech.Views.Archivo;
 using BiblioTech.Views.Ayuda;
 using BiblioTech.Views.Multas;
+using BiblioTech.Views.Perfil;
 using BiblioTech.Views.Prestamos;
 using BiblioTech.Views.Reportes;
 using BiblioTech.Views.Usuarios;
@@ -252,6 +253,13 @@ namespace BiblioTech.Views
 
         private void mnuMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+
+        }
+
+        private void perfilToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmPerfil perfil = new FrmPerfil(_sistema);
+            AbrirFormulario(perfil);
 
         }
     }
