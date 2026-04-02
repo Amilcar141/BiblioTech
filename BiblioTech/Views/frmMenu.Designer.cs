@@ -65,7 +65,7 @@
             this.manualDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.soporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -124,7 +124,7 @@
             this.reportesToolStripMenuItem,
             this.configuraciónToolStripMenuItem,
             this.ayudaToolStripMenuItem,
-            this.cerrarSesiónToolStripMenuItem});
+            this.btnCerrarSesion});
             this.mnuMenu.Location = new System.Drawing.Point(0, 0);
             this.mnuMenu.Name = "mnuMenu";
             this.mnuMenu.Padding = new System.Windows.Forms.Padding(35, 2, 0, 5);
@@ -356,11 +356,12 @@
             this.soporteToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.soporteToolStripMenuItem.Text = "Soporte";
             // 
-            // cerrarSesiónToolStripMenuItem
+            // btnCerrarSesion
             // 
-            this.cerrarSesiónToolStripMenuItem.Name = "cerrarSesiónToolStripMenuItem";
-            this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(88, 19);
-            this.cerrarSesiónToolStripMenuItem.Text = "Cerrar Sesión";
+            this.btnCerrarSesion.Name = "btnCerrarSesion";
+            this.btnCerrarSesion.Size = new System.Drawing.Size(88, 19);
+            this.btnCerrarSesion.Text = "Cerrar Sesión";
+            this.btnCerrarSesion.Click += new System.EventHandler(this.cerrarSesiónToolStripMenuItem_Click);
             // 
             // frmMenu
             // 
@@ -422,6 +423,6 @@
         private System.Windows.Forms.ToolStripMenuItem manualDeUsuarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem soporteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cerrarSesiónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btnCerrarSesion;
     }
 }

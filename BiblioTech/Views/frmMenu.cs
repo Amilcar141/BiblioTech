@@ -47,5 +47,13 @@ namespace BiblioTech.Views
 
             AbrirFormulario(prestamo);
         }
+
+        
+        private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPrincipal login = new frmPrincipal();
+            login.Show();
+            this.Close();
+        }
     }
 }

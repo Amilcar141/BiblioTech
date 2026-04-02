@@ -92,14 +92,13 @@
             // 
             // cmbRol
             // 
+            this.cmbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRol.FormattingEnabled = true;
-            this.cmbRol.Items.AddRange(new object[] {
-            "Administrador",
-            "Lector"});
             this.cmbRol.Location = new System.Drawing.Point(80, 324);
             this.cmbRol.Name = "cmbRol";
             this.cmbRol.Size = new System.Drawing.Size(121, 21);
             this.cmbRol.TabIndex = 11;
+            this.cmbRol.SelectedIndexChanged += new System.EventHandler(this.cmbRol_SelectedIndexChanged);
             // 
             // txtCorreo
             // 

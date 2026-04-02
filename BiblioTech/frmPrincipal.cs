@@ -37,7 +37,7 @@ namespace BiblioTech
                 return;
             }
 
-            if ( controller.ValidarCredenciales(Cuenta, Contrasenia))
+            if (controller.ValidarCredenciales(Cuenta, Contrasenia))
             {
 
                 frmMenu menu = new frmMenu();
@@ -58,6 +58,13 @@ namespace BiblioTech
         {
             frmRegistros registro = new frmRegistros(controller.usuarios);
             registro.ShowDialog();
+        }
+    
+
+   public void LimpiarCampos()
+        {
+            txtCuenta.Text = "";
+            txtContrasenia.Text = "";
         }
     }
 }

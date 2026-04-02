@@ -21,9 +21,13 @@ namespace BiblioTech.Views
             InitializeComponent();
             controller = new RegistroController(usuarios);
 
+            cmbRol.Text = "Selecciona un rol...";
             cmbRol.Items.Add("Administrador");
+            cmbRol.Items.Add("Bibliotecario");
             cmbRol.Items.Add("Lector");
-            cmbRol.SelectedIndex = 1;
+            cmbRol.SelectedIndex = 0;
+            
+
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -46,6 +50,15 @@ namespace BiblioTech.Views
                         "Bibliotech",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!Correo.Contains("@"))
+                {
+                    MessageBox.Show("El correo debe contener @.",
+                                    "Bibliotech",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -75,11 +88,18 @@ namespace BiblioTech.Views
             }
 
 
-        }
 
+
+
+        }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cmbRol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

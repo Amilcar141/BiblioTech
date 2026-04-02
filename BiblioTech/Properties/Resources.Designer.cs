@@ -63,9 +63,39 @@ namespace BiblioTech.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Administrador {
+            get {
+                object obj = ResourceManager.GetObject("Administrador", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Biblioteca {
             get {
                 object obj = ResourceManager.GetObject("Biblioteca", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Bibliotecario {
+            get {
+                object obj = ResourceManager.GetObject("Bibliotecario", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lector {
+            get {
+                object obj = ResourceManager.GetObject("Lector", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

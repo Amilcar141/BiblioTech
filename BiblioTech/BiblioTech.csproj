@@ -89,6 +89,12 @@
     <Compile Include="Views\frmRegistros.Designer.cs">
       <DependentUpon>frmRegistros.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\frmRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmRol.Designer.cs">
+      <DependentUpon>frmRol.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Views\frmFavoritos.resx">
       <DependentUpon>frmFavoritos.cs</DependentUpon>
     </EmbeddedResource>
@@ -114,6 +120,9 @@
     <EmbeddedResource Include="Views\frmRegistros.resx">
       <DependentUpon>frmRegistros.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\frmRol.resx">
+      <DependentUpon>frmRol.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -129,6 +138,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="Img\Lector.png" />
+    <None Include="Img\Bibliotecario.png" />
+    <None Include="Img\Administrador.png" />
     <Content Include="Img\Biblioteca.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

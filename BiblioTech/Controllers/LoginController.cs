@@ -11,7 +11,7 @@ namespace BiblioTech.Controllers
     {
         public readonly List<Usuario> usuarios = new List<Usuario>
         {
-        new Usuario("admin",     "1234"),
+        new Usuario("admin",   "1234"),
             };
                 
         public bool ValidarCredenciales(string Cuenta, string Contrasenia)
@@ -21,5 +21,7 @@ namespace BiblioTech.Controllers
                 u.Contrasenia == Contrasenia);
 
         }
+
+
     }
 }
