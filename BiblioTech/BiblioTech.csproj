@@ -71,6 +71,12 @@
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\frmMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmMenu.Designer.cs">
+      <DependentUpon>frmMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\frmPrestamo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +111,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\frmMenu.resx">
+      <DependentUpon>frmMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\frmPrestamo.resx">
       <DependentUpon>frmPrestamo.cs</DependentUpon>
     </EmbeddedResource>
@@ -129,6 +138,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="Img\busqueda.png" />
     <None Include="Img\Lector.png" />
     <None Include="Img\Bibliotecario.png" />
     <None Include="Img\Administrador.png" />
